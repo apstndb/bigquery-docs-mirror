@@ -67,7 +67,7 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
     - **Type** : the resource type, such as BigQuery connection, Cloud Storage bucket, or database. Depending on the resource type, you can also filter by subtype, such as the connection type or SQL dialect.
     - **Select locations** : the locations to search in.
     - **Select datasets** : this limits search results to BigQuery resources that belong to the selected BigQuery datasets. In the **Type to filter** field, enter the name of the dataset.
-    - **Annotations** : the Knowledge Catalog [aspect types](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
+    - **Annotations** : the Knowledge Catalog [aspect types](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
 
     To remove a filter, click **Clear** next to the specific filter that you want to remove. Or, to remove all filters, click **Clear Filters** .
 

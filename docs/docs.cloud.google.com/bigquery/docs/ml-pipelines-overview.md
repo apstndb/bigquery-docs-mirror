@@ -2,17 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/ml-pipelines-overview
 uri: https://docs.cloud.google.com/bigquery/docs/ml-pipelines-overview
 title: ML pipelines overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about machine learning pipelines in BigQuery ML using Vertex AI Pipelines, GoogleSQL, or Dataform. You can use these pipelines to automate your MLOps workflows.
 data_source: docs.cloud.google.com
 ---
 
 # ML pipelines overview
 
-This document provides an overview of the services you can use to build an ML pipeline to manage your BigQuery ML [MLOps](https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) workflow.
+You can build a machine learning (ML) pipeline to manage your BigQuery ML [MLOps](https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) workflow. An ML pipeline is a representation of an MLOps workflow that's composed of a series of *pipeline tasks* . Each pipeline task performs a specific step in the MLOps workflow to train and deploy a model. Separating each step into a standardized, reusable task lets you automate and monitor repeatable processes in your ML practice.
 
-An ML pipeline is a representation of an MLOps workflow that is composed of a series of *pipeline tasks* . Each pipeline task performs a specific step in the MLOps workflow to train and deploy a model. Separating each step into a standardized, reusable task lets you automate and monitor repeatable processes in your ML practice.
-
-You can use any of the following services to create BigQuery ML ML pipelines:
+You can use the following services to create BigQuery ML ML pipelines:
 
 - Use Vertex AI Pipelines to create portable, extensible ML pipelines.
 - Use GoogleSQL queries to create less complex SQL-based ML pipelines.

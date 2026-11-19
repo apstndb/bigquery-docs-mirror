@@ -515,15 +515,14 @@ Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.go
 
 ```
 gcloud projects add-iam-policy-binding PROJECT_ID \
---member="serviceAccount:$(bq show --format=prettyjson --connection $PROJECT_ID.$REGION.$CONNECTION_ID | jq -r .cloudResource.serviceAccountId)"
+--member="serviceAccount:SERVICE_ACCOUNT_ID"
 --role=roles/aiplatform.user
 ```
 
 Replace the following:
 
 - `PROJECT_ID` : the name of your project.
-- `REGION` : the location where the connection was created.
-- `CONNECTION_ID` : The name of the connection you created.
+- `SERVICE_ACCOUNT_ID` : the service account ID associated with your connection. You can find this value when you view your [connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
 ### Terraform
 

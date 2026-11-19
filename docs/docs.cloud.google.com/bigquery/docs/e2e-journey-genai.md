@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # End-to-end user journeys for generative AI models
 
-This document describes the user journeys for BigQuery ML remote or hosted models, including the statements and functions that you can use to work with those models. BigQuery ML offers the following types of remote models:
+You can use remote or hosted generative AI models in BigQuery ML to integrate advanced AI capabilities directly into BigQuery. Exploring these end-to-end user journeys lets you discover the specific SQL statements and functions required to create, evaluate, and generate data from Gemini models, Cloud AI services, and custom open models. BigQuery ML offers the following types of remote models:
 
 - [Fine-tuned Google Gemini models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned)
 - [Google, partner, and open models as a service](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)

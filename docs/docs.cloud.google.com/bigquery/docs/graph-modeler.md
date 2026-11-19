@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Use the BigQuery Graph visual modeler
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request support or provide feedback for this feature, send an email to <bq-graph-preview-support@google.com> .
-
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 The BigQuery Graph visual modeler in BigQuery Studio lets you define node and edge tables directly from your BigQuery data sources and manage graph topologies without writing any DDL statements. In this document, you learn how to create, view, edit, and query graphs by using the visual modeler, or create graphs programmatically by using [schema statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) .

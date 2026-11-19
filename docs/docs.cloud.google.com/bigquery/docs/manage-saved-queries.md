@@ -191,11 +191,15 @@ To view saved query metadata, do the following:
 
 ## Work with saved query versions
 
-You can choose to create a saved query either inside of or outside of a [repository](https://docs.cloud.google.com/bigquery/docs/repository-intro) . Saved query versioning is handled differently based on where the saved query is located.
+You can choose to create a saved query either inside of or outside of a [repository](https://docs.cloud.google.com/bigquery/docs/use-repositories-workspaces-intro#repositories) ( [Preview](https://cloud.google.com/products#product-launch-stages) ). Saved query versioning is handled differently based on where the saved query is located.
 
 ### Saved query versioning in repositories
 
-Repositories are Git repositories that reside either in BigQuery or with a third-party provider. You can use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) in repositories to perform version control on saved queries. For more information, see [Use version control with a file](https://docs.cloud.google.com/bigquery/docs/workspaces#use_version_control_with_a_file) .
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Repositories are Git repositories that reside either in BigQuery or with a third-party provider. You can use [workspaces](https://docs.cloud.google.com/bigquery/docs/use-repositories-workspaces-intro#workspaces) in repositories to perform version control on saved queries. For more information, see [Use version control with a file](https://docs.cloud.google.com/bigquery/docs/workspaces#use_version_control_with_a_file) .
 
 ### Saved query versioning outside of repositories
 
@@ -487,7 +491,7 @@ System entry type
 The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
 
 System aspect type  
-The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
 
 Type  
 The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .

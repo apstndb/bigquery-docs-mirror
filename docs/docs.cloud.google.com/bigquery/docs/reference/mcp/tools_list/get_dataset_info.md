@@ -87,6 +87,11 @@ Represents a BigQuery dataset.
   "defaultEncryptionConfiguration": {
     object (EncryptionConfiguration)
   },
+  "replicas": [
+    {
+      object (Replica)
+    }
+  ],
   "satisfiesPzs": boolean,
   "satisfiesPzi": boolean,
   "type": string,
@@ -119,6 +124,10 @@ Represents a BigQuery dataset.
     string: string,
     ...
   },
+
+  // Union field _failover_reservation_id can be only one of the following:
+  "failoverReservationId": string
+  // End of list of possible types for union field _failover_reservation_id.
 
   // Union field _catalog_source can be only one of the following:
   "catalogSource": string
@@ -217,16 +226,21 @@ Represents a BigQuery dataset.
 <p>The default encryption key for all tables in the dataset. After this property is set, the encryption key of all newly-created tables in the dataset is set to this value unless the table creation request or query explicitly overrides the key.</p></td>
 </tr>
 <tr class="even">
+<td><code>replicas[]</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.Replica"><code>Replica</code></a><code> )</code></p>
+<p>Optional. The list of replicas in a cross region replicated or disaster recovery dataset.</p></td>
+</tr>
+<tr class="odd">
 <td><code>satisfiesPzs</code></td>
 <td><p><code>boolean</code></p>
 <p>Output only. Reserved for future use.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>satisfiesPzi</code></td>
 <td><p><code>boolean</code></p>
 <p>Output only. Reserved for future use.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>type</code></td>
 <td><p><code>string</code></p>
 <p>Output only. Same as <code>type</code> in <code>ListFormatDataset</code> . The type of the dataset, one of:</p>
@@ -239,32 +253,32 @@ Represents a BigQuery dataset.
 <li>BIGLAKE_HIVE - a Biglake dataset accessible through the Hive API.</li>
 </ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>linkedDatasetSource</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.LinkedDatasetSource"><code>LinkedDatasetSource</code></a><code> )</code></p>
 <p>Optional. The source dataset reference when the dataset is of type LINKED. For all other dataset types it is not set. This field cannot be updated once it is set. Any attempt to update this field using Update and Patch API Operations will be ignored.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>linkedDatasetMetadata</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.LinkedDatasetMetadata"><code>LinkedDatasetMetadata</code></a><code> )</code></p>
 <p>Output only. Metadata about the LinkedDataset. Filled out when the dataset type is LINKED.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>externalDatasetReference</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.ExternalDatasetReference"><code>ExternalDatasetReference</code></a><code> )</code></p>
 <p>Optional. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>externalCatalogDatasetOptions</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.ExternalCatalogDatasetOptions"><code>ExternalCatalogDatasetOptions</code></a><code> )</code></p>
 <p>Optional. Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema or namespace represented by the current dataset.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>isCaseInsensitive</code></td>
 <td><p><code>boolean</code></p>
 <p>Optional. TRUE if the dataset and its table names are case-insensitive, otherwise FALSE. By default, this is FALSE, which means the dataset and its table names are case-sensitive. This field does not affect routine references.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>defaultCollation</code></td>
 <td><p><code>string</code></p>
 <p>Optional. Defines the default collation specification of future tables created in the dataset. If a table is created in this dataset without table-level default collation, then the table inherits the dataset default collation, which is applied to the string fields that do not have explicit collation specified. A change to this field affects only tables created afterwards, and does not alter the existing tables. The following values are supported:</p>
@@ -273,17 +287,17 @@ Represents a BigQuery dataset.
 <li>'': empty string. Default to case-sensitive behavior.</li>
 </ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>defaultRoundingMode</code></td>
 <td><p><code>enum ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.RoundingMode"><code>RoundingMode</code></a><code> )</code></p>
 <p>Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table's default rounding mode, unless otherwise specified.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>maxTimeTravelHours</code></td>
 <td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>Int64Value</code></a><code> format)</code></p>
 <p>Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>tags[] </code><strong><code>(deprecated)</code></strong></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.GcpTag"><code>GcpTag</code></a><code> )</code></p>
 <blockquote>
@@ -291,21 +305,35 @@ Represents a BigQuery dataset.
 </blockquote>
 <p>Output only. Tags for the dataset. To provide tags as inputs, use the <code>resourceTags</code> field.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>storageBillingModel</code></td>
 <td><p><code>enum ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.StorageBillingModel"><code>StorageBillingModel</code></a><code> )</code></p>
 <p>Optional. Updates storage_billing_model for the dataset.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>restrictions</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.RestrictionConfig"><code>RestrictionConfig</code></a><code> )</code></p>
 <p>Optional. Output only. Restriction config for all tables and dataset. If set, restrict certain accesses on the dataset and all its tables based on the config. See <a href="https://cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress">Data egress</a> for more details.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>resourceTags</code></td>
 <td><p><code>map (key: string, value: string)</code></p>
 <p>Optional. The <a href="https://cloud.google.com/bigquery/docs/tags">tags</a> attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/environment" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "Production". See <a href="https://cloud.google.com/iam/docs/tags-access-control#definitions">Tag definitions</a> for more details.</p>
 <p>An object containing a list of <code>"key": value</code> pairs. Example: <code>{ "name": "wrench", "mass": "1.3kg", "count": "3" }</code> .</p></td>
+</tr>
+<tr class="even">
+<td><p>Union field <code>_failover_reservation_id</code> .</p>
+<p><code>_failover_reservation_id</code> can be only one of the following:</p></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>failoverReservationId</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The failover reservation associated with the dataset, in regionless format. For example, <code>{admin_project}.{failover_reservation}</code> . To learn about failover reservations, see <a href="https://cloud.google.com/bigquery/docs/managed-disaster-recovery#overview">Managed disaster recovery overview</a> .</p></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><p>Union field <code>_catalog_source</code> .</p>
@@ -583,6 +611,120 @@ Represents a BigQuery dataset.
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `kmsKeyName` | `string` Optional. Describes the Cloud KMS encryption key that will be used to protect destination BigQuery table. The BigQuery Service Account associated with your project requires access to this encryption key. |
 
+### Replica
+
+**JSON representation**
+
+```
+{
+
+  // Union field _id can be only one of the following:
+  "id": string
+  // End of list of possible types for union field _id.
+
+  // Union field _location can be only one of the following:
+  "location": string
+  // End of list of possible types for union field _location.
+
+  // Union field _primary_assignment_time can be only one of the following:
+  "primaryAssignmentTime": string
+  // End of list of possible types for union field _primary_assignment_time.
+
+  // Union field _primary_assignment_completion_time can be only one of the
+  // following:
+  "primaryAssignmentCompletionTime": string
+  // End of list of possible types for union field
+  // _primary_assignment_completion_time.
+
+  // Union field _replica_state can be only one of the following:
+  "replicaState": enum (ReplicaState)
+  // End of list of possible types for union field _replica_state.
+
+  // Union field _creation_time can be only one of the following:
+  "creationTime": string
+  // End of list of possible types for union field _creation_time.
+
+  // Union field _backfill_completion_time can be only one of the following:
+  "backfillCompletionTime": string
+  // End of list of possible types for union field _backfill_completion_time.
+
+  // Union field _failover_reservation_uri can be only one of the following:
+  "failoverReservationUri": string
+  // End of list of possible types for union field _failover_reservation_uri.
+
+  // Union field _replica_options can be only one of the following:
+  "replicaOptions": {
+    object (ReplicaOptions)
+  }
+  // End of list of possible types for union field _replica_options.
+}
+```
+
+| Fields                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|-----------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Union field `_id` . `_id` can be only one of the following:                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `id`                                                                                                                        | `string` Required. The user-visible string identifier for this dataset replica. For example, `us-east4-replica` .                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_location` . `_location` can be only one of the following:                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `location`                                                                                                                  | `string` Required. The logical BigQuery region where this replica is located. This is uppercase if "US" or "EU", otherwise a lowercase cloud region like "asia-northeast1". For more information, see [Dataset locations](https://cloud.google.com/bigquery/docs/locations) .                                                                                                                                                                                                                                                                                                           |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_primary_assignment_time` . `_primary_assignment_time` can be only one of the following:                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `primaryAssignmentTime`                                                                                                     | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. The time at which the replica was assigned primary. Only one replica has this field populated at any point. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .                                                                                          |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_primary_assignment_completion_time` . `_primary_assignment_completion_time` can be only one of the following: |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `primaryAssignmentCompletionTime`                                                                                           | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. After a new primary assignment is made, this is the time that the dataset's data has been fully replicated to the replica, and after which the system uses current reads in the new primary replica. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` . |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_replica_state` . `_replica_state` can be only one of the following:                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `replicaState`                                                                                                              | `enum ( `[`ReplicaState`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.ReplicaState)` )` Output only. The current replication state of the replica.                                                                                                                                                                                                                                                                                                                                                                              |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_creation_time` . `_creation_time` can be only one of the following:                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `creationTime`                                                                                                              | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. The timestamp when the replica was created. For any dataset's first replica, this matches the dataset's `creation_time` . Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .                                                                            |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_backfill_completion_time` . `_backfill_completion_time` can be only one of the following:                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `backfillCompletionTime`                                                                                                    | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. The time when the backfill was completed and the replica is ready to use. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .                                                                                                                            |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_failover_reservation_uri` . `_failover_reservation_uri` can be only one of the following:                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `failoverReservationUri`                                                                                                    | `string` Output only. The failover reservation resource name for the replica's region if this replica is used for disaster recovery (DR). Fully-qualified format, for example: "projects/{project}/locations/{location}/reservations/{reservation}". The location portion of the format is uppercase if "US" or "EU", otherwise a lowercase cloud region like "asia-northeast1".                                                                                                                                                                                                        |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Union field `_replica_options` . `_replica_options` can be only one of the following:                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `replicaOptions`                                                                                                            | `object ( `[`ReplicaOptions`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.ReplicaOptions)` )` Optional. Contains modification options for the replica, such as setting a Cloud KMS key.                                                                                                                                                                                                                                                                                                                                         |
+|                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+### Timestamp
+
+**JSON representation**
+
+```
+{
+  "seconds": string,
+  "nanos": integer
+}
+```
+
+| Fields    |                                                                                                                                                                                                                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `seconds` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).                            |
+| `nanos`   | `integer` Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive. |
+
+### ReplicaOptions
+
+**JSON representation**
+
+```
+{
+
+  // Union field _default_kms_key_name can be only one of the following:
+  "defaultKmsKeyName": string
+  // End of list of possible types for union field _default_kms_key_name.
+}
+```
+
+| Fields                                                                                          |                                                                                        |
+|-------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| Union field `_default_kms_key_name` . `_default_kms_key_name` can be only one of the following: |                                                                                        |
+| `defaultKmsKeyName`                                                                             | `string` Optional. The default Cloud KMS encryption key resource name for the replica. |
+|                                                                                                 |                                                                                        |
+
 ### BoolValue
 
 **JSON representation**
@@ -733,6 +875,19 @@ Indicates the type of resources in a dataset that the entry applies to.
 | `TARGET_TYPE_UNSPECIFIED` | Do not use. You must set a target type explicitly. |
 | `VIEWS`                   | This entry applies to views in the dataset.        |
 | `ROUTINES`                | This entry applies to routines in the dataset.     |
+
+### ReplicaState
+
+Specifies the replication state of the replica.
+
+| Enums                         |                                                                                                                                                                                                                                                                          |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `REPLICA_STATE_UNSPECIFIED`   | Should never be set.                                                                                                                                                                                                                                                     |
+| `PRIMARY`                     | The replica is the primary. All routing by default goes to the primary, and only the primary is writable.                                                                                                                                                                |
+| `SECONDARY`                   | The replica is the secondary and is read-only.                                                                                                                                                                                                                           |
+| `ASSIGNED_PRIMARY`            | The replica where the new primary is going to be. At most one replica can have this value, and it's only present when the dataset has a primary switch in progress.                                                                                                      |
+| `PREVIOUSLY_ASSIGNED_PRIMARY` | The replica that was previously the primary, but is no longer assigned as the primary. All routing still goes to this replica, but it is no longer writable. Only set on the old primary during a primary switch. At most one replica at any moment can have this value. |
+| `BACKFILLING`                 | The replica is not queryable yet since it's still backfilling.                                                                                                                                                                                                           |
 
 ### LinkState
 

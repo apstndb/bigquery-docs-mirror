@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create an ML model in BigQuery ML by using the Google Cloud console
 
-This document shows you how to use the Google Cloud console to create a BigQuery ML model.
+Using the Google Cloud console to create BigQuery ML models lets you visually train and deploy machine learning (ML) assets without writing complex SQL statements. You can use the Google Cloud console to select training data, tune hyperparameters, and connect to remote Cloud AI services directly from BigQuery.
 
 ## Required roles
 

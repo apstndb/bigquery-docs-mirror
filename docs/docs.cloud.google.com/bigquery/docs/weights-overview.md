@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigQuery ML model weights overview
 
-This document describes how BigQuery ML supports model weights discoverability for machine learning (ML) models.
+You can retrieve model weights in BigQuery ML to inspect the specific rules, numbers, and components that your trained machine learning (ML) models contain. Discovering these internal data structures lets you understand and audit the exact mathematical logic your models use to make predictions.
 
 An ML model is an artifact that is saved after running an ML algorithm on training data. The model represents the rules, numbers, and any other algorithm-specific data structures that are required to make predictions. Some examples include the following:
 

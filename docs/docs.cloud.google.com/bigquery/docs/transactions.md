@@ -119,7 +119,7 @@ BEGIN TRANSACTION;
 CREATE TEMP TABLE tmp
   AS SELECT * FROM mydataset.NewArrivals WHERE warehouse = 'warehouse #1';
 
--- Delete the matching records from the NewArravals table.
+-- Delete the matching records from the NewArrivals table.
 DELETE mydataset.NewArrivals WHERE warehouse = 'warehouse #1';
 
 -- Merge the records from the temporary table into the Inventory table.

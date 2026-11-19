@@ -69,6 +69,10 @@ You can use the following search functions to perform a semantic vector search, 
 
 Optionally, you can create a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) by using the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . When a vector index is used, the `VECTOR_SEARCH` and `AI.SEARCH` functions use the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. Without a vector index, these functions use [brute force search](https://en.wikipedia.org/wiki/Brute-force_search) to measure distance for every record. You can also choose to use brute force to get exact results even when a vector index is available.
 
+## Rerank results
+
+After you perform a semantic or hybrid search, you can use the [`AI.RANK` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-rank) to reorder the results. The `AI.RANK` function reorders the rows of a table by how well the text in a specified column answers a search query. It evaluates the query and each row's text together, rather than comparing them independently. The function returns each row with a relevance score and rank position, sorted from most to least relevant.
+
 ## Handle embedding model deprecation
 
 When an embedding model is deprecated, you must migrate your workflows to a supported replacement model before the deprecated model is shut down. The following models have a retirement date of April 1, 2027:

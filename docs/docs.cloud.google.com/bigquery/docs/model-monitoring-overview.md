@@ -2,15 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/model-monitoring-overview
 uri: https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview
 title: Model monitoring overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about monitoring machine learning models in BigQuery ML. You can monitor models to analyze data skew and drift, ensuring your models remain accurate over time.
 data_source: docs.cloud.google.com
 ---
 
 # Model monitoring overview
 
-This document describes how BigQuery ML supports monitoring of machine learning (ML) models through evaluation and comparison the data a model uses. This includes comparing a model's serving data to its training data,and comparing new serving data to previously used serving data.
+Monitoring machine learning (ML) models in BigQuery ML lets you evaluate and compare the data that your models use to make predictions. This includes comparing a model's serving data to its training data, and comparing new serving data to previously used serving data.
 
-Understanding the data used by your models is a critical aspect of ML, because this data affects model performance. Understanding any variance between your training and serving data is especially important in ensuring that your models remain accurate over time. A model performs best on serving data that is similar to the training data. When the serving data deviates from the data used to train the model, the model's performance can deteriorate, even if the model itself hasn't changed.
+Understanding the data used by your models is a critical aspect of ML, because this data affects model performance. Understanding any variance between your training and serving data is especially important in ensuring that your models remain accurate over time. A model performs best on serving data that's similar to the training data. When the serving data deviates from the data used to train the model, the model's performance can deteriorate, even if the model itself hasn't changed.
 
 BigQuery ML provides functions to help you analyze your training and serving data for *data skew* and *data drift* :
 

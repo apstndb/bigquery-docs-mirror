@@ -8,50 +8,13 @@ data_source: docs.cloud.google.com
 
 # Generative AI overview
 
-This document describes the generative artificial intelligence (AI) functions that BigQuery supports. These functions accept natural language inputs and use pre-trained [Gemini Enterprise Agent Platform models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) and built-in BigQuery models.
+You can use generative AI functions to analyze natural language and unstructured data directly in BigQuery. Applying these pre-trained [Gemini Enterprise Agent Platform models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) lets you extract structured data, generate embeddings, and classify text or images without writing complex pipelines.
 
-BigQuery offers a variety of AI functions to help with tasks such as the following:
-
-- Generate creative content.
-- Analyze, detect sentiment, and answer questions about text or unstructured data, such as images.
-- Summarize the key ideas or impressions conveyed by the content.
-- Extract structured data from text.
-- Classify text or unstructured data into user-defined categories.
-- Generate embeddings to search for similar text, images, and video.
-- Rate inputs in order to rank them by quality, similarity, or other criteria.
-
-AI functions are grouped into the following categories to help you accomplish these tasks:
+BigQuery offers the following categories of AI functions:
 
 - **[General-purpose AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#general_purpose_ai) :** These functions give you full control and transparency on the choice of model, prompt, and parameters to use.
-
-  - [Perform LLM inference](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#inference) , such as to answer questions about your data
-
-    - `AI.GENERATE` is the most flexible inference function, which lets you analyze any structured or unstructured data.
-    - `AI.GENERATE_TEXT` is a table-valued version of `AI.GENERATE` that also supports partner models and open models.
-
-  - [Generate structured output](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#generate_structured_data) , such as extracting names, addresses, or object descriptions from text, documents, or images.
-
-    - `AI.GENERATE` , when you specify an output schema.
-    - `AI.GENERATE_TABLE` is a table-valued version of `AI.GENERATE` that calls a remote model and lets you specify a custom output schema.
-    - If your output schema has a single field, you can use one of the specialized functions: `AI.GENERATE_BOOL` , `AI.GENERATE_DOUBLE` , or `AI.GENERATE_INT` .
-
-  - [Generate embeddings](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#text_embedding) for semantic search and clustering
-
-    - `AI.EMBED` : Create an embedding from text or image data.
-    - `AI.GENERATE_EMBEDDING` : A table-valued function that adds a column of embedded text, image, audio, video, or document data to your table.
-
-- **[Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality. With [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview), these functions scale to millions or billions of rows.
-
-  - `AI.IF` : filter your data with natural language conditions.
-
-  - `AI.SCORE` : rate input, such as by quality or sentiment.
-
-  - `AI.CLASSIFY` : classify input into user-defined categories.
-
-  - `AI.AGG` : aggregate input to summarize or analyze your data.
-
+- **[Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality. With [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) , these functions scale to millions or billions of rows.
 - **Utility functions:** Use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) to estimate the number of tokens in an input prompt before you run a query.
-
 - **[Task-specific functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#task-specific_functions) :** These functions use Cloud AI APIs to help you perform tasks such as natural language processing, machine translation, document processing, audio transcription, and computer vision.
 
 ## General-purpose AI functions
@@ -120,7 +83,7 @@ Managed AI functions simplify routine tasks, such as filtering, classification, 
 - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : Classify text into user-defined categories. You can use this function in a `GROUP BY` clause to group inputs according to the categories that you define. For example, you could classify support tickets by whether they relate to billing, shipping, product quality, or something else.
 - [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) : Aggregate input based on natural language instructions to summarize or analyze your data. For example, you could scan logs of user application sessions to determine where customers are having difficulty, or you could summarize the contents of a large set of images.
 
-> **Note:** To process large datasets more efficiently, you can use *optimized mode* (Preview) for `AI.IF` and `AI.CLASSIFY` functions. This mode works by training a lightweight, distilled model on a sample of your data, then using that model for inference on the majority of rows. This approach avoids calling an LLM for every row, which [reduces token consumption and latency](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) when working with thousands or even billions of rows.
+> **Note:** To process large datasets more efficiently, you can use *optimized mode* for `AI.IF` and `AI.CLASSIFY` functions. This mode works by training a lightweight, distilled model on a sample of your data, then using that model for inference on the majority of rows. This approach avoids calling an LLM for every row, which [reduces token consumption and latency](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) when working with thousands or even billions of rows.
 
 For a tutorial that shows examples of how to use these functions, see [Perform semantic analysis with managed AI functions](https://docs.cloud.google.com/bigquery/docs/semantic-analysis) .
 

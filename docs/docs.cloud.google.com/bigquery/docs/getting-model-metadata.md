@@ -2,17 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/getting-model-metadata
 uri: https://docs.cloud.google.com/bigquery/docs/getting-model-metadata
 title: Get model metadata
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to retrieve BigQuery ML model metadata to audit machine learning assets, review feature columns, and understand model training options.
 data_source: docs.cloud.google.com
 ---
 
 # Get model metadata
 
-This page shows you how to get information or metadata about BigQuery ML models. You can get model metadata by:
-
-- Using the Google Cloud console
-- Using the `bq show` CLI command
-- Calling the [`models.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get) API method directly or by using the client libraries
+You can retrieve BigQuery ML model metadata to audit and understand the machine learning assets stored in your datasets. Reviewing details like model type, feature columns, and training options helps you verify the structure and configuration of a model before you use it for predictions.
 
 > **Note:** Getting information about models by querying the `INFORMATION_SCHEMA` views is unsupported.
 

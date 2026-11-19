@@ -191,6 +191,8 @@ You cannot add labels to or update labels on pending, running, or completed jobs
 
 When you add a label to a job, the label is included in your billing data.
 
+> **Note:** For capacity-based pricing, you can't attribute job costs using job labels in Cloud Billing Reports because these costs are attributed at the reservation level.
+
 For more information, see [Adding job labels](https://docs.cloud.google.com/bigquery/docs/adding-labels#job-label) .
 
 ## What's next

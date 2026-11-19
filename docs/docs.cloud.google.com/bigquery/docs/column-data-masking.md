@@ -1429,7 +1429,7 @@ You can also grant fine-grained access control access to data policies.
 
 The permissions to grant fine-grained access control access to data policies and manage data policies are different. To control fine-grained access control permissions, you must update the `grantees` field of the data policy. To control access to the data policies, set the IAM roles using the [`setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method.
 
-To set grantees on a data policy, use the [v2 `patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method. To manage data policy permissions, use the [v1 `setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies/setIamPolicy) method.
+To set grantees on a data policy, use the [v2 `patch`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/patch) method. To manage data policy permissions, use the [v2 `setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies/setIamPolicy) method.
 
 ### API
 
@@ -1453,7 +1453,7 @@ REVOKE FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
 
 #### Delete data policies
 
-The user or service account that creates a data policy must have the `bigquery.dataPolicies.delete` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
+The user or service account that deletes a data policy must have the `bigquery.dataPolicies.delete` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
 ### API
 
@@ -1486,6 +1486,8 @@ The following permissions are required to assign a data policy directly on a col
 - `bigquery.dataPolicies.attach`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+> **Note:** To assign or unassign a data policy on a column in an [Apache Iceberg table managed by the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/fine-grained-access-control#column-level-security) , you also need the `biglake.tables.setColumnDataPolicy` and `biglake.tables.update` permissions on the table, or the `biglake.tables.create` permission for `CREATE TABLE` statements. The BigLake Admin role ( `roles/biglake.admin` ) includes these permissions. You also need the `bigquery.jobs.create` permission on the query project. In GoogleSQL DDL statements, reference the table by its four-part `PROJECT_ID `` . `` CATALOG_ID `` . `` NAMESPACE `` . `` TABLE_NAME` identifier.
 
 #### Assign a data policy
 
@@ -1523,7 +1525,7 @@ To unassign a data policy directly on a column, do one of the following:
 
 ### SQL
 
-To detach a data policy to a column, use the [`ALTER COLUMN SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.
+To detach a data policy from a column, use the [`ALTER COLUMN SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.
 
 The following example uses the `ALTER COLUMN SET OPTIONS` to remove all data policies from an existing column on a table:
 
@@ -1543,7 +1545,7 @@ ALTER COLUMN column_name SET OPTIONS (
 
 ### API
 
-To unassign a data policy to a column, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method on the table and update the table schema empty or updated data policies.
+To unassign a data policy from a column, call the [`patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method on the table and update the table schema with empty or updated data policies.
 
 ### Limitations
 
@@ -1563,6 +1565,6 @@ Assigning a data policy directly on a column is subject to the following limitat
 - Load jobs don't support user-specified schemas with column data policies.
 - If you overwrite a destination table, the system removes any existing policy tags from the table, unless you use the `--destination_schema` flag to specify a schema with column data policies.
 - By default, data masking does not support partitioned or clustered columns. This is a general limitation of data masking, not specific to column data policies. Data masking on partitioned or clustered columns can significantly increase query costs.
-- You can't assign a data policy directly on a column in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , [non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) , [Apache Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) and [Delta Lake](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) .
+- You can't assign a data policy directly on a column in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , [non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) , [Apache Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) , and [Delta Lake](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) . For [Apache Iceberg tables managed by the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/fine-grained-access-control) , you can assign or unassign column data policies only through GoogleSQL DDL with the four-part `PROJECT_ID `` . `` CATALOG_ID `` . `` NAMESPACE `` . `` TABLE_NAME` identifier. Data Catalog policy tags, Resource Manager data governance tags, and federated catalog tables aren't supported. In addition, catalogs that use credential vending mode return a `403 Forbidden` HTTP status code for direct storage credential requests unless the calling principal has unmasked ( `RAW_DATA_ACCESS_POLICY` ) access to every protected column and, if the table has row-level access policies, unfiltered row access ( `FILTER USING (TRUE)` ).
 - Fine Grained Access can be granted only at the data policy level. For more information, see [Update data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking#update-data-policies-on-column) .
 - You can't [unassign](https://docs.cloud.google.com/bigquery/docs/column-data-masking#unassign-data-policies-on-column) the last remaining data policy on a column using the BigQuery Data Policy API. You can unassign the last remaining data policy on a column using the [`ALTER COLUMN SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statement.

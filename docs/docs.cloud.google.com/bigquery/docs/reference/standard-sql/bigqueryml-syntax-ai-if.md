@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.IF` function, which uses a Gemini Enterprise Agent Platform Gemini model to evaluate a condition described in natural language and returns a `BOOL` .
 
-> **Tip:** When processing large datasets, use the [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview) with `AI.IF` to reduce large language model (LLM) token costs and query latency.
+> **Tip:** When processing large datasets, use the [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) with `AI.IF` to reduce large language model (LLM) token costs and query latency.
 
 You can use the `AI.IF` function to filter and join data based on conditions described in natural language or multimodal input. The following are common use cases:
 
@@ -117,7 +117,7 @@ AI.IF(
 
   If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
-- `EMBEDDINGS` : the embeddings to use for [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+- `EMBEDDINGS` : the embeddings to use for [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) . This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
 
   This argument accepts the following data types:
 

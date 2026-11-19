@@ -64,9 +64,11 @@ For more information, see the [Authentication Overview](https://docs.cloud.googl
 
 DatasetView specifies which dataset information is returned.
 
-| Enums                      |                                                                                              |
-|----------------------------|----------------------------------------------------------------------------------------------|
-| `DATASET_VIEW_UNSPECIFIED` | The default value. Default to the FULL view.                                                 |
-| `METADATA`                 | View metadata information for the dataset, such as friendlyName, description, labels, etc.   |
-| `ACL`                      | View ACL information for the dataset, which defines dataset access for one or more entities. |
-| `FULL`                     | View both dataset metadata and ACL information.                                              |
+| Enums                         |                                                                                                                               |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `DATASET_VIEW_UNSPECIFIED`    | The default value. Defaults to the BASIC view.                                                                                |
+| `METADATA`                    | View metadata information for the dataset, such as friendlyName, description, labels, etc.                                    |
+| `ACL`                         | View ACL information for the dataset, which defines dataset access for one or more entities.                                  |
+| `FULL`                        | Includes everything from BASIC_REPLICA_METADATA_VIEW plus full replica information.                                           |
+| `BASIC`                       | View both dataset metadata and ACL information.                                                                               |
+| `BASIC_REPLICA_METADATA_VIEW` | Includes everything from the BASIC view plus basic replication metadata, excluding fields that require cross-region requests. |

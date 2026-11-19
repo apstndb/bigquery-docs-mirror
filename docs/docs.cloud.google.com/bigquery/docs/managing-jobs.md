@@ -69,7 +69,7 @@ The following permissions are required to run and manage jobs:
 - `bigquery.jobs.update` on the project to cancel any job.
 - `bigquery.jobs.listAll` on the organization, folder, or project to list all jobs and retrieve metadata on any job submitted by any user. To see details for all jobs, the `bigquery.jobs.list` permission is also required.
 - `bigquery.jobs.list` on the project to list all jobs and retrieve metadata on any job submitted by any user. For jobs submitted by other users, details and metadata are redacted.
-- `bigquery.jobs.listExecutionMetadata` on the organization to list all job execution metadata (without sensitive information) for any job submitted by any user.
+- `bigquery.jobs.listExecutionMetadata` on the organization to view job execution metadata in administrative monitoring charts and slot estimation for any job submitted by any user (includes job execution metrics, project ID, folder numbers, job ID, reservation ID, labels, and `user_email` , while excluding SQL query text, query execution plans and stages, and referenced or destination tables, views, and routines).
 - `bigquery.jobs.update` on the project to cancel any job.
 - `bigquery.jobs.delete` on the project to delete any job.
 

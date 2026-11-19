@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage BigQuery ML models in Gemini Enterprise Agent Platform
 
-You can register BigQuery ML models with the Vertex AI Model Registry, in order to manage them alongside your Gemini Enterprise Agent Platform models without needing to export them. When you register models with Model Registry, you can version, evaluate, and deploy the models for online prediction by using a single interface, and without needing a serving container. If you aren't familiar with Agent Platform and how it integrates with BigQuery ML, see [Gemini Enterprise Agent Platform for BigQuery users](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/beginner/bqml) .
+You can register BigQuery ML models with the Vertex AI Model Registry to manage them alongside your Gemini Enterprise Agent Platform models without exporting them. When you register models with Model Registry, you can version, evaluate, and deploy the models for online prediction by using a single interface, and without needing a serving container. If you aren't familiar with Agent Platform and how it integrates with BigQuery ML, see [Gemini Enterprise Agent Platform for BigQuery users](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/beginner/bqml) .
 
 To learn more about Agent Platform prediction, see [Overview of getting predictions on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/overview) .
 

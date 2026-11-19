@@ -265,6 +265,10 @@ For more information about how row-level security interacts with some BigQuery f
 
 ## Audit logging and monitoring
 
+You can monitor row-level security in BigQuery in two ways: use audit logs in Cloud Logging to track policy lifecycle and data access events, or query the `INFORMATION_SCHEMA.ROW_ACCESS_POLICIES` view to inspect active row-level access policy definitions and metadata.
+
+### Audit logging
+
 When data in a table with one or more row-level access policies is read, the row-level access policies authorized for the read access and any corresponding tables referenced in subqueries appear in the IAM authorization information for that read request.
 
 Creation and deletion of row-level access policies are audit logged, and can be accessed through [Cloud Logging](https://docs.cloud.google.com/logging/docs/overview) . Audit logs include the name of the row-level access policy. However, the `filter_expression` and `grantee_list` definitions of a row-level access policy are omitted from logs, as they may contain user or other sensitive information. Listing and viewing of row-level access policies are not audit logged.
@@ -272,6 +276,10 @@ Creation and deletion of row-level access policies are audit logged, and can be 
 For more information about logging in BigQuery, see [Introduction to BigQuery monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) .
 
 For more information about logging in Google Cloud, see [Cloud Logging](https://docs.cloud.google.com/logging/docs) .
+
+### Monitor with `INFORMATION_SCHEMA`
+
+You can query the [`INFORMATION_SCHEMA.ROW_ACCESS_POLICIES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-row-access-policies) to retrieve real-time metadata about active row-level access policies across a dataset or region. The view returns each policy's target table, policy name, filter predicate ( `filter_predicate` ), creation time, and last modified time.
 
 ## What's next
 

@@ -8,15 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manage code with BigQuery Studio Git repositories
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <bigquery-repositories-feedback@google.com> .
-
 BigQuery Studio Git repositories let you version control SQL scripts, notebooks, and other code assets directly in the BigQuery Studio file browser. You can clone remote Git repositories, manage branches, and perform Git operations without leaving the Google Cloud console.
 
-Compared to classic [repositories](https://docs.cloud.google.com/bigquery/docs/repositories) , this integration provides a streamlined, folder-based experience under your user root folder in the left pane. You can interact with your code assets like standard files and directories while maintaining a connection to a remote Git repository.
+Compared to BigQuery [repositories](https://docs.cloud.google.com/bigquery/docs/repositories) [(Preview)](https://cloud.google.com/products#product-launch-stages) , which use a workspace-based approach to version control, BigQuery Studio Git repositories provide a streamlined, folder-based experience under your user root folder in the left pane. You can interact with your code assets like standard files and directories while maintaining a connection to a remote Git repository.
 
 ## Limitations
 
@@ -117,7 +111,7 @@ To create a Git repository, do the following:
 
     - If no account connector exists, click **Create account connector** to create a new account connector.
 
-    - If you prefer not to use a Developer Connect account connector, click **Use a different connection type** to [connect using HTTPS or SSH](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) .
+    - If you prefer not to use a Developer Connect account connector, click **switch to HTTPS or SSH** to [connect using HTTPS or SSH](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) .
 
       > **Note:** BigQuery Studio Git repositories use Developer Connect [account connectors](https://docs.cloud.google.com/developer-connect/docs/account-connectors) rather than [Git repository connections](https://docs.cloud.google.com/developer-connect/docs/git-repo-connections) . For more information, see [The difference between Git repositories connections and account connectors](https://docs.cloud.google.com/developer-connect/docs/overview#difference_between) .
 

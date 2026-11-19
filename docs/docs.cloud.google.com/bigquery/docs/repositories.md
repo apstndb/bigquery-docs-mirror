@@ -16,7 +16,9 @@ data_source: docs.cloud.google.com
 
 BigQuery repositories let you version control your code files and collaborate with your team. You can create, share, and delete BigQuery repositories, or connect them to a third-party Git repository.
 
-For a folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) [(Preview)](https://cloud.google.com/products/#product-launch-stages) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
+For a folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
+
+> **Important:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you can't schedule it for execution in a BigQuery repository. For scheduling and executing Dataform workflows, you need to use Dataform repositories. For scheduling queries and notebooks, use BigQuery Studio. For more information, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [Schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
 
 ## Before you begin
 
@@ -46,6 +48,18 @@ Because code assets in BigQuery are powered by Dataform, you should consider the
 - Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
 
 For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
+
+### Service account
+
+All BigQuery repositories are connected to the default Dataform service agent. This service account is derived from your project number in the following format:
+
+```
+service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
+```
+
+Replace `<var>PROJECT_NUMBER</var>` with your Google Cloud project number.
+
+[Strict act-as mode](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode) is enforced and requires all repositories to use a custom service account or user credentials for a Google Account to schedule pipelines and notebooks.
 
 ## Create a repository
 

@@ -14,7 +14,7 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-2.  Enable the BigQuery, Gemini Data Analytics, Gemini for Google Cloud, and Knowledge Catalog APIs, if any are not already enabled.
+2.  Enable the BigQuery, Gemini Data Analytics, Gemini for Google Cloud, and Dataplex APIs, if any are not already enabled.
 
     **Roles required to enable APIs**
 
@@ -45,7 +45,7 @@ To work with data agents, you must have Identity and Access Management (IAM) per
 
 To have conversations, see the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
-Agents act on your behalf and uses your permissions. Agents can only access data and resources that you have permission to access.
+Agents act on your behalf and use your permissions. Agents can only access data and resources that you have permission to access.
 
 ## Best practices
 
@@ -441,6 +441,8 @@ Continue to the next section to place the agent in draft mode or publish the age
 
 7.  To return to the new agent page, click **Close** . Immediately after saving or publishing your agent, you can see it in the **Agent Catalog** .
 
+A data agent is scoped to the Google Cloud project in which you create it. To view or use a shared data agent in the **Agent Catalog** , you must select the project that hosts the agent in the Google Cloud console project picker. You must also have the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
+
 You can create conversations with the data agent by using BigQuery Studio or [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API. For information on publishing to Data Studio, see [Publish a data agent in Data Studio](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-agent-data-studio) . For information on publishing to Gemini Enterprise, see [Publish a data agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) .
 
 ## Manage data agents
@@ -449,7 +451,7 @@ You can find existing agents in the **Agent Catalog** tab, which consists of thr
 
 - **My agents** : a list of all agents that you create and publish. You can modify and share published agents with others.
 - **My draft agents** : agents that you haven't published yet. You can't share draft agents.
-- **Shared by others in your organization** : Agents that others create and share with you. If others grant you permissions, you can edit these shared agents.
+- **Shared by others in your organization** : agents that others create in the selected project and share with you. If others grant you permissions, you can edit these shared agents.
 
 ### Edit a data agent
 
@@ -475,7 +477,12 @@ Follow these steps to edit a data agent:
 
 ### Share a data agent
 
-Follow these steps to share a published data agent. You can't share draft agents.
+Follow these steps to share a published data agent with principals in your project or across projects. You can't share draft agents.
+
+Data agents are scoped to the Google Cloud project in which they are created, and they run queries using the IAM permissions of the user in the conversation. To find and chat with a shared data agent in BigQuery, you must meet the following requirements:
+
+- Select the project that hosts the data agent in the Google Cloud console project picker. The agent then appears in the **All agents** section of the **Agent Catalog** tab.
+- Have the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) , such as Gemini for Google Cloud User ( `roles/cloudaicompanion.user` ) and BigQuery Job User ( `roles/bigquery.jobUser` ) on the project where you run queries, and BigQuery Data Viewer ( `roles/bigquery.dataViewer` ) on the knowledge sources that the agent uses.
 
 1.  Go to the BigQuery **Agents** page.
 
@@ -665,9 +672,9 @@ You can monitor the performance, adoption, latency, and costs of your data agent
 - Projected token usage
 - Hourly answer latency
 
-### Before you begin
+### Prerequisites for agent observability
 
-Enable the Cloud Trace, Cloud Monitoring, Cloud Logging APIs, if any are not already enabled.
+Enable the Cloud Trace, Cloud Monitoring, Cloud Logging, Observability, and Gemini for Google Cloud APIs, if any are not already enabled.
 
 **Roles required to enable APIs**
 
@@ -745,11 +752,14 @@ Agent observability is disabled by default. An administrator can enable it for y
 
 ### API
 
+> **Note:** If the `curl` request fails with a `401 UNAUTHENTICATED` error and reason `ACCESS_TOKEN_TYPE_UNSUPPORTED` due to Google Workspace domain restrictions on the token from `gcloud auth print-access-token` , use the **Google Cloud CLI** tab ( `gcloud gemini gibq-observability-settings` ) or impersonate a service account by running `gcloud auth print-access-token --impersonate-service-account= `` SERVICE_ACCOUNT` , where `SERVICE_ACCOUNT` is the email address of a service account.
+
 1.  Create an observability setting:
 
     ```
     curl -X POST \
         -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+        -H "x-goog-user-project: PROJECT_ID" \
         -H "Content-Type: application/json; charset=utf-8" \
         -d '{
               "conversational_analytics_setting": {
@@ -770,6 +780,7 @@ Agent observability is disabled by default. An administrator can enable it for y
     ```
     curl -X POST \
         -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+        -H "x-goog-user-project: PROJECT_ID" \
         -H "Content-Type: application/json; charset=utf-8" \
         -d '{
               "target": "projects/PROJECT_ID",
@@ -792,17 +803,15 @@ Metrics are collected after you enable observability. Data isn't backfilled. To 
 
 ### Cloud Monitoring
 
-1.  In the Google Cloud console, go to the Cloud Monitoring **Dashboards** page.
+1.  In the Google Cloud console, go to the Cloud Monitoring **Metrics explorer** page.
 
-2.  In the **My Dashboards** pane, search for the dashboard named `BigQuery Conversational Analytics` .
+2.  In the **Metric** pane, click **Select a metric** .
 
-3.  To open the dashboard, click its name.
+3.  In the filter bar, enter `Gemini Data Analytics` or `geminidataanalytics` .
 
-4.  Optional: Create a [custom dashboard](https://docs.cloud.google.com/monitoring/charts/dashboards) .
+4.  Select the metric that you want to view, and then click **Apply** . Agent metrics include agent usage, model calls, tool usage, health, latency, and token usage.
 
-5.  Optional: To view metrics individually, go to the **Metrics explorer** page.
-
-    Agent metrics include agent usage, model calls, tool usage, health, latency, and token usage.
+5.  Optional: Create a [custom dashboard](https://docs.cloud.google.com/monitoring/charts/dashboards) .
 
 ### Debug model calls
 
@@ -841,8 +850,10 @@ To retain your trace data, do the following:
 2.  Find the location of your `_Trace` bucket:
 
     ```
-    gcloud observability buckets list --location=-
+    gcloud observability buckets list --location=- --project=PROJECT_ID
     ```
+
+    Replace `PROJECT_ID` with the ID of your project.
 
     Note the location of your `_Trace` bucket for the next step.
 

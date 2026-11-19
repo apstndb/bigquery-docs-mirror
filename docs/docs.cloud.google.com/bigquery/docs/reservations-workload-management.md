@@ -279,15 +279,42 @@ To use reservation groups, you must first enable [reservation fairness](https://
 
 Reservation groups let you manage the properties of multiple reservations, similar to how datasets organize tables.
 
-Reservations with the same reservation group will share idle slots with each other first before being available to the organization:
+The following diagram shows how reservations within the same reservation group share idle slots with each other first before making them available to other reservations in the administration project:
 
 ![Reservation groups.](https://docs.cloud.google.com/static/bigquery/images/reservation-groups.svg)
 
 ### Idle slot sharing with reservation groups
 
-Idle slots are distributed evenly among ungrouped reservations and reservation groups and then evenly within reservation groups.
+Only unused baseline slots and unallocated commitment slots are shared as idle slots. Autoscaled slots are never shared, even between reservations in the same reservation group. If all reservations in a reservation group have `0` baseline slots, the group has no internal idle slots to share among its members. However, its members can still borrow idle slots from other reservations in the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) .
 
-In the following example, there are three reservations and 1,200 idle slots. With no reservation groups, each reservation has a fair share of 400 idle slots. When reservations 1 and 2 are grouped together, the idle slot distribution changes. The idle slots are first distributed evenly among the reservation group and reservation 3 (600 idle slots to both). Then the 600 idle slots for the reservation group are distributed evenly to reservation 1 and 2.
+When a reservation in a reservation group needs slots, BigQuery allocates capacity in the following order:
+
+1.  **Own baseline slots** : The reservation uses its own configured baseline slots first.
+2.  **Within-group idle slots** : If the reservation needs more slots, it borrows unused baseline slots from other reservations in the same reservation group. These idle slots are distributed evenly among the active reservations in that group that need additional slots.
+3.  **Project-level idle slots** : Any idle baseline slots that aren't used within a reservation group, along with idle baseline slots from ungrouped reservations and unallocated commitments in the same administration project, location, and edition, form the project-level idle slot pool. This pool is distributed evenly among each ungrouped reservation and each reservation group that needs additional slots. A reservation group's share is then distributed evenly among its active member reservations.
+4.  **Autoscaled slots** : After all available baseline and idle slots are used, the reservation scales up its own autoscaled slots.
+
+If you set `ignore_idle_slots` to `true` on a reservation in a reservation group, that reservation can't borrow idle slots from any reservation, including other reservations in the same group. However, its own unused baseline slots are still lent first to other reservations in the same group and then to other reservations in the administration project.
+
+#### Example: Sharing idle slots within a reservation group
+
+In this example, the administration project contains the following reservations:
+
+- `Reservation 1` : 600 baseline slots in `Group A` , currently idle
+- `Reservation 2` : 200 baseline slots in `Group A` , active
+- `Reservation 3` : an ungrouped active reservation
+
+If `Reservation 2` needs 800 slots, it uses its 200 baseline slots and borrows all 600 idle baseline slots from `Reservation 1` because they belong to the same reservation group. `Reservation 3` receives 0 idle slots from `Group A` .
+
+If `Reservation 2` only needs 400 slots, it uses its 200 baseline slots and borrows 200 idle baseline slots from `Reservation 1` . The remaining 400 unused baseline slots from `Group A` are then shared with `Reservation 3` .
+
+#### Example: Distribution of project-level idle slots across groups and ungrouped reservations
+
+In this example, the administration project has 1,200 project-level idle slots. There are 3 active reservations, `Reservation 1` , `Reservation 2` , and `Reservation 3` , and they all need additional slots from an unallocated commitment or another idle reservation.
+
+With no reservation groups, each reservation has an equal share of 400 idle slots.
+
+When `Reservation 1` and `Reservation 2` are grouped together, the idle slot distribution changes. The project-level idle slots are first distributed evenly between the reservation group and `Reservation 3` . The reservation group and `Reservation 3` each receive 600 idle slots. Then, the 600 idle slots in the reservation group are distributed evenly between `Reservation 1` and `Reservation 2` . `Reservation 1` and `Reservation 2` each receive 300 idle slots.
 
 ![Reservation groups idle slot sharing.](https://docs.cloud.google.com/static/bigquery/images/reservation-groups-idle-slot-sharing.svg)
 

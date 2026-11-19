@@ -10,6 +10,11 @@ data_source: docs.cloud.google.com
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset.SCHEMA_REPRESENTATION)
 - [DatasetReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#DatasetReference)
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#DatasetReference.SCHEMA_REPRESENTATION)
+- [Replica](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Replica)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Replica.SCHEMA_REPRESENTATION)
+- [ReplicaState](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ReplicaState)
+- [ReplicaOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ReplicaOptions)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ReplicaOptions.SCHEMA_REPRESENTATION)
 - [LinkedDatasetSource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetSource)
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetSource.SCHEMA_REPRESENTATION)
 - [LinkedDatasetMetadata](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetMetadata)
@@ -75,6 +80,11 @@ Represents a BigQuery dataset.
   "defaultEncryptionConfiguration": {
     object (EncryptionConfiguration)
   },
+  "replicas": [
+    {
+      object (Replica)
+    }
+  ],
   "satisfiesPzs": boolean,
   "satisfiesPzi": boolean,
   "type": string,
@@ -104,6 +114,7 @@ Represents a BigQuery dataset.
     string: string,
     ...
   },
+  "failoverReservationId": string,
   "catalogSource": string
 }
 ```
@@ -261,16 +272,21 @@ Represents a BigQuery dataset.
 <p>The default encryption key for all tables in the dataset. After this property is set, the encryption key of all newly-created tables in the dataset is set to this value unless the table creation request or query explicitly overrides the key.</p></td>
 </tr>
 <tr class="even">
+<td><code>replicas[]</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Replica"><code>Replica</code></a><code> )</code></p>
+<p>Optional. The list of replicas in a cross region replicated or disaster recovery dataset.</p></td>
+</tr>
+<tr class="odd">
 <td><code>satisfiesPzs</code></td>
 <td><p><code>boolean</code></p>
 <p>Output only. Reserved for future use.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>satisfiesPzi</code></td>
 <td><p><code>boolean</code></p>
 <p>Output only. Reserved for future use.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>type</code></td>
 <td><p><code>string</code></p>
 <p>Output only. Same as <code>type</code> in <code>ListFormatDataset</code> . The type of the dataset, one of:</p>
@@ -283,32 +299,32 @@ Represents a BigQuery dataset.
 <li>BIGLAKE_HIVE - a Biglake dataset accessible through the Hive API.</li>
 </ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>linkedDatasetSource</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetSource"><code>LinkedDatasetSource</code></a><code> )</code></p>
 <p>Optional. The source dataset reference when the dataset is of type LINKED. For all other dataset types it is not set. This field cannot be updated once it is set. Any attempt to update this field using Update and Patch API Operations will be ignored.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>linkedDatasetMetadata</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetMetadata"><code>LinkedDatasetMetadata</code></a><code> )</code></p>
 <p>Output only. Metadata about the LinkedDataset. Filled out when the dataset type is LINKED.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>externalDatasetReference</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference"><code>ExternalDatasetReference</code></a><code> )</code></p>
 <p>Optional. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>externalCatalogDatasetOptions</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalCatalogDatasetOptions"><code>ExternalCatalogDatasetOptions</code></a><code> )</code></p>
 <p>Optional. Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema or namespace represented by the current dataset.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>isCaseInsensitive</code></td>
 <td><p><code>boolean</code></p>
 <p>Optional. TRUE if the dataset and its table names are case-insensitive, otherwise FALSE. By default, this is FALSE, which means the dataset and its table names are case-sensitive. This field does not affect routine references.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>defaultCollation</code></td>
 <td><p><code>string</code></p>
 <p>Optional. Defines the default collation specification of future tables created in the dataset. If a table is created in this dataset without table-level default collation, then the table inherits the dataset default collation, which is applied to the string fields that do not have explicit collation specified. A change to this field affects only tables created afterwards, and does not alter the existing tables. The following values are supported:</p>
@@ -317,17 +333,17 @@ Represents a BigQuery dataset.
 <li>'': empty string. Default to case-sensitive behavior.</li>
 </ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>defaultRoundingMode</code></td>
 <td><p><code>enum ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/RoundingMode"><code>RoundingMode</code></a><code> )</code></p>
 <p>Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table's default rounding mode, unless otherwise specified.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>maxTimeTravelHours</code></td>
 <td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>Int64Value</code></a><code> format)</code></p>
 <p>Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>tags[] </code><strong><code>(deprecated)</code></strong></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#GcpTag"><code>GcpTag</code></a><code> )</code></p>
 <blockquote>
@@ -335,15 +351,20 @@ Represents a BigQuery dataset.
 </blockquote>
 <p>Output only. Tags for the dataset. To provide tags as inputs, use the <code>resourceTags</code> field.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>storageBillingModel</code></td>
 <td><p><code>enum ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#StorageBillingModel"><code>StorageBillingModel</code></a><code> )</code></p>
 <p>Optional. Updates storageBillingModel for the dataset.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>resourceTags</code></td>
 <td><p><code>map (key: string, value: string)</code></p>
 <p>Optional. The <a href="https://cloud.google.com/bigquery/docs/tags">tags</a> attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/environment" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "Production". See <a href="https://cloud.google.com/iam/docs/tags-access-control#definitions">Tag definitions</a> for more details.</p></td>
+</tr>
+<tr class="odd">
+<td><code>failoverReservationId</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The failover reservation associated with the dataset, in regionless format. For example, <code>{admin_project}.{failover_reservation}</code> . To learn about failover reservations, see <a href="https://cloud.google.com/bigquery/docs/managed-disaster-recovery#overview">Managed disaster recovery overview</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code>catalogSource</code></td>
@@ -374,6 +395,69 @@ Identifier for a dataset.
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `datasetId` | `string` Required. A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 1,024 characters. |
 | `projectId` | `string` Optional. The ID of the project containing this dataset.                                                                                                                                   |
+
+## Replica
+
+The replica metadata of the dataset. If the dataset has two or more replicas, it's considered a cross-region replicated (CRR) dataset.
+
+**JSON representation**
+
+```
+{
+  "id": string,
+  "location": string,
+  "primaryAssignmentTime": string,
+  "primaryAssignmentCompletionTime": string,
+  "replicaState": enum (ReplicaState),
+  "creationTime": string,
+  "backfillCompletionTime": string,
+  "failoverReservationUri": string,
+  "replicaOptions": {
+    object (ReplicaOptions)
+  }
+}
+```
+
+| Fields                            |                                                                                                                                                                                                                                                                                                                                                                                  |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`                              | `string` Required. The user-visible string identifier for this dataset replica. For example, `us-east4-replica` .                                                                                                                                                                                                                                                                |
+| `location`                        | `string` Required. The logical BigQuery region where this replica is located. This is uppercase if "US" or "EU", otherwise a lowercase cloud region like "asia-northeast1". For more information, see [Dataset locations](https://cloud.google.com/bigquery/docs/locations) .                                                                                                    |
+| `primaryAssignmentTime`           | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. The time at which the replica was assigned primary. Only one replica has this field populated at any point.                                                                                                                                                  |
+| `primaryAssignmentCompletionTime` | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. After a new primary assignment is made, this is the time that the dataset's data has been fully replicated to the replica, and after which the system uses current reads in the new primary replica.                                                         |
+| `replicaState`                    | `enum ( `[`ReplicaState`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ReplicaState)` )` Output only. The current replication state of the replica.                                                                                                                                                                                                    |
+| `creationTime`                    | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. The timestamp when the replica was created. For any dataset's first replica, this matches the dataset's `creationTime` .                                                                                                                                     |
+| `backfillCompletionTime`          | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. The time when the backfill was completed and the replica is ready to use.                                                                                                                                                                                    |
+| `failoverReservationUri`          | `string` Output only. The failover reservation resource name for the replica's region if this replica is used for disaster recovery (DR). Fully-qualified format, for example: "projects/{project}/locations/{location}/reservations/{reservation}". The location portion of the format is uppercase if "US" or "EU", otherwise a lowercase cloud region like "asia-northeast1". |
+| `replicaOptions`                  | `object ( `[`ReplicaOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ReplicaOptions)` )` Optional. Contains modification options for the replica, such as setting a Cloud KMS key.                                                                                                                                                               |
+
+## ReplicaState
+
+Specifies the replication state of the replica.
+
+| Enums                         |                                                                                                                                                                                                                                                                          |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `REPLICA_STATE_UNSPECIFIED`   | Should never be set.                                                                                                                                                                                                                                                     |
+| `PRIMARY`                     | The replica is the primary. All routing by default goes to the primary, and only the primary is writable.                                                                                                                                                                |
+| `SECONDARY`                   | The replica is the secondary and is read-only.                                                                                                                                                                                                                           |
+| `ASSIGNED_PRIMARY`            | The replica where the new primary is going to be. At most one replica can have this value, and it's only present when the dataset has a primary switch in progress.                                                                                                      |
+| `PREVIOUSLY_ASSIGNED_PRIMARY` | The replica that was previously the primary, but is no longer assigned as the primary. All routing still goes to this replica, but it is no longer writable. Only set on the old primary during a primary switch. At most one replica at any moment can have this value. |
+| `BACKFILLING`                 | The replica is not queryable yet since it's still backfilling.                                                                                                                                                                                                           |
+
+## ReplicaOptions
+
+Options set by the user when creating the replica. These include region-specific dataset values, for example default KMS key name. When a resource is replicated, the destination region's replica contains values that should be overwritten in the destination region.
+
+**JSON representation**
+
+```
+{
+  "defaultKmsKeyName": string
+}
+```
+
+| Fields              |                                                                                        |
+|---------------------|----------------------------------------------------------------------------------------|
+| `defaultKmsKeyName` | `string` Optional. The default Cloud KMS encryption key resource name for the replica. |
 
 ## LinkedDatasetSource
 

@@ -40,7 +40,7 @@ The following limitations apply to BigQuery disaster recovery:
 
 - Once a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from attached datasets using any capacity model.
 
-- For datasets using disaster recovery, load and extract jobs can't use the free shared slot pool. You must create a `PIPELINE` type reservation assignment because only the Enterprise Plus edition supports writing to disaster recovery-configured datasets.
+- For datasets using disaster recovery, load jobs can't use the free shared slot pool. You must create a `PIPELINE` type reservation assignment because only the Enterprise Plus edition supports writing to disaster recovery-configured datasets.
 
 - After a failover, autoscaling depends on compute capacity availability in the secondary region. Only the reservation baseline is available in the secondary region.
 
@@ -333,6 +333,18 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
+### API
+
+To attach a dataset to a reservation, call the [`datasets.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) and set the `failover_reservation_id` field.
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "failover_reservation_id": "ADMIN_PROJECT.FAILOVER_RESERVATION"
+}
+```
+
 ## Detach a dataset from a reservation
 
 To stop managing the failover behavior of a dataset through a reservation, detach the dataset from the reservation. This doesn't change the current primary replica for the dataset nor does it remove any existing dataset replicas. For more information about removing dataset replicas after detaching a dataset, see [Remove a dataset replica](https://docs.cloud.google.com/bigquery/docs/data-replication#remove_a_dataset_replica) .
@@ -373,6 +385,18 @@ To detach a dataset from a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL 
 3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
+### API
+
+To detach a dataset from a reservation, call the [`datasets.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) and set the `failover_reservation_id` field to an empty string.
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "failover_reservation_id": ""
+}
+```
 
 ## Initiate a failover
 

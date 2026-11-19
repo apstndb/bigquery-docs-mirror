@@ -8,22 +8,14 @@ data_source: docs.cloud.google.com
 
 # Delete models
 
-This page shows you how to delete BigQuery ML models. You can delete a model by:
-
-- Using the Google Cloud console
-- Using the bq command-line tool's `bq rm` command or `bq query` command
-- Calling the [`models.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/models/delete) API method or calling the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method
-- Using the client libraries
-
-You can only delete one model at a time. When you delete a model, any data in the model is also deleted.
-
-To automatically delete models after a specified period of time, set the model's expiration time when you create it using the bq command-line tool, the API, or the client libraries. If you did not set the expiration when the model was created, you can [update the model's expiration time](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#expiration) .
+You can delete unused BigQuery ML models manually, or [configure an expiration time](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#expiration) for automatic deletion, to help organize your datasets and avoid unnecessary storage costs.
 
 ## Limitations on deleting models
 
 Deleting a model is subject to the following limitations:
 
 - You can't delete multiple models at the same time. You must delete them individually.
+- When you delete a model, any data in the model is also deleted.
 - You can't restore a deleted model.
 
 ## Required permissions

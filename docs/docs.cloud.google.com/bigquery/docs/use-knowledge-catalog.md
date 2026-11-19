@@ -40,7 +40,7 @@ Knowledge Catalog automatically discovers and indexes technical metadata from Bi
 
 - **Column-level metadata** : individual columns or fields are represented as *[paths](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata)* , allowing you to attach specific metadata, like PII markers or data quality scores, to individual fields within a BigQuery table rather than just the table itself.
 
-- **Aspects** : technical metadata is enriched with [*aspects*](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , which add business context to data, such as ownership, data quality, and documentation.
+- **Aspects** : technical metadata is enriched with [*aspects*](https://docs.cloud.google.com/knowledge-catalog/docs/about-aspects#aspects) , which add business context to data, such as ownership, data quality, and documentation.
 
 - **Data products** : you can package related BigQuery assets into [data products](https://docs.cloud.google.com/knowledge-catalog/docs/data-products-overview) —for example, ecommerce business data—which have shared access and governance constraints.
 

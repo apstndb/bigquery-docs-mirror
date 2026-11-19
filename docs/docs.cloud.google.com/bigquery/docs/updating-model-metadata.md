@@ -2,23 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/updating-model-metadata
 uri: https://docs.cloud.google.com/bigquery/docs/updating-model-metadata
 title: Update model metadata
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to update BigQuery ML model metadata, including descriptions, labels, and expiration times, to organize and manage your machine learning assets.
 data_source: docs.cloud.google.com
 ---
 
 # Update model metadata
 
-This page shows you how to update BigQuery ML model metadata. You can update model metadata by:
-
-- Using the Google Cloud console.
-- Using the `bq update` command in the bq command-line tool.
-- Calling the [`models.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) API method directly or by using the client libraries.
-
-The following model metadata can be updated:
-
-- [**Description**](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#description) : Can be updated by using the Google Cloud console, bq command-line tool, API, or client libraries.
-- [**Labels**](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#labels) : Can be updated by using the Google Cloud console, bq command-line tool, API, or client libraries.
-- [**Expiration time**](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#expiration) : Can be updated by using the bq tool, API, or client libraries.
+Updating BigQuery ML model metadata helps you organize and manage the lifecycle of your machine learning assets. You can modify a model's [**description**](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#description) , [**labels**](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#labels) , and [**expiration time**](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata#expiration) to identify resources, track usage with key-value pairs, and automatically delete outdated models.
 
 ## Required permissions
 

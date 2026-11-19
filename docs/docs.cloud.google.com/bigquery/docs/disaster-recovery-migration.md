@@ -8,11 +8,11 @@ data_source: docs.cloud.google.com
 
 # Migrate to managed disaster recovery
 
-This page describes how to migrate from BigQuery cross-region replication to BigQuery-managed disaster recovery.
+Migrating your BigQuery datasets from [cross-region replication](https://docs.cloud.google.com/bigquery/docs/data-replication) (CRR) to [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) (DR) lets you enhance your data availability and protection against regional outages. Transitioning to managed DR lets you replicate both storage and compute capacity, so that you can fail over to a secondary replica even if your primary region becomes unavailable.
 
 ## Overview
 
-BigQuery [cross-region replication](https://docs.cloud.google.com/bigquery/docs/data-replication) (CRR) and [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) (DR) are both features designed to enhance data availability and disaster recovery capabilities. However, they handle regional outages in different ways. CRR doesn't allow promoting the secondary replica if the primary region is unavailable. In contrast, DR offers more comprehensive protection by allowing a failover to the secondary replica even if the primary region is unavailable. With CRR, only storage is replicated, while with DR both storage and compute capacity are replicated.
+CRR and DR are designed to enhance data availability and disaster recovery capabilities. However, they handle regional outages in different ways. CRR doesn't allow promoting the secondary replica if the primary region is unavailable. In contrast, DR offers more comprehensive protection by allowing a failover to the secondary replica even if the primary region is unavailable. With CRR, only storage is replicated, while with DR both storage and compute capacity are replicated.
 
 The following table describes the feature capabilities of CRR and DR:
 

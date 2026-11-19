@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/managing-models
 uri: https://docs.cloud.google.com/bigquery/docs/managing-models
 title: Manage models
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to manage BigQuery ML models by copying, encrypting, and renaming them to organize and distribute your machine learning assets.
 data_source: docs.cloud.google.com
 ---
 
 # Manage models
 
-This document shows you how to manage BigQuery ML models, including copying models and renaming models.
+Managing your BigQuery ML models helps you organize, secure, and distribute your machine learning assets. You can copy and rename models to promote them between different environments or to update your naming conventions without retraining your data. You can also protect your models using a customer-managed encryption keys (CMEK).
 
 ## Required roles
 
@@ -146,7 +146,7 @@ Where:
 
 ## Encrypt models
 
-For more information about using a customer-managed encryption key (CMEK) to encrypt a model, see [Use CMEK to protect BigQuery ML models](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#cmek-bqml) .
+For more information about using a CMEK to encrypt a model, see [Use CMEK to protect BigQuery ML models](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#cmek-bqml) .
 
 ## What's next
 

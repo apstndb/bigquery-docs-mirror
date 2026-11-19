@@ -24,6 +24,8 @@ You can perform the following tasks with row-level access policies:
 
 When you select a table in the Google Cloud console, the **Preview** tab cannot show previews of tables with row-access policies. To view the contents of the table, run a query.
 
+For [Apache Iceberg tables managed by the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/fine-grained-access-control#limitations) , you can create and drop row-level access policies only through GoogleSQL DDL with the four-part `PROJECT_ID `` . `` CATALOG_ID `` . `` NAMESPACE `` . `` TABLE_NAME` identifier. Row-level access policies aren't supported on federated catalog tables and don't support subqueries in `FILTER USING` expressions. On catalogs that use credential vending mode, the Apache Iceberg REST catalog endpoint returns a `403 Forbidden` HTTP status code for direct Cloud Storage credential requests unless the calling principal has unmasked ( `RAW_DATA_ACCESS_POLICY` ) access to every protected column and, if the table has row-level access policies, unfiltered row access ( `FILTER USING (TRUE)` ).
+
 ## Before you begin
 
 Grant Identity and Access Management (IAM) roles that give users the necessary permissions to perform each task in this document. The permissions required to perform a task (if any) are listed in the "Required permissions" section of the task.
@@ -52,6 +54,8 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 - `roles/bigquery.admin`
 - `roles/bigquery.dataOwner`
+
+> **Note:** To create, update, list, or delete a row-level access policy on an [Apache Iceberg table managed by the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/fine-grained-access-control#row-level-security) , you need the `biglake.rowAccessPolicies.*` permissions on the table. To create or update a policy, you also need the `biglake.tables.getData` permission. The BigLake Admin role ( `roles/biglake.admin` ) includes these permissions. You also need the `bigquery.jobs.create` permission on the query project. In GoogleSQL DDL statements, reference the table by its four-part `PROJECT_ID `` . `` CATALOG_ID `` . `` NAMESPACE `` . `` TABLE_NAME` identifier.
 
 #### The `bigquery.filteredDataViewer` role
 

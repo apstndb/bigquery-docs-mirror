@@ -33,6 +33,8 @@ Embeddings are high-dimensional numerical vectors that represent a given entity.
 
 You can also perform a **hybrid search** that combines a semantic vector search with a lexical (keyword) search. By default, the `mode` parameter is set to `AUTO` which enables `AI.SEARCH` to automatically perform a hybrid search if your table has a vector index configured with lexical search columns. If your table has a vector index on the embedding column, then `AI.SEARCH` uses it to optimize the search.
 
+To improve the precision of your search results, you can enable semantic [reranking](https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking) by setting the `rerank` argument to `TRUE` . When reranking is enabled, `AI.SEARCH` retrieves an initial set of candidate rows using semantic or hybrid search, and then evaluates `query_value` and each row's `column_to_search` text together to score and reorder the candidates by how well the text answers the search query, similar to the [`AI.RANK` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-rank) .
+
 You can use `AI.SEARCH` to help with the following tasks:
 
 - **Semantic search** : search entities ranked by semantic similarity.
@@ -52,6 +54,7 @@ AI.SEARCH(
   mode => mode_value
   [, top_k => top_k_value ]
   [, distance_type => distance_type_value ]
+  [, rerank => rerank_value ]
   [, options => options_value]
 )
 ```
@@ -76,6 +79,17 @@ AI.SEARCH(
 
   If you don't specify `distance_type_value` and the `column_to_search` column has a vector index that's used, then `AI.SEARCH` uses the distance type specified in the [`distance_type` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) of the `CREATE VECTOR INDEX` statement.
 
+- `rerank` : A `BOOL` value that specifies whether to rerank the retrieved candidates using the [ranking API](https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking) :
+
+  - `TRUE` : Enables semantic reranking. `AI.SEARCH` retrieves an initial set of candidates from the vector search or hybrid search stage and then evaluates `query_value` and each candidate row's `column_to_search` text together to score and reorder the candidates by relevance.
+  - `FALSE` (default): Disables semantic reranking.
+
+  When you set `rerank` to `TRUE` , the following requirements apply:
+
+  - `column_to_search` must be of type `STRING` . Candidate rows with `NULL` or empty string values in `column_to_search` are excluded prior to reranking.
+  - `query_value` must be a non-empty `STRING` literal or query parameter. `ObjectRef` values aren't supported.
+  - Reranking uses your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to call the Agent Search ranking API in the project that runs the query. You must enable the Discovery Engine API ( `discoveryengine.googleapis.com` ) in that project, and your account must have the `discoveryengine.rankingConfigs.rank` permission on the project. This permission is included in the Discovery Engine Viewer role ( `roles/discoveryengine.viewer` ). For more information, read about [access control for Agent Search](https://docs.cloud.google.com/generative-ai-app-builder/docs/access-control) .
+
 - `options` : A named argument with a JSON-formatted `STRING` value. `options_value` is a literal that specifies the following search options:
 
   - `fraction_lists_to_search` : A JSON number that specifies the percentage of lists to search. For example, `options => '{"fraction_lists_to_search":0.15}'` . The `fraction_lists_to_search` value must be in the range `0.0` to `1.0` , exclusive.
@@ -90,6 +104,11 @@ AI.SEARCH(
 
   - `use_brute_force` : A JSON boolean that determines whether to use brute force search by skipping the vector index if one is available. For example, `options => '{"use_brute_force":true}'` . The default is `false` . If you specify `use_brute_force=false` and there is no usable vector index available, brute force is used anyway.
 
+  - `reranker` : A JSON object that configures semantic reranking. You can only specify `reranker` when `rerank` is set to `TRUE` . For example, `options => '{"reranker": {"num_candidates": 50}}'` . The `reranker` object supports the following fields:
+
+    - `num_candidates` : A JSON integer that specifies the number of candidates retrieved from vector or hybrid search to pass to the reranker for reordering. For example, `options => '{"reranker": {"num_candidates": 30}}'` . The default is `top_k * 5` . When `top_k` is positive, `num_candidates` must be at least `top_k` , or negative to rerank all rows in the base table. When `top_k` is negative, `num_candidates` must be negative or omitted. The number of candidate rows passed to the reranker can't exceed 10,000,000.
+    - `model` : A JSON string that specifies the [ranking model](https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking#models) to use. If you don't specify this option, `semantic-ranker-default@latest` is used, which always points to the latest available ranking model. We recommend that you omit this option so that your queries pick up model improvements automatically.
+
   `options` defaults to `'{}'` to denote that all underlying options use their corresponding default values.
 
 ## Details
@@ -101,9 +120,14 @@ You can optionally use `AI.SEARCH` with a [vector index](https://docs.cloud.goog
 The output includes the following columns:
 
 - `base` : A `STRUCT` value that contains all columns from `base_table` or a subset of the columns from `base_table` that you selected in the `base_table_query` query.
+
 - `distance` : A `FLOAT64` value that represents the distance between the `query_value` and the embedding in `column_to_search` .
 
-Rows that are missing a generated embedding are skipped during the search.
+- `rerank_score` : A `FLOAT64` value that contains the relevance of the text in `column_to_search` to `query_value` , in the range of `0.0` to `1.0` . Higher values indicate greater relevance. This column is only included in the output when `rerank` is set to `TRUE` , and the output rows are sorted by `rerank_score` in descending order.
+
+  The `rerank_score` value is intended for comparing rows within a single result set. Because scores aren't calibrated across queries, a static threshold (such as `rerank_score > 0.5` ) might work well for one query while excluding relevant results for another. To constrain result sets, use the `top_k` argument.
+
+Rows that are missing a generated embedding are skipped during the search. When `rerank` is set to `TRUE` , candidate rows with `NULL` or empty string values in `column_to_search` are excluded prior to reranking without raising an error.
 
 ## Examples
 
@@ -137,9 +161,9 @@ FROM AI.SEARCH(TABLE mydataset.products, 'description', "A really fun toy");
 /*------------------+----------------------------------------------+----------------------+
  | name             | description                                  | distance             |
  +------------------+----------------------------------------------+----------------------+
- | Super slingers   | An exciting board game for the whole family. | 0.80954913893618929  |
- | Lounger chair    | A comfortable chair for relaxing in.         | 0.938933930620146    |
- | Encyclopedia set | A collection of informational books.         | 1.1119297739353384   |
+ | Super slingers   | An exciting board game for the whole family. | 0.9147342919053343   |
+ | Lounger chair    | A comfortable chair for relaxing in.         | 0.9782074503966303   |
+ | Encyclopedia set | A collection of informational books.         | 1.0836052217341476   |
  +------------------+----------------------------------------------+----------------------*/
 ```
 
@@ -154,26 +178,57 @@ FROM
     "A really fun toy",
     mode => 'HYBRID');
 
-/*------------------+----------------------------------------------+---------------------+
- | name             | description                                  | distance            |
- +------------------+----------------------------------------------+---------------------+
- | Super slingers   | An exciting board game for the whole family. | 0.96798155737704916 |
- | Lounger chair    | A comfortable chair for relaxing in.         | 0.96799795186891957 |
- | Encyclopedia set | A collection of informational books.         | 0.96799795186891957 |
- +------------------+----------------------------------------------+---------------------*/
+/*------------------+----------------------------------------------+--------------------+
+ | name             | description                                  | distance           |
+ +------------------+----------------------------------------------+--------------------+
+ | Super slingers   | An exciting board game for the whole family. | 0.9677335415040333 |
+ | Lounger chair    | A comfortable chair for relaxing in.         | 0.9677335415040333 |
+ | Encyclopedia set | A collection of informational books.         | 0.967741935483871  |
+ +------------------+----------------------------------------------+--------------------*/
+```
+
+The following example searches for products that are fun to play with and enables semantic reranking on the results.
+
+```
+SELECT base.name, base.description, distance, rerank_score
+FROM
+  AI.SEARCH(
+    TABLE mydataset.products,
+    'description',
+    "A really fun toy",
+    rerank => TRUE);
+
+/*------------------+----------------------------------------------+--------------------+---------------------+
+ | name             | description                                  | distance           | rerank_score        |
+ +------------------+----------------------------------------------+--------------------+---------------------+
+ | Super slingers   | An exciting board game for the whole family. | 0.9147342919053343 | 0.2777999937534332  |
+ | Encyclopedia set | A collection of informational books.         | 1.0836052217341476 | 0.03830000013113022 |
+ | Lounger chair    | A comfortable chair for relaxing in.         | 0.9782074503966303 | 0.03720000013709068 |
+ +------------------+----------------------------------------------+--------------------+---------------------*/
 ```
 
 ## Related functions
 
 The `AI.SEARCH` and [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) functions support overlapping use cases. In general, you should use `AI.SEARCH` when your base table has autonomous embedding generation enabled and you want to search for results close to a single string literal. It offers a simplified syntax compared to `VECTOR_SEARCH` and doesn't require you to embed your search query. You should use `VECTOR_SEARCH` when you want to batch your search queries, when you want to generate your own embeddings as input, or if your base table doesn't use autonomous embedding generation.
 
+You can set `rerank => TRUE` in `AI.SEARCH` to semantically rerank candidate rows as part of the search call, or use the [`AI.RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-rank) function directly when you want to rerank the results of `VECTOR_SEARCH` , rank an arbitrary table or query statement, or rank a column other than `column_to_search` .
+
 ## Locations
 
 You can run `AI.SEARCH` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Gemini Enterprise Agent Platform embedding models, and also in the `US` and `EU` multi-regions.
 
-## Quotas
+## Pricing
+
+The `AI.SEARCH` function uses [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) for vector and hybrid search. When `rerank` is set to `TRUE` , `AI.SEARCH` also uses your credentials to call the Agent Search ranking API in the project that runs the query. This usage is billed using [ranking API pricing](https://cloud.google.com/generative-ai-app-builder/pricing#ranking-api-pricing) .
+
+## Quotas and limits
 
 See [Generative AI functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
+
+When `rerank` is set to `TRUE` :
+
+- Ranking requests count toward the Agent Search ranking API quota of the project that runs the query. For more information, see [Agent Search quotas and limits](https://docs.cloud.google.com/generative-ai-app-builder/quotas) .
+- If a row's text in `column_to_search` is longer than the ranking model's token limit, the extra text is truncated. For each model's limit, see [Supported models](https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking#models) .
 
 ## What's next
 

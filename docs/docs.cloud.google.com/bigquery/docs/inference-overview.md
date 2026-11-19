@@ -2,18 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/inference-overview
 uri: https://docs.cloud.google.com/bigquery/docs/inference-overview
 title: Model inference overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about machine learning inference in BigQuery ML. You can use inference to operationalize your models and generate batch or online predictions directly on your data.
 data_source: docs.cloud.google.com
 ---
 
 # Model inference overview
 
-This document describes the types of batch inference that BigQuery ML supports, which include:
-
-- [Batch prediction](https://docs.cloud.google.com/bigquery/docs/inference-overview#prediction)
-- [Online prediction](https://docs.cloud.google.com/bigquery/docs/inference-overview#online_prediction)
-
-Machine learning inference is the process of running data points into a machine learning model to calculate an output such as a single numerical score. This process is also referred to as "operationalizing a machine learning model" or "putting a machine learning model into production."
+You can use machine learning (ML) inference in BigQuery ML to run data points through your ML models to calculate outputs, such as numerical scores. This process is also referred to as "operationalizing a machine learning model" or "putting a machine learning model into production." Generating [batch predictions](https://docs.cloud.google.com/bigquery/docs/inference-overview#prediction) or [online predictions](https://docs.cloud.google.com/bigquery/docs/inference-overview#online_prediction) in BigQuery ML lets you put your ML models into production without building complex data pipelines.
 
 ## Batch prediction
 

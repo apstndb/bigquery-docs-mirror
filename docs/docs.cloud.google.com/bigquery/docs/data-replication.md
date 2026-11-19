@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/data-replication
 uri: https://docs.cloud.google.com/bigquery/docs/data-replication
 title: Cross-region dataset replication
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to replicate BigQuery datasets between different regions or multi-regions for geo-redundancy.
 data_source: docs.cloud.google.com
 ---
 
@@ -112,6 +112,8 @@ BigQuery dataset replication is subject to the following limitations:
   - To ensure scheduled queries continue running against the promoted primary replica, you must manually recreate them in the new primary location.
 - You can't replicate hidden datasets.
 - Cross-region replication isn't supported for datasets that contain [conditional IAM policies](https://docs.cloud.google.com/bigquery/docs/conditions) . To identify if this error is disrupting your replication, you can check the `sync_status` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) .
+- You can't trigger a primary switch by using the BigQuery API. A primary switch can only be triggered by using the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) .
+- If a dataset is in the middle of a primary switch, [`datasets.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) calls are still routed to the old primary until the primary switch is complete. This might lead to stale data in the `replicas` field.
 
 ### Resource behavior
 
@@ -208,6 +210,67 @@ ADD REPLICA `my_replica`
 OPTIONS(location='us-east4');
 ```
 
+### API
+
+To replicate a dataset when you create it, call the [`datasets.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) . When you create a dataset with replicas, you must include the primary replica in the `replicas` field.
+
+The following example creates a dataset in the `us` multi-region and adds a replica in the `eu` multi-region in one operation:
+
+```
+POST https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets
+
+{
+  "datasetReference": {
+    "datasetId": "DATASET_ID",
+    "projectId": "PROJECT_ID"
+  },
+  "location": "us",
+  "replicas": [
+    {
+      "id": "us-replica",
+      "location": "us"
+    },
+    {
+      "id": "eu-replica",
+      "location": "eu"
+    }
+  ]
+}
+```
+
+To add a replica to an existing dataset, call the [`datasets.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) . When adding or dropping replicas, you must include the primary replica in the `replicas` field.
+
+The following example adds a replica in the `eu` multi-region to an existing dataset in the `us` multi-region:
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "replicas": [
+    {
+      "id": "us-replica",
+      "location": "us"
+    },
+    {
+      "id": "eu-replica",
+      "location": "eu"
+    }
+  ]
+}
+```
+
+To make the dataset a disaster recovery (DR) dataset, you can associate a failover reservation by setting the `failover_reservation_id` field. You can only set this field after the secondary replica has been backfilled.
+
+The following example updates a dataset to include a failover reservation:
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "failover_reservation_id": "ADMIN_PROJECT.FAILOVER_RESERVATION"
+}
+```
+
 To confirm when the secondary replica has successfully been created, you can query the `creation_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
 After the secondary replica has been created, you can query it by explicitly [setting the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the query to the secondary region. If a location is not explicitly set, BigQuery uses the region of the primary replica of the dataset.
@@ -282,6 +345,25 @@ ALTER SCHEMA my_dataset
 DROP REPLICA IF EXISTS `us`;
 ```
 
+### API
+
+To remove a replica and stop replicating the dataset, call the [`datasets.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) or [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) . When dropping a replica, you must include the primary replica in the `replicas` field.
+
+The following example drops the `eu` replica from a dataset by sending a request that includes only the primary `us` replica:
+
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID
+
+{
+  "replicas": [
+    {
+      "id": "us-replica",
+      "location": "us"
+    }
+  ]
+}
+```
+
 You must first drop any secondary replicas to delete the entire dataset. If you delete the entire dataset—for example, by using the [`DROP SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) —without dropping all secondary replicas, you receive the following error:
 
 ```
@@ -339,13 +421,29 @@ To view these metrics in Monitoring, do the following:
 
 To list the dataset replicas in a project, query the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
+### View replication status with the BigQuery API
+
+To view replication information for a dataset, call the [`datasets.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) and set the `datasetView` query parameter.
+
+The `datasetView` parameter supports the following values:
+
+- `BASIC` : default. Returns basic dataset information but doesn't include the `replicas` field.
+- `BASIC_REPLICA_METADATA_VIEW` : returns basic dataset information and the `replicas` field, excluding fields that require cross-region requests such as `sync_status` .
+- `FULL` : returns basic dataset information and the `replicas` field, excluding fields that require cross-region requests such as `sync_status` . The `FULL` dataset view is functionally equivalent to `BASIC_REPLICA_METADATA_VIEW` , but in the future, `FULL` is subject to change.
+
+The following example retrieves dataset information including replica metadata:
+
+```
+GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID?datasetView=BASIC_REPLICA_METADATA_VIEW
+```
+
 ## Migrate datasets
 
-You can use cross-region dataset replication to migrate your datasets from one region to another. The following example demonstrates the process of migrating the existing `my_migration` dataset from the `US` multi-region to the `EU` multi-region using cross-region replication.
+You can use cross-region dataset replication to migrate your datasets from one region to another. You can also use cross-region dataset replication to migrate from a multi-region location to a region, or from a region to a multi-region location. For more information, see [Migrate a dataset](https://docs.cloud.google.com/bigquery/docs/migrate-datasets) .
 
 ### Replicate the dataset
 
-To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `my_migration` dataset to the `EU` multi-region.
+To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `my_migration` dataset from the `US` multi-region to the `EU` multi-region using cross-region replication.
 
 ```
 -- Create a replica in the secondary region. 

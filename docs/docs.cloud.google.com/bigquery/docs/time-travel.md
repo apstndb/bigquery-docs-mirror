@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Data retention with time travel and fail-safe
 
-This document describes *time travel* and *fail-safe* data retention windows for datasets. During the time travel and fail-safe periods, data that you have changed or deleted in any table in the dataset continues to be stored in case you need to recover it.
+Configuring time travel and fail-safe data retention in BigQuery lets you store and recover data that was recently changed or deleted. Accessing historical data within these retention windows lets you restore deleted tables, revert unwanted updates, and help protect your datasets against accidental data loss.
 
 ## Time travel and data retention
 

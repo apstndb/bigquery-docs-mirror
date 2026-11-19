@@ -344,16 +344,6 @@ p_MatchTableProgrammaticBuyer\_ ` network_code `
 BigQuery view:  
 MatchTableProgrammaticBuyer\_ ` network_code `
 
-### Proposal retraction reason
-
-Ad Manager file: [ProposalRetractionReason](https://developers.google.com/doubleclick-publishers/docs/pqlreference#matchtables)
-
-BigQuery table:  
-p_MatchTableProposalRetractionReason\_ ` network_code `
-
-BigQuery view:  
-MatchTableProposalRetractionReason\_ ` network_code `
-
 ### Third-party company
 
 Ad Manager file: [ThirdPartyCompany](https://developers.google.com/doubleclick-publishers/docs/pqlreference#matchtables)

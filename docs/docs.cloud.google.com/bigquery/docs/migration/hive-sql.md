@@ -613,7 +613,7 @@ The following table provides details about converting `CREATE VIEW` statements f
 <td>Not supported.</td>
 </tr>
 <tr class="even">
-<td><code>Table and artition concatenate</code></td>
+<td><code>Table and partition concatenate</code></td>
 <td><a href="https://cwiki.apache.org/confluence/display/hive/languagemanual+ddl#LanguageManualDDL-AlterTable/PartitionConcatenate"><code>ALTER TABLE table_name [PARTITION (partition_key = 'partition_value' [, ...])]</code></a><code> CONCATENATE;</code></td>
 <td>Not supported.</td>
 </tr>

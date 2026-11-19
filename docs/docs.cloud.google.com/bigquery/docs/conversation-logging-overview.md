@@ -48,7 +48,7 @@ When a user chats with a data agent that has conversation logging enabled, conve
 
 2.  **Ask** : a user sends a question to the agent. In BigQuery Studio, users see a notice that their conversations are logged.
 
-3.  **Privacy check** : before the agent starts working on the turn, a privacy check reads the metadata of the agent's knowledge-source tables using the chatting user's credentials. This check confirms that none of the tables use [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) (row access policies), [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) (policy tags), or [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . If the check finds a policy or can't confirm that there are none, the turn isn't logged, and the agent still answers the user's question.
+3.  **Privacy check** : before the agent starts working on the turn, a privacy check reads the metadata of the agent's knowledge-source tables by using the chatting user's credentials. This check confirms that none of the tables use [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) (row access policies), [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) (policy tags), or [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . If the check finds a policy or can't confirm that there are none, the turn isn't logged, and the agent still answers the user's question.
 
 4.  **Answer** : the agent answers the user as usual.
 

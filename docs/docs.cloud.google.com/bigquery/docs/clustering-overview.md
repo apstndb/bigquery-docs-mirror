@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Clustering overview
 
-Clustering is an unsupervised machine learning technique you can use to group similar records together. It is a useful approach for when you want to understand what groups or clusters you have in your data, but don't have labeled data to train a model on. For example, if you had unlabeled data about subway ticket purchases, you could cluster that data by ticket purchase time to better understand what time periods have the heaviest subway usage. For more information, see [What is clustering?](https://developers.google.com/machine-learning/clustering/overview)
+You can use clustering models in BigQuery ML to group similar records together to discover underlying patterns in your unlabeled data. Applying the clustering technique lets you understand the natural segments within your datasets or perform anomaly detection without needing pre-labeled training examples.
+
+## About clustering
+
+Clustering is an unsupervised machine learning technique you can use to group similar records together. Clustering is a useful approach for when you want to understand what groups or clusters you have in your data, but don't have labeled data to train a model on. For example, if you had unlabeled data about subway ticket purchases, you could cluster that data by ticket purchase time to better understand what time periods have the heaviest subway usage. For more information, see [What is clustering?](https://developers.google.com/machine-learning/clustering/overview)
 
 [K-means models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) are widely used to perform clustering. You can use k-means models with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to cluster data, or with the [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 

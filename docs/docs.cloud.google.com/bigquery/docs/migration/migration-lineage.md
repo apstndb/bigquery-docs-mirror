@@ -33,7 +33,7 @@ The lineage service processes the first 5 GB of the oldest logs from your source
 
 ## Supported locations
 
-The migration lineage service is available in select locations. For more information, see [BigQuery SQL translator and lineage service locations](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
+The migration lineage service is available in select locations. For more information, see [BigQuery Migration Service locations](https://docs.cloud.google.com/bigquery/docs/locations#migration-service-loc) .
 
 ## Required permissions
 

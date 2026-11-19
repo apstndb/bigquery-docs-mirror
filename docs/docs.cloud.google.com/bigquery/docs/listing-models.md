@@ -2,17 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/listing-models
 uri: https://docs.cloud.google.com/bigquery/docs/listing-models
 title: List models
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to list BigQuery ML models in a dataset to audit your available models before performing evaluation or inference tasks.
 data_source: docs.cloud.google.com
 ---
 
 # List models
 
-This page shows you how to list BigQuery ML models in a dataset. You can list BigQuery ML models by:
-
-- Using the Google Cloud console.
-- Using the `bq ls` command in the bq command-line tool.
-- Calling the [`models.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) API method directly or by using the client libraries.
+Listing BigQuery ML models helps you discover and manage the machine learning assets stored in your datasets. You can retrieve this information to audit your available models before performing evaluation or inference tasks.
 
 ## Required permissions
 

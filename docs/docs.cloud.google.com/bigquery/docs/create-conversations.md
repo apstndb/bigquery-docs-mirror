@@ -30,7 +30,7 @@ When you create a direct conversation with a data source, the [Conversational An
 
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-2.  Enable the BigQuery, Gemini Data Analytics, and Gemini for Google Cloud APIs, if any are not already enabled.
+2.  Enable the BigQuery, Gemini Data Analytics, Gemini for Google Cloud, and Dataplex APIs, if any are not already enabled.
 
     **Roles required to enable APIs**
 

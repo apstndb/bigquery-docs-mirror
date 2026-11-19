@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Optimize AI function costs with model distillation
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** For support during the preview, contact <bqml-feedback@google.com> .
-
 This document describes how to use the optimized mode for [managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) in BigQuery. You can use optimized mode to process large-scale datasets containing thousands, or even billions, of rows with significantly reduced large language model (LLM) token consumption and query latency compared to standard per-row LLM inference. This optimization only applies to the `AI.IF` and `AI.CLASSIFY` functions.
 
 If you want to set a limit on your total token consumption to prevent budget overruns, rather than optimizing the token efficiency of your queries, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) instead.
@@ -240,8 +234,6 @@ GROUP BY 1;
 
 - Try more advanced embedding models like `text-embedding-005` or `gemini-embedding-2` .
 
-- Contact <bqml-feedback@google.com> for additional debugging assistance.
-
 ### Unexpected number of rows processed by the LLM
 
 **Issue** : Query execution statistics show that an unexpectedly high number of rows were processed by the remote LLM instead of the distilled model. This might be due to the following reasons:
@@ -249,7 +241,7 @@ GROUP BY 1;
 - The distilled model was trained successfully, but some rows had missing embeddings. These rows are processed by the remote LLM.
 - The distilled model was not able to be applied for each row and had to fall back to the remote LLM to maintain consistent quality.
 
-**Solution** : Verify that embeddings are properly generated and valid for all rows in your data. If the issue persists, contact <bqml-feedback@google.com> for debugging.
+**Solution** : Verify that embeddings are properly generated and valid for all rows in your data.
 
 ### Autonomous embedding column not detected
 

@@ -10,12 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-BigQuery provides AI, machine learning (ML), and agent capabilities across several workflows:
-
-- **In-console assistance and analysis** : write and explain code, prepare data, ask questions about your tables in natural language, build pipelines, and administer BigQuery resources in the Google Cloud console.
-- **AI, search, and ML in SQL queries** : call large language models (LLMs) such as Gemini, perform text and vector search, and train or run predictive ML models directly in GoogleSQL.
-- **Tools for building agents** : connect custom agents to BigQuery using Model Context Protocol (MCP) servers, agent frameworks, and skills, and stream agent interaction logs into BigQuery for analysis.
-- **Agents in your IDE or terminal** : query data, manage pipelines, and run workflows from development environments such as Antigravity, VS Code, and command-line interfaces.
+You can integrate AI, machine learning (ML), and agent capabilities into your BigQuery workflows to help you analyze your data and accelerate your development workflows. BigQuery offers tools to help you generate and refine code, prepare data, build pipelines, analyze data with natural language, and administer your BigQuery resources.
 
 ## Choose an AI tool
 

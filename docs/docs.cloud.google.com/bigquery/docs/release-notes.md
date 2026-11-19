@@ -14,6 +14,49 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 18, 2026
+
+Feature
+
+Lakehouse supports BigQuery [row-level security and column-level security with dynamic data masking](https://docs.cloud.google.com/lakehouse/docs/fine-grained-access-control) on Apache Iceberg tables in the Lakehouse runtime catalog ( [GA](https://cloud.google.com/products#product-launch-stages) ). You can restrict which rows principals can see and mask sensitive column values by managing these policies with GoogleSQL DDL statements in BigQuery. On catalogs that use credential vending mode, the Apache Iceberg REST catalog endpoint vends storage credentials only to principals that have unmasked access to every protected column and, if the table has row-level access policies, unfiltered row access.
+
+Feature
+
+You can manage and version control SQL scripts and notebooks with [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) , which provide a streamlined, folder-based integration with remote Git repositories. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can query the [`INFORMATION_SCHEMA.ROW_ACCESS_POLICIES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-row-access-policies) to retrieve metadata about active [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and inspect filter predicates across a dataset or region. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+## November 17, 2026
+
+Feature
+
+To reduce LLM token consumption and query latency when processing large datasets, enable [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) using the following [managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) :
+
+- [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+- [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+
+Optimized mode supports the following:
+
+- More types of queries are in scope for optimized mode.
+- Optimized mode supports multi-label classification with `AI.CLASSIFY` .
+- The **Job information** tab in the **Query results** pane shows information about the relative quality of the optimized query results.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use the BigQuery REST API ( [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) , [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) , [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) , and [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) ) to configure and monitor [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) and to attach or detach failover reservations for [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use the `rerank` option in the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) to reorder the results of your search by how well the text in the column to search answers the search query. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use the [`AI.RANK` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-rank) to reorder the rows of a table by how well the text in a specified column answers a search query. This function is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## November 16, 2026
 
 Feature

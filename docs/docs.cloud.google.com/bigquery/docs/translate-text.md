@@ -258,7 +258,7 @@ When you process text from multiple regions, you might want to record the detect
 
 ## Translate text with the Translation LLM
 
-For text that that contains informal language, slang, or complex sentiment, such as customer or movie reviews, set `model => 'translation-llm'` in the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) to use the [Translation LLM](https://docs.cloud.google.com/translate/docs/translation-llm) model instead of the default NMT model. When you know the language of the input column, you can also specify the `source_language` argument:
+For text that contains informal language, slang, or complex sentiment, such as customer or movie reviews, set `model => 'translation-llm'` in the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) to use the [Translation LLM](https://docs.cloud.google.com/translate/docs/translation-llm) model instead of the default NMT model. When you know the language of the input column, you can also specify the `source_language` argument:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

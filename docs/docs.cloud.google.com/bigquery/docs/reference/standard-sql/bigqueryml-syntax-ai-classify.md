@@ -140,7 +140,7 @@ AI.CLASSIFY(
   - `single` (default): Each input is classified into exactly one category.
   - `multi` : Each value is classified into zero or more categories. In this case, the function returns an array that contains each relevant category, or an empty array if no category applies.
 
-- `EMBEDDINGS` : the embeddings to use for optimized mode (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+- `EMBEDDINGS` : the embeddings to use for [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) . This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
 
   This argument accepts the following data types:
 
@@ -255,7 +255,7 @@ The result is similar to the following:
 
 ### Classify text with optimized mode
 
-The following query categorizes BBC news articles using optimized mode (Preview):
+The following query categorizes BBC news articles using optimized mode:
 
 ```
 SELECT

@@ -2,15 +2,19 @@
 name: documents/docs.cloud.google.com/bigquery/docs/dimensionality-reduction-overview
 uri: https://docs.cloud.google.com/bigquery/docs/dimensionality-reduction-overview
 title: Dimensionality reduction overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about dimensionality reduction in BigQuery ML. You can use dimensionality reduction to reduce features in large datasets, decrease training time, and improve model interpretation.
 data_source: docs.cloud.google.com
 ---
 
 # Dimensionality reduction overview
 
+You can use dimensionality reduction in BigQuery ML to translate data from a high-dimensional space into a low-dimensional space while retaining its most important characteristics. Reducing the number of features in your large datasets lets you decrease model training time and helps you better interpret relationships between similar data points.
+
+## About dimensionality reduction
+
 Dimensionality reduction is the common term for a set of mathematical techniques used to capture the shape and relationships of data in a high-dimensional space and translate this information into a low-dimensional space.
 
-Reducing dimensionality is important when you are working with large datasets that can contain thousands of features. In such a large data space, the wider range of distances between data points can make model output harder to interpret. For example, it makes it difficult to understand which data points are more closely situated and therefore represent more similar data. Dimensionality reduction helps you reduce the number of features while retaining the most important characteristics of the dataset. Reducing the number of features also helps reduce the training time of any models that use the data as input.
+Reducing dimensionality is important when you work with large datasets that can contain thousands of features. In such a large data space, the wider range of distances between data points can make model output harder to interpret. For example, it makes it difficult to understand which data points are more closely situated and therefore represent more similar data. Dimensionality reduction helps you reduce the number of features while retaining the most important characteristics of the dataset. Reducing the number of features also helps reduce the training time of any models that use the data as input.
 
 BigQuery ML offers the following models for dimensionality reduction:
 

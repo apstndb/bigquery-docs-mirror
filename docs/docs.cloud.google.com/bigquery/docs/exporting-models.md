@@ -2,18 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/exporting-models
 uri: https://docs.cloud.google.com/bigquery/docs/exporting-models
 title: Export models
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to export BigQuery ML models to Cloud Storage to use them for online prediction, edit them in Python, or deploy them locally.
 data_source: docs.cloud.google.com
 ---
 
 # Export models
 
-This page shows you how to export BigQuery ML models. You can export BigQuery ML models to Cloud Storage, and use them for online prediction, or edit them in Python. You can export a BigQuery ML model by:
-
-- Using the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/exporting-models) .
-- Using the [`EXPORT MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model) statement.
-- Using the `bq extract` command in the bq command-line tool.
-- Submitting an [`extract`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration) job through the API or client libraries.
+You can export BigQuery ML models to Cloud Storage to use them for online prediction or edit them in Python. Extracting your models from BigQuery lets you integrate them into external applications or local deployment environments.
 
 You can export the following model types:
 
@@ -127,7 +122,7 @@ The following limitations apply when exporting models:
 
   - `ARRAY` , `TIMESTAMP` , or `GEOGRAPHY` feature types were present in the input data.
 
-- Exported models for model types `AUTOML_REGRESSOR` and `AUTOML_CLASSIFIER` do not support Agent Platform deployment for online prediction.
+- Exported models for model types `AUTOML_REGRESSOR` and `AUTOML_CLASSIFIER` don't support Agent Platform deployment for online prediction.
 
 - The model size limit is 1 GB for matrix factorization model export. The model size is roughly proportional to `num_factors` , so you can reduce `num_factors` during training to shrink the model size if you reach the limit.
 
@@ -251,7 +246,7 @@ To export model, create an `extract` job and populate the job configuration.
 
     - If `status.state = DONE` , the job completed successfully.
     - If the `status.errorResult` property is present, the request failed, and that object will include information describing what went wrong.
-    - If `status.errorResult` is absent, the job finished successfully, although there might have been some non-fatal errors. Non-fatal errors are listed in the returned job object's `status.errors` property.
+    - If `status.errorResult` is absent, the job finished successfully, although there might have been some nonfatal errors. Nonfatal errors are listed in the returned job object's `status.errors` property.
 
 **API notes:**
 
@@ -361,7 +356,7 @@ You can also leverage the <a href="https://docs.cloud.google.com/gemini-enterpri
 <td>To run XGBoost Booster models locally, you can use the exported <code>main.py</code> file:
 <ol>
 <li>Download all of the files from Cloud Storage to the local directory.</li>
-<li>Unzip the <code>predictor.py</code> file from <code>xgboost_predictor-0.1.tar.gz</code> to the local directory.</li>
+<li>Extract the <code>predictor.py</code> file from <code>xgboost_predictor-0.1.tar.gz</code> to the local directory.</li>
 <li>Run <code>main.py</code> (see instructions in <code>main.py</code> ).</li>
 </ol></td>
 </tr>
@@ -431,10 +426,6 @@ This section provides the prediction output format of the exported models for ea
 |  {&quot;scores&quot;:[3, 0.2], &quot;classes&quot;:[&#39;a&#39;, &#39;b&#39;]}] |
 +---------------------------------------------+
         </code></pre></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -874,7 +865,7 @@ This example plots multiple trees (one tree per iteration):
 
 > **Note:** We use the label encoder to encode categorical features, so you can get the corresponding category for a split value from the vocabulary file in the 'assets/' directory inside the model export Cloud Storage bucket. For example, when you see "f0 \< 2.95" in a node, you can find the corresponding category in the vocabulary file by looking for the 3rd item.
 
-We don't save feature names in the model, so you will see names such as "f0", "f1", and so on. You can find the corresponding feature names in the `assets/model_metadata.json` exported file using these names (such as "f0") as indexes.
+We don't save feature names in the model, so you will see names such as "f0" and "f1". You can find the corresponding feature names in the `assets/model_metadata.json` exported file using these names (such as "f0") as indexes.
 
 ## Required permissions
 

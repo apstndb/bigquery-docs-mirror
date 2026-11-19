@@ -510,6 +510,8 @@ You cannot add labels to or update labels on pending, running, or completed jobs
 
 When you add a label to a job, the label is included in your billing data.
 
+> **Note:** For capacity-based pricing, you can't attribute job costs using job labels in Cloud Billing Reports because these costs are attributed at the reservation level.
+
 ### Required IAM roles
 
 To get the permission that you need to add a label to a job, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .

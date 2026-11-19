@@ -80,7 +80,7 @@ The BigQuery [**Studio**](https://docs.cloud.google.com/bigquery/docs/query-over
 
 3.  ***Files** tab of the left pane* : use the **Files** tab to organize code assets such as saved queries and notebooks by using folders. For more information, see [Organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
 
-4.  ***Source control** tab of the left pane* ( [Preview](https://cloud.google.com/products/#product-launch-stages) ): use the **Source control** tab to store code, edit files, and track changes using version control through repositories or by using remote Git-based repositories. For more information, see [Introduction to repositories](https://docs.cloud.google.com/bigquery/docs/repository-intro) .
+4.  ***Source control** tab of the left pane* ( [Preview](https://cloud.google.com/products/#product-launch-stages) ): use the **Source control** tab to store code, edit files, and track changes using version control through repositories or by using remote Git-based repositories. For more information, see [Introduction to repositories and workspaces](https://docs.cloud.google.com/bigquery/docs/use-repositories-workspaces-intro) .
 
 5.  ***Home** tab* : use the **Home** tab to view the following resources:
 
