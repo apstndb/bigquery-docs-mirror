@@ -610,17 +610,49 @@ Follow these steps to import the registered agent:
     2.  In the **Agent details** pane, for **Type** , select **A2A** .
     3.  For **Region** , select the region that matches your data agent and Agent Gateway configuration.
     4.  Select **Paste JSON** , paste the A2A endpoint JSON data from BigQuery, and then click **Save** .
+
 2.  In Gemini Enterprise, click the name of the app where you want to add the agent.
+
 3.  In the navigation menu, click **Agents** \> click **Add agent** .
+
 4.  In the **Choose an agent type** pane, locate **Agents from Agent Registry** and click **Add** .
+
 5.  In the **Add agent** pane, search for the agent by name, Agent Registry ID, type, producer, or use case, or locate the agent card in the list.
+
 6.  On the agent card, click **Add agent** .
+
 7.  In the **Review agent details** step, review the agent metadata populated from the agent's A2A card including name, description, agent URL, capabilities, and skills, and then click **Next** .
+
 8.  In the **Authenticate agent** step, select how Gemini Enterprise authenticates against the agent provider:
+
     - **Default Google-managed credentials** : Google manages the OAuth credentials automatically. You don't need to manually configure or enter client credentials.
-    - **Custom OAuth** : Select this option only if your organization requires custom OAuth client credentials, and enter the Client ID, Client secret, Authorization URL, and Token URL.
+
+    - **Custom OAuth (provide details below)** : select this option only if your organization requires custom OAuth client credentials. Enter the credentials generated in [Configure authorization details](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) :
+
+      - **Client ID** : the OAuth client ID generated for your application.
+
+      - **Client secret** : the OAuth client secret generated for your application.
+
+      - **Authorization URL** : enter the authorization URL formatted with your OAuth client ID and required scopes:
+
+        ```
+        https://accounts.google.com/o/oauth2/v2/auth?client_id=CLIENT_ID&redirect_uri=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fstatic%2Foauth%2Foauth.html&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgeminidataanalytics&include_granted_scopes=true&response_type=code&access_type=offline&prompt=consent
+        ```
+
+        Replace ` CLIENT_ID ` with your OAuth client ID.
+
+      - **Token URL** : enter the following:
+
+        ```
+        https://oauth2.googleapis.com/token
+        ```
+
+      - **Scopes** : (Optional) leave this field empty because the required scope is already included in the authorization URL. If your agent accesses additional Google Cloud resources, you can specify additional scopes separated by spaces or use `https://www.googleapis.com/auth/cloud-platform` .
+
 9.  Click **Finish** .
+
 10. The agent appears in the **Agents table** with the state **Enabled** and agent type **A2A (Custom)** .
+
 11. [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups who need access.
 
 #### Option 2: Import using A2A card JSON
@@ -632,15 +664,45 @@ Follow these steps to import the registered agent:
 If BigQuery and Gemini Enterprise are in different projects, follow these steps to import the agent using the A2A card JSON:
 
 1.  In Gemini Enterprise, click the name of the app where you want to add the agent.
+
 2.  In the navigation menu, click **Agents** \> click **Add agent** .
+
 3.  In the **Choose an agent type** pane, locate **Custom agent via A2A** and click **Add** .
+
 4.  In the **Agent card JSON** field, enter the agent card JSON received from the data analyst.
+
 5.  Click **Preview agent details** \> click **Next** .
+
 6.  In the **Agent authorization** step, select your authentication method:
+
     - **Default Google-managed credentials** : Google manages the OAuth credentials automatically without requiring you to manually enter or generate a client ID and client secret.
-    - **Custom OAuth** : Select this option if you want to manually provide custom OAuth credentials, following the steps in [Register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) .
+
+    - **Custom OAuth (provide details below)** : select this option if you want to manually provide custom OAuth credentials, following the steps in [Register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) . Enter the generated credentials as follows:
+
+      - **Client ID** : the OAuth client ID generated for your application.
+
+      - **Client secret** : the OAuth client secret generated for your application.
+
+      - **Authorization URL** : enter the authorization URL formatted with your OAuth client ID and required scopes:
+
+        ```
+        https://accounts.google.com/o/oauth2/v2/auth?client_id=CLIENT_ID&redirect_uri=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fstatic%2Foauth%2Foauth.html&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgeminidataanalytics&include_granted_scopes=true&response_type=code&access_type=offline&prompt=consent
+        ```
+
+        Replace ` CLIENT_ID ` with your OAuth client ID.
+
+      - **Token URL** : enter the following:
+
+        ```
+        https://oauth2.googleapis.com/token
+        ```
+
+      - **Scopes** : (Optional) leave this field empty because the required scope is already included in the authorization URL. If your agent accesses additional Google Cloud resources, you can specify additional scopes separated by spaces or use `https://www.googleapis.com/auth/cloud-platform` .
+
 7.  In the **Tool authorizations** step, click **Finish** .
+
 8.  The agent appears in the **Agents table** with the state **Enabled** and agent type **A2A (Custom)** .
+
 9.  [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups who need access.
 
 ### Discover and use an agent

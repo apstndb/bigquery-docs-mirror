@@ -2,13 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/vector-search-intro
 uri: https://docs.cloud.google.com/bigquery/docs/vector-search-intro
 title: Introduction to embeddings and vector search
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about embeddings, vector search, and AI indexes in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
 # Introduction to embeddings and vector search
 
-This document provides an overview of embeddings and vector search in BigQuery. Vector search is a technique to compare similar objects using embeddings, and it is used to power Google products, including Google Search, YouTube, and Google Play. You can use vector search to perform semantic searches at scale, or you can perform a **hybrid search** that combines a semantic search with a lexical (keyword) search. When you use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) with vector search, you can take advantage of foundational technologies like inverted file indexing (IVF) and the [ScaNN algorithm](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/) .
+This document provides an overview of embeddings, vector search, and AI indexes in BigQuery. Vector search is a technique to compare similar objects using embeddings, and it powers Google products, including Google Search, YouTube, and Google Play. You can use vector search to perform semantic searches at scale, or you can perform a **hybrid search** that combines a semantic search with a lexical (keyword) search.
+
+To perform natural language searches without manually configuring models or managing index structures, you can use [AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) ( [Preview](https://cloud.google.com/products#product-launch-stages) ). When you create an AI index, BigQuery builds and maintains the underlying embedding and index structures for your AI indexes. Alternatively, for more granular control over the embedding process, you can generate your own embeddings and use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) to take advantage of foundational technologies like inverted file indexing (IVF) and the [ScaNN algorithm](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/) .
 
 Vector search is built on embeddings. Embeddings are high-dimensional numerical vectors that represent a given entity, like a piece of text or an audio file. Machine learning (ML) models use embeddings to encode semantics about such entities to make it easier to reason about and compare them. For example, a common operation in clustering, classification, and recommendation models is to measure the distance between vectors in an [embedding space](https://en.wikipedia.org/wiki/Latent_space) to find items that are most semantically similar.
 
@@ -31,6 +33,8 @@ The combination of embedding generation and vector search enables many interesti
 ## Generate embeddings
 
 The following sections describe the functions that BigQuery offers to help you generate or work with embeddings.
+
+If you want a fully managed solution for natural language search without manually generating embeddings or managing index structures, consider using an [AI index](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) ( [Preview](https://cloud.google.com/products#product-launch-stages) ). When you create an AI index, BigQuery autonomously builds and maintains the underlying embedding and index structures for you. For more control over the embedding process, use the following functions to generate and work with embeddings yourself.
 
 ### Generate single embeddings
 
@@ -63,7 +67,7 @@ You can use the following search functions to perform a semantic vector search, 
 
 - [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a semantic vector search or hybrid search by using SQL.
 
-- [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) : Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
+- [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) : Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function to query a table that has an [AI index](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) or has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
 
 - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `VECTOR_SEARCH` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
 
@@ -121,6 +125,8 @@ For more information, see [Vector index limits](https://docs.cloud.google.com/bi
 
 - Queries that contain the `VECTOR_SEARCH` or `AI.SEARCH` function aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 - Pre-filtering data pruning in `VECTOR_SEARCH` and `AI.SEARCH` queries is only optimized when filtering on [partitioned columns](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) or [stored columns](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) , not on [clustered columns](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . Using non-stored clustered columns in a pre-filter subquery results in a full table scan. For more information, see [Pre-filtering limitations](https://docs.cloud.google.com/bigquery/docs/vector-index#pre-filtering_limitations) .
+- You can't create a partitioned vector index on a table that has autonomous embedding generation enabled.
+- Each table supports at most one AI index ( `CREATE AI INDEX` ). A table with an AI index can't have a vector index ( `CREATE VECTOR INDEX` ) or an automatically generated embedding column (autonomous embedding generation).
 
 ## What's next
 
@@ -129,6 +135,10 @@ For more information, see [Vector index limits](https://docs.cloud.google.com/bi
 - Learn how to perform a semantic or hybrid search using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
 
 - Learn how to perform semantic or hybrid search using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
+
+- Learn more about [AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) .
+
+- Learn how to [create and manage AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index) .
 
 - Learn more about [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
 

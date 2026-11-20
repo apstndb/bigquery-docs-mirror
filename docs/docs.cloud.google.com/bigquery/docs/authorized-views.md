@@ -426,6 +426,18 @@ The impact of column-level security on views is independent of whether or not th
 
 For a detailed description of how permissions are applied, see [Query views](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#views) for column-level security.
 
+### Filter rows dynamically with SECURE_CONTEXT
+
+In multi-tenant architectures where creating a separate authorized view per user or tenant isn't practical, a trusted backend application or middle-tier service (such as an application server that authenticates end users and queries BigQuery using a shared service account) can pass verified per-request attributes in the `secureContext.secureParameterEntries` field of a [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) request, or in `configuration.query.secureContext.secureParameterEntries` for a [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) request. An authorized logical view can then filter rows dynamically by calling the [`SECURE_CONTEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#secure_context) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+
+Allow only trusted backend applications or middle-tier services to set `secureContext` parameters after authenticating the caller. Don't let untrusted clients or AI agents set `secureContext` directly. Any logical view that a query can access can call `SECURE_CONTEXT` and return parameter values, including views in other projects that the backend service account can read. When your backend runs untrusted or AI-generated SQL, apply the following controls:
+
+- Enforce an allowlist of administrator-authored views deterministically in middleware rather than relying on AI prompt instructions alone. Use query templates or a semantic layer, or inspect `statistics.query.referencedLogicalViews` (and `statistics.query.referencedTables` for base tables) from a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) or parse the SQL abstract syntax tree (AST) before running the query.
+- Use a VPC Service Controls perimeter and IAM [Principal Access Boundary (PAB) policies](https://docs.cloud.google.com/iam/docs/principal-access-boundary-policies) to prevent the backend service account from reading views in untrusted external projects.
+- Don't grant `bigquery.tables.create` or `bigquery.tables.update` permissions to untrusted principals on any dataset that your backend service account can read. These permissions shouldn't be granted through custom roles or by using predefined roles such as BigQuery Data Editor ( `roles/bigquery.dataEditor` ).
+
+For parameter limits, job metadata redaction, audit logging, and security best practices, see [`SECURE_CONTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#secure_context) .
+
 ### Use BigQuery sharing with authorized views
 
 BigQuery sharing (formerly Analytics Hub) is a data exchange platform with the following capabilities:

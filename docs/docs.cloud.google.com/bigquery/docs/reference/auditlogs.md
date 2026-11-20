@@ -771,6 +771,8 @@ The main `activity` stream reports all remaining activities and events such as t
 
 BigQuery audit logs can include information that users might consider sensitive, such as SQL text, schema definitions, and identifiers for resources such as table and datasets. For information about managing access to this information, see the Cloud Logging [access control documentation](https://docs.cloud.google.com/logging/docs/access-control) .
 
+When a query evaluates the [`SECURE_CONTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#secure_context) function (Preview), Data Access audit logs record the parameter keys and values in the [`secureContextValues`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SecureContextValue) field, even though BigQuery omits `secureContext` from job metadata and [`INFORMATION_SCHEMA.JOBS*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) views. If you pass sensitive attributes in `secureContext` , restrict access to Data Access audit logs.
+
 ## Caller identities and resource names
 
 Audit logging doesn't redact the caller's identity and IP addresses for any access that succeeds or for any write operation.

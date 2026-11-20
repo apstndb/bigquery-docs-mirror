@@ -40,6 +40,7 @@ Query results are not cached:
 - If the query runs against an [external data source](https://docs.cloud.google.com/bigquery/docs/external-data-sources) . other than Cloud Storage. (GoogleSQL queries on Cloud Storage are supported by cached query results.)
 - If the query runs against a table protected by [row-level security](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) , then the results are not cached.
 - If the query runs against a table protected by [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , including data masking, results might not be cached.
+- If the query evaluates the [`SECURE_CONTEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#secure_context) ( [Preview](https://cloud.google.com/products#product-launch-stages) ), then the results aren't cached.
 - If the query text has changed in any way, including modified whitespace or comments.
 
 ## How cached results are stored

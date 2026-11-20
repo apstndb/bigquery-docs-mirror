@@ -4383,6 +4383,66 @@ OPTIONS (
   default_index_column_granularity = 'COLUMN');
 ```
 
+## `CREATE AI INDEX` statement
+
+> **Preview**
+>
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Creates a new AI index on a table. An AI index is a managed, self-optimizing indexing abstraction that enables natural language search across one or more columns in your BigQuery tables with the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
+
+### Syntax
+
+```
+CREATE AI INDEX [ IF NOT EXISTS ] index_name
+ON table_name({ AUTO COLUMNS | column_name [, ...] });
+```
+
+### Arguments
+
+- `IF NOT EXISTS` : if there is already an AI index by that name on the table, the statement has no effect.
+
+- `index_name` : the name of the AI index that you're creating. Because the index is always created in the same project and dataset as the base table, you don't need to specify the project or dataset in the index name. The index name must be unique among all indexes on the table.
+
+- `table_name` : the name of the standard table to index.
+
+- `AUTO COLUMNS` : instructs BigQuery to automatically select all the eligible columns from the base table to include in the AI index.
+
+- `column_name` : the name of a column to explicitly include in the AI index. You can specify a single column or a comma-separated list of columns.
+
+### Details
+
+When you run `CREATE AI INDEX` , the base table can have at most 1,000,000 rows for on-demand projects, or at most 100,000,000 rows if the project that contains the table has a `BACKGROUND` reservation assignment.
+
+Only top-level, non-repeated `STRING` columns are supported (between 1 and 50 columns).
+
+Each table supports at most one AI index. A table with an AI index can't also have a vector index or an automatically generated embedding column (autonomous embedding generation).
+
+### Required permissions
+
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
+
+| Permission                    | Resource                                 |
+|-------------------------------|------------------------------------------|
+| `bigquery.tables.createIndex` | The table where you create the AI index. |
+| `bigquery.tables.update`      | The table where you create the AI index. |
+
+### Examples
+
+The following example creates an AI index using `AUTO COLUMNS` :
+
+```
+CREATE AI INDEX products_ai_index
+ON mydataset.products(AUTO COLUMNS);
+```
+
+The following example creates an AI index on specific columns:
+
+```
+CREATE AI INDEX products_ai_index
+ON mydataset.products(name, description);
+```
+
 ## `CREATE VECTOR INDEX` statement
 
 Creates a new [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) on a column of a table.
@@ -7900,6 +7960,43 @@ The following example deletes a search index `my_index` from `my_table` :
 
 ```
 DROP SEARCH INDEX my_index ON dataset.my_table;
+```
+
+## `DROP AI INDEX` statement
+
+> **Preview**
+>
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Deletes an AI index on a table.
+
+### Syntax
+
+```
+DROP AI INDEX [ IF EXISTS ] index_name ON table_name;
+```
+
+### Arguments
+
+- `IF EXISTS` : If no AI index exists with that name on the table, the statement has no effect.
+- `index_name` : The name of the AI index that you're deleting.
+- `table_name` : The name of the table with the AI index.
+
+### Required permissions
+
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
+
+| Permission                    | Resource                               |
+|-------------------------------|----------------------------------------|
+| `bigquery.tables.deleteIndex` | The table with the AI index to delete. |
+| `bigquery.tables.update`      | The table with the AI index to delete. |
+
+### Example
+
+The following example deletes an AI index named `products_ai_index` from the table `mydataset.products` :
+
+```
+DROP AI INDEX IF EXISTS products_ai_index ON mydataset.products;
 ```
 
 ## `DROP VECTOR INDEX` statement

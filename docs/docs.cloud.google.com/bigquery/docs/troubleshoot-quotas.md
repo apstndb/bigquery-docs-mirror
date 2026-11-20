@@ -681,6 +681,16 @@ If you run high-volume interactive queries, especially in scenarios that involve
 - Spread the workload across interactive queries.
 - Because you can queue more batch queries than interactive queries, use [batch priority jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#batch) instead of interactive queries.
 
+#### Query admission denied or continuous query slot limits
+
+If query queuing is disabled ( `default_interactive_query_queue_timeout_ms` or `default_batch_query_queue_timeout_ms` is set to `-1` ) and the [query queue concurrency limit](https://docs.cloud.google.com/bigquery/docs/query-queues) is reached, BigQuery rejects new queries with `Query was not admitted as the maximum concurrency has been reached` ( `rateLimitExceeded` with HTTP `403` , or `jobRateLimitExceeded` with HTTP `400` on synchronous `jobs.query` and `jobs.getQueryResults` calls).
+
+To resolve query admission errors:
+
+- Reduce concurrent query submissions, run non-urgent workloads with [batch priority](https://docs.cloud.google.com/bigquery/docs/running-queries#batch) , or adjust the [reservation concurrency target](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target) .
+- Retry failed operations using [truncated exponential backoff](https://docs.cloud.google.com/monitoring/api/troubleshooting#retry) . If `jobs.query` or `jobs.getQueryResults` failed with `jobRateLimitExceeded` , submit the retry with a new `jobId` because calling `jobs.getQueryResults` again on the failed `jobId` returns the same error.
+- **Continuous queries:** BigQuery admits a continuous query only when the `CONTINUOUS` reservation assignment provides at least 10 slots for each concurrent continuous query. Increase the reservation's maximum size (for example, by using [slot autoscaling](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#slots_autoscaling) ) or reduce the number of concurrent continuous queries. For more information, see [Reservation limitations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#reservation_limitations) .
+
 ### Shuffle size limit errors
 
 BigQuery returns this error when your project exceeds the maximum disk and memory size limit available for shuffle operations.
@@ -813,7 +823,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 - Reduce the update rate for the table metadata.
 
-- Add a delay between jobs or table operations to make sure that the update rate is within the limit, and retry failed operations with truncated exponential backoff.
+- Add a delay between jobs or table operations to ensure that the update rate is within the limit, and retry failed operations with truncated exponential backoff.
 
 - Consolidate consecutive DDL statements (such as multiple `ALTER TABLE` statements) into a single [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) or batch schema changes into a single table metadata update rather than running consecutive metadata update commands.
 
@@ -1100,3 +1110,15 @@ To verify and monitor the effects of the fixes, the Power BI and DataHub adminis
     2.  View the dashboards on the **Metrics** tab to verify the decrease in call volume and related 403 errors.
 
 Administrators should see a dramatic and permanent drop in the usage of this specific API call, confirming that the fix was successful.
+
+### Job exceeded rate limits
+
+Error string: `Job exceeded rate limits: Your `` SCOPE `` exceeded quota for `` QUOTA_METRIC `` . For more information, see https://cloud.google.com/bigquery/docs/troubleshoot-quotas`
+
+This HTTP `400 Bad Request` error ( `reason: jobRateLimitExceeded` ) occurs when a job is created, and then fails during execution with a `rateLimitExceeded` error—for example, when the job exceeds the [table metadata update rate limit](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-update-table-metadata-limit) or the [concurrent table and dataset metadata read limit](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-concurrent-table-and-meta-reads) . BigQuery returns `jobRateLimitExceeded` when you call `jobs.query` or `jobs.getQueryResults` for that job, or when a synchronous query isn't admitted because queuing is disabled (see [Query admission denied or continuous query slot limits](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-query-admission-denied) ).
+
+To resolve this error:
+
+- Use [truncated exponential backoff](https://docs.cloud.google.com/monitoring/api/troubleshooting#retry) to reduce the request rate, and then retry the job with a **new `jobId`** . Calling `jobs.getQueryResults` again on the failed `jobId` returns the same error.
+- Ensure your client retry logic handles HTTP `400` responses with `reason: jobRateLimitExceeded` , because retry policies that check only for `429` or `5xx` status codes skip this error.
+- Inspect `<var>QUOTA_METRIC</var>` and `<var>SCOPE</var>` in the error message and apply the mitigation for that specific quota on this page.

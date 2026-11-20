@@ -38,18 +38,6 @@ The validation service extracts and stages different data depending on the valid
 - **Aggregate validation ( `--aggregate` )** : uploads computed aggregate metrics to the `source_aggregates.parquet` file, including actual `MIN` and `MAX` cell values from included columns.
 - **Data validation ( `--data` )** : extracts raw, unmasked cell values from sampled rows, or from all rows when using the `BRUTE_FORCE` strategy. It uploads these values in Apache Parquet or CSV format to your Cloud Storage staging bucket and loads them into the `validation_results` dataset in BigQuery.
 
-> **Caution:** The validation service runs SQL expressions from your configuration files and CLI flags without modification. Affected settings include the following:
->
-> - `whereClause`
-> - `sourceTable.whereClause`
-> - `targetTable.whereClause`
-> - `columnSettings.columns. `` COLUMN `` .transformExpression`
-> - `partitioning.column`
-> - `physicalPartitions`
-> - The `--where` , `--source-where` , and `--target-where` flags
->
-> These queries run in your source database as the configured `source` user and in BigQuery as the principal that creates the validation workflow.
-
 To protect your data and secure your validation environment, configure the following settings:
 
 - **Exclude sensitive columns** : add sensitive columns to the `columnSettings.exclude` field to omit them from source extraction queries, target comparisons, and validation reports.
@@ -1293,6 +1281,18 @@ table:
     - `TRIM` , `UPPER` , `LOWER` : supported across all dialects.
     - `EMPTY_TO_NULL` , `NULL_TO_EMPTY` , `CAST_TO_STRING` : supported on source queries for PostgreSQL, Amazon Redshift, Oracle, and Teradata sources.
   - `transformExpression` : custom SQL expression that references the literal source column name. For example, `"ROUND( `` SOURCE_COLUMN `` , 4)"` . Because the expression is evaluated on both the source query and the BigQuery comparison query, use SQL functions that are valid in both your source dialect and GoogleSQL.
+
+> **Caution:** The validation service runs SQL expressions from your configuration files and CLI flags without modification. Affected settings include the following:
+>
+> - `whereClause`
+> - `sourceTable.whereClause`
+> - `targetTable.whereClause`
+> - `columnSettings.columns. `` COLUMN `` .transformExpression`
+> - `partitioning.column`
+> - `physicalPartitions`
+> - The `--where` , `--source-where` , and `--target-where` flags
+>
+> These queries run in your source database as the configured `source` user and in BigQuery as the principal that creates the validation workflow.
 
 ### Value normalization
 

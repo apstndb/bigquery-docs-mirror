@@ -566,6 +566,8 @@ It can take up to 24 hours for some charges to appear in Cloud Billing.
 
 - You can't create a partitioned vector index on a table that has autonomous embedding generation enabled.
 
+- You can't create an [AI index](https://docs.cloud.google.com/bigquery/docs/ai-index) ( `CREATE AI INDEX` ) on a table that has autonomous embedding generation enabled.
+
 - If you create a vector index on the automatically generated embedding column, then index training starts after at least 80% of the rows have generated embeddings. You can check the progress of the embedding generation by following these steps:
 
   Query the percentage of embeddings on your table that have been generated:

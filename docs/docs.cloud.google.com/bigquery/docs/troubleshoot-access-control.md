@@ -163,7 +163,7 @@ When an operation fails with `403 accessDenied` ( `Access Denied: `` RESOURCE_TY
   - **Google Drive ( `Permission denied while getting Drive credentials` ).** Grant the user or service account viewer access to the Google Drive file or Google Sheet, ensure the caller provides the `https://www.googleapis.com/auth/drive` OAuth scope, or update [scheduled query credentials](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#error_code_invalid_userid) .
   - **Cloud Storage and BigLake tables.** Grant `roles/storage.objectViewer` on the Cloud Storage bucket to the user (for standard external tables) or to the [BigLake connection service account](https://docs.cloud.google.com/bigquery/docs/biglake-intro) (for BigLake tables).
 
-- **Customer-managed encryption keys (CMEK).** If the query references a table that's protected by CMEK, make sure that the corresponding Cloud KMS key exists and is enabled. If a query or load job fails with `Cloud KMS Error: Permission 'cloudkms.cryptoKeyVersions.useToEncrypt' denied` (or `useToDecrypt` ), grant the BigQuery Encryption Service Agent ( `bq- `` PROJECT_NUMBER `` @bigquery-encryption.iam.gserviceaccount.com` ) the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role on the Cloud Key Management Service key. See [Grant encryption and decryption permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) . For other CMEK errors, see [Troubleshoot customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control#troubleshoot-cmek) .
+- **Customer-managed encryption keys (CMEK).** If the query references a table that's protected by CMEK, ensure that the corresponding Cloud KMS key exists and is enabled. If a query or load job fails with `Cloud KMS Error: Permission 'cloudkms.cryptoKeyVersions.useToEncrypt' denied` (or `useToDecrypt` ), grant the BigQuery Encryption Service Agent ( `bq- `` PROJECT_NUMBER `` @bigquery-encryption.iam.gserviceaccount.com` ) the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role on the Cloud Key Management Service key. See [Grant encryption and decryption permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) . For other CMEK errors, see [Troubleshoot customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control#troubleshoot-cmek) .
 
 - **Service account impersonation.** If a request using service account impersonation fails with `Permission 'iam.serviceAccounts.getAccessToken' denied` , grant the calling principal `roles/iam.serviceAccountTokenCreator` on the target service account.
 
@@ -212,7 +212,7 @@ Your request originated from a network address or client that is outside the des
 
 2.  **Fix Cross-Project Billing.** For cross-project queries, ensure the billing project that executes the query resides in the same perimeter as the queried data within the perimeter. If needed, specify a compliant billing project manually using the Google Cloud console project picker, the [`--project_id` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#project_id_flag) in the bq command-line tool, or your [API or client library request](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-3.  **Verify Access Levels.** Make sure your client network, IP, or user account is permitted using [Access Context Manager](https://docs.cloud.google.com/access-context-manager/docs/overview) . The Google Cloud console requires ingress rules specifically configured to allow user access to protected environments.
+3.  **Verify Access Levels.** Ensure that your client network, IP, or user account is permitted using [Access Context Manager](https://docs.cloud.google.com/access-context-manager/docs/overview) . The Google Cloud console requires ingress rules specifically configured to allow user access to protected environments.
 
 ### Export to Google Drive is blocked for projects with VPC Service Controls enabled
 
@@ -324,6 +324,26 @@ The Google Account or Google Workspace account issuing the request has been susp
 
 Contact your Google Workspace or Cloud Identity administrator to review the account status in the Google Admin console and restore or un-suspend the user account, or update the workload to authenticate with an active service account.
 
+## Billing isn't enabled for the project
+
+Error string: `Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. `` DETAILS`
+
+This HTTP `403 Forbidden` error ( `reason: billingNotEnabled` ) occurs when billing isn't enabled for the project, or when the project runs in the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#limitations) and attempts an operation that exceeds sandbox limits.
+
+To resolve this error:
+
+- **Enable billing for the project.** Link an active Cloud Billing account to the project in the Google Cloud console. For step-by-step instructions, see [Enable billing for a project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project) .
+
+- **Upgrade from the BigQuery sandbox ( `expiration time must be less than 60 days` ).** In the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#limitations) , tables, views, and partitions automatically expire after 60 days. Enable billing to [upgrade from the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#upgrade) , and then update the default expiration times for your datasets, tables, views, and partitions.
+
+## Request was blocked to protect system operation
+
+Error string: `Request was blocked to protect the system's operation. Please contact support at https://cloud.google.com/support.`
+
+This HTTP `403 Forbidden` error ( `reason: blocked` ) occurs when BigQuery temporarily adds an operation to a denylist, usually to prevent a broader service outage.
+
+To resolve this error, [contact Cloud Customer Care](https://cloud.google.com/support) and include the exact timestamp, project ID, and BigQuery job ID so that Cloud Customer Care can investigate the administrative mitigation rule.
+
 ## Troubleshoot column-level access control
 
 The following sections explain how to troubleshoot issues with [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) and Data Catalog policy tags.
@@ -407,3 +427,4 @@ Error: `Your administrator prevents using KMS keys from project `` KMS_PROJECT_I
 - For more information about troubleshooting allow and deny policies in IAM, see [Troubleshoot policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies) .
 - For more information about the Policy Intelligence Policy Analyzer, see [Policy Analyzer for allow policies](https://docs.cloud.google.com/policy-intelligence/docs/policy-analyzer-overview) .
 - For more information about the Policy Troubleshooter, see [Use Policy Troubleshooter](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#troubleshooter) .
+- For BigQuery API HTTP status codes and error reasons, see [HTTP status and error codes for BigQuery API](https://docs.cloud.google.com/bigquery/docs/errors) .

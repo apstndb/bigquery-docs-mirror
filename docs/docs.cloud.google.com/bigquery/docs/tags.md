@@ -2215,15 +2215,86 @@ curl --request GET \
 --compressed
 ```
 
+### View data governance tags attached to columns
+
+You can view the data governance tags that are attached to top-level columns and nested `STRUCT` (or `RECORD` ) leaf fields using SQL ( `INFORMATION_SCHEMA` views), the Google Cloud console, the bq tool, or the BigQuery API.
+
+### SQL
+
+To view data governance tags attached to top-level columns, query the [`INFORMATION_SCHEMA.COLUMNS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) . To view data governance tags attached to nested leaf fields within a `STRUCT` (or `RECORD` ) column, query the [`INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-column-field-paths) .
+
+The following query returns the data governance tags attached to top-level columns in a table:
+
+```
+SELECT
+  table_name,
+  column_name,
+  tag.key AS tag_key,
+  tag.value AS tag_value
+FROM
+  `PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.COLUMNS`,
+  UNNEST(data_governance_tags) AS tag
+WHERE
+  table_name = 'TABLE_ID';
+```
+
+The following query returns the data governance tags attached to both top-level columns and nested fields within `STRUCT` (or `RECORD` ) columns in a table:
+
+```
+SELECT
+  table_name,
+  column_name,
+  field_path,
+  tag.key AS tag_key,
+  tag.value AS tag_value
+FROM
+  `PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS`,
+  UNNEST(data_governance_tags) AS tag
+WHERE
+  table_name = 'TABLE_ID';
+```
+
+Replace the following:
+
+- `PROJECT_ID` : the ID of the project that contains the dataset.
+
+- `DATASET_ID` : the ID of the dataset that contains the table.
+
+- `TABLE_ID` : the name of the table.
+
+### Console
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, expand your project and dataset, and then select the table.
+
+3.  Click the **Schema** tab to view the data governance tags attached to each column or nested field.
+
+### bq CLI
+
+Run the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) with the `--schema` flag to inspect the `dataGovernanceTagsInfo` object on columns and nested `fields` :
+
+```
+bq show \
+    --project_id=PROJECT_ID \
+    --schema \
+    --format=prettyjson \
+    DATASET_ID.TABLE_ID
+```
+
+### API
+
+Call the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) and inspect the `dataGovernanceTagsInfo` field on each column or nested field in `schema.fields` .
+
 ### Interactions with other features
 
 This section describes how data governance tags interact with other BigQuery features.
 
-| Feature            | Interaction                                                                                                                                  |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| Information Schema | Data governance tags attached to columns are included in the `INFORMATION_SCHEMA.COLUMNS` and `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` views. |
-| Table copy         | Cross-region table copies are disabled for tables that have column-level security features, including tables with data governance tags.      |
-| Time travel        | Access to historical table data is governed by the access policies and tags that are attached to the table.                                  |
+| Feature            | Interaction                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Information Schema | Data governance tags attached to top-level columns are included in the [`INFORMATION_SCHEMA.COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) view, and tags attached to top-level columns or nested fields within `STRUCT` (or `RECORD` ) columns are included in the [`INFORMATION_SCHEMA.COLUMN_FIELD_PATHS`](https://docs.cloud.google.com/bigquery/docs/information-schema-column-field-paths) view. |
+| Table copy         | Cross-region table copies are disabled for tables that have column-level security features, including tables with data governance tags.                                                                                                                                                                                                                                                                                                   |
+| Time travel        | Access to historical table data is governed by the access policies and tags that are attached to the table.                                                                                                                                                                                                                                                                                                                               |
 
 ### Configure a default data policy project
 

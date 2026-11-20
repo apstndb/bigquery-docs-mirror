@@ -20,7 +20,7 @@ Once allocated, baseline slots remain constantly available to your reservation, 
 
 ## Reservation assignments
 
-To use allocated slots in a reservation, you must *assign* it to one or more projects, folders, or organizations. When a job in a project runs, it uses slots from its assigned reservation. Resources can inherit assignments from their parent in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) . If a project is not assigned to a reservation, it inherits the assignment of the parent folder or organization, if it exists.
+To run workloads by using the slots in a reservation, you must *assign* the reservation to one or more projects, folders, or organizations. When a job in a project runs, the job uses slots from its assigned reservation. Resources can inherit assignments from their parent in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) . If a project is not assigned to a reservation, the project inherits the assignment of the parent folder or organization, if it exists.
 
 Projects use the single most specific reservation in the resource hierarchy to which they are assigned. A folder assignment overrides an organization assignment, and a project assignment overrides a folder assignment.
 

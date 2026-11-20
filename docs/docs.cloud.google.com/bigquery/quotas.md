@@ -256,57 +256,62 @@ The following system limits apply to query jobs created automatically by running
 <td>A GoogleSQL query can have up to 10,000 parameters.</td>
 </tr>
 <tr class="odd">
-<td>Maximum request size</td>
-<td>10 MB</td>
-<td>The request size can be up to 10 MB, including additional properties like query parameters.</td>
+<td>Maximum <code>secureContext</code> parameter size and count</td>
+<td>10,000 parameters, 1 MiB per value, 10 MiB total</td>
+<td>When you use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#secure_context"><code>SECURE_CONTEXT</code></a> function (Preview), <code>secureContext.secureParameterEntries</code> can contain up to 10,000 key-value pairs and up to 10 MiB combined across all values. Keys must be 1-127 characters long and match the regular expression <code>^[a-zA-Z </code><em><code>][a-zA-Z0-9</code></em><code> ]*$</code> , and each value must be a <code>STRING</code> up to 1 MiB.</td>
 </tr>
 <tr class="even">
+<td>Maximum request size</td>
+<td>10 MB</td>
+<td>The request size can be up to 10 MB, including additional properties such as query parameters and <code>secureContext</code> parameters.</td>
+</tr>
+<tr class="odd">
 <td>Maximum response size</td>
 <td>10 GB compressed</td>
 <td>Sizes vary depending on compression ratios for the data. The actual response size might be significantly larger than 10 GB. The maximum response size is unlimited when <a href="https://docs.cloud.google.com/bigquery/docs/writing-results#large-results">writing large query results to a destination table</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Maximum row size</td>
 <td>100 MB</td>
 <td>The maximum row size is approximate, because the limit is based on the internal representation of row data. The maximum row size limit is enforced during certain stages of query job execution.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Maximum columns in a table, query result, or view definition</td>
 <td>10,000 columns</td>
 <td>A table, query result, or view definition can have up to 10,000 columns. This includes nested and repeated columns. Deleted columns can continue to count towards the total number of columns. If you've deleted columns, then you might receive quota errors until the total resets.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Maximum concurrent slots for on-demand pricing</td>
 <td>2,000 slots per project<br />
 20,000 slots per organization</td>
 <td>With on-demand pricing, your project can have up to 2,000 concurrent slots. There is also a 20,000 concurrent slots cap at the organization level. BigQuery tries to allocate slots fairly between projects within an organization if their total demand is higher than 20,000 slots. BigQuery slots are shared among all queries in a single project. BigQuery might exceed this limit to accelerate your queries. The capacity is subject to availability. To check how many slots you're using, see <a href="https://docs.cloud.google.com/bigquery/docs/monitoring">Monitoring BigQuery using Cloud Monitoring</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Maximum CPU usage per scanned data for on-demand pricing</td>
 <td>256 CPU seconds per MiB scanned</td>
 <td>With on-demand pricing, your query can use up to approximately 256 CPU seconds per MiB of scanned data. If your query is too CPU-intensive for the amount of data being processed, the query fails with a <code>billingTierLimitExceeded</code> error. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/error-messages">Error messages</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Multi-statement transaction table mutations</td>
 <td>100 tables</td>
 <td>A <a href="https://docs.cloud.google.com/bigquery/docs/transactions">transaction</a> can mutate data in at most 100 tables.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Multi-statement transaction partition modifications</td>
 <td>100,000 partition modifications</td>
 <td>A <a href="https://docs.cloud.google.com/bigquery/docs/transactions">transaction</a> can perform at most 100,000 partition modifications.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>BigQuery Omni maximum query result size</td>
 <td>20 GiB uncompressed</td>
 <td>The maximum result size is 20 GiB logical bytes when querying <a href="https://docs.cloud.google.com/bigquery/docs/query-azure-data">Microsoft Azure</a> or <a href="https://docs.cloud.google.com/bigquery/docs/query-aws-data">AWS</a> data. If your query result is larger than 20 GiB, consider exporting the results to <a href="https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3">Amazon S3</a> or <a href="https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage">Blob Storage</a> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations">BigQuery Omni Limitations</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>BigQuery Omni maximum row size</td>
 <td>10 MiB</td>
 <td>The maximum row size is 10 MiB when querying <a href="https://docs.cloud.google.com/bigquery/docs/query-azure-data">Microsoft Azure</a> or <a href="https://docs.cloud.google.com/bigquery/docs/query-aws-data">AWS</a> data. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations">BigQuery Omni Limitations</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Global queries transfer</td>
 <td>2 GiB/s</td>
 <td>The bandwidth of transfer used by <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> , per project, per region pair</td>
@@ -769,6 +774,15 @@ The following limits apply to BigQuery [search indexes](https://docs.cloud.googl
 | Number of search index DDL statements per table per day                                                                | 20 operations                                       | Your project can issue up to 20 `CREATE INDEX` , `ALTER INDEX` , or `DROP INDEX` DDL operations per table per day.                                                                                                                                                                                                                                                                                                                          |
 | Maximum total size of table data per organization allowed for search index creation that does not run in a reservation | 100 TB in multi-regions; 20 TB in all other regions | You can create a search index for a table if the overall size of tables with indexes in your organization is below your region's limit: 100 TB for the `US` and `EU` multi-regions, and 20 TB for all other regions. If your index-management jobs run in [your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) , then this limit doesn't apply.                                        |
 | Number of columns indexed with column granularity per table                                                            | 63 columns per table                                | A table can have up to 63 columns with `index_granularity` set to `COLUMN` . Columns indexed with `COLUMN` granularity from setting the `default_index_column_granularity` option count towards this limit. There is no limit on the number of columns that are indexed with `GLOBAL` granularity. For more information, see [index with column granularity](https://docs.cloud.google.com/bigquery/docs/search-index#column-granularity) . |
+
+## AI indexes
+
+The following limits apply to BigQuery [AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) :
+
+| System limit                                                                   | Default          | Notes                                                                                                          |
+|--------------------------------------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------|
+| Base table maximum number of rows for on-demand projects                       | 1,000,000 rows   | A table can have at most 1,000,000 rows to create an AI index in a project without a `BACKGROUND` reservation. |
+| Base table maximum number of rows for projects with a `BACKGROUND` reservation | 100,000,000 rows | A table can have at most 100,000,000 rows to create an AI index in a project with a `BACKGROUND` reservation.  |
 
 ## Vector indexes
 

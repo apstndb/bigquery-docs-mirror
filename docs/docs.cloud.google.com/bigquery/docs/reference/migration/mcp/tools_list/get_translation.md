@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `get_translation`
 
-Gets the SQL translation for a given translation ID. If the state is not yet `SUCCEEDED` or `FAILED` , wait at least two seconds before rechecking the state. When it is `SUCCEEDED` , check `translation_logs` for entries with severity `ERROR` before using `translated_query` . For information on what the errors mean and how to resolve them, see `translate_query` .
+Gets the SQL translation for a given translation ID. If the state is not yet `SUCCEEDED` or `FAILED` , the translation is still in progress. Wait 5 to 10 seconds before rechecking the state, and don't translate the query again. When it is `SUCCEEDED` , check `translation_logs` for entries with severity `ERROR` before using `translated_query` . For information on what the errors mean and how to resolve them, see `translate_query` .
 
 The following code sample shows how to use `curl` to call the `get_translation` MCP tool.
 

@@ -14,6 +14,28 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 19, 2026
+
+Feature
+
+You can now [enable agent observability with the Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#monitor-agent) to monitor the agent's token consumption, request volume, and model latency in Cloud Monitoring and inspect execution traces and tool calls in Cloud Trace. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now create [AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) using the [`CREATE AI INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_ai_index) to perform natural language searches across table columns with the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) without manually generating embeddings or managing models. To learn how to create, monitor, and delete AI indexes, see [Use AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can use the [validation service](https://docs.cloud.google.com/bigquery/docs/migration/migration-validation) in the BigQuery Migration Service to verify that tables migrated from your source data warehouse match your target tables in BigQuery across schemas, aggregate metrics, and row-level data. This feature is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Security
+
+A path traversal vulnerability in workspace directory handling and Git integration was discovered in Dataform, BigQuery Studio, and Colab Enterprise. For more information, see the [GCP-2026-084](https://docs.cloud.google.com/bigquery/docs/security-bulletins#gcp-2026-084) security bulletin.
+
+Feature
+
+BigQuery [generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) now support the `gemini-4-neon` model. This model is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
 ## November 18, 2026
 
 Feature
@@ -80,6 +102,10 @@ Feature
 BigQuery [generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) now support the `gemini-4-hydrogen` model. This model is [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 ## November 11, 2026
+
+Feature
+
+The LangGraph and LangChain BigQuery callback handler for [BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics) is [generally available](https://cloud.google.com/products#product-launch-stages) (GA). This callback handler lets you stream agent execution events from LangGraph or LangChain agents directly into BigQuery to analyze and evaluate agent interactions.
 
 Feature
 

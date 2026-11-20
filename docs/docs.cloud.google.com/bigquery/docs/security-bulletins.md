@@ -10,6 +10,16 @@ data_source: docs.cloud.google.com
 
 This page describes all security bulletins related to BigQuery.
 
+## GCP-2026-084
+
+**Published:** 2026-11-19
+
+### Description
+
+| Description                                                                                                                                                                                                                                                                                                                                                                                                            | Severity | Notes                                                               |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------|
+| A path traversal vulnerability in workspace directory handling and Git integration was discovered in Dataform, BigQuery Studio, and Colab Enterprise. What should I do? No customer action is required. This vulnerability was patched on October 10, 2026. What vulnerabilities are being addressed? An authenticated remote attacker could read private files and create arbitrary files across tenant repositories. | Critical | [CVE-2026-126054](https://www.cve.org/CVERecord?id=CVE-2026-126054) |
+
 ## GCP-2026-056
 
 **Published** : 2026-08-26

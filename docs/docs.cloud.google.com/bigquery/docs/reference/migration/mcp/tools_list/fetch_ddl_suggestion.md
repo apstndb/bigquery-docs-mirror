@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `fetch_ddl_suggestion`
 
-Fetches the DDL suggestion for a given suggestion ID. If the state is not yet `SUCCEEDED` or `FAILED` , wait at least two seconds before rechecking the state. The DDL is in `suggestion.suggestion_content` . For instructions on using it, see `generate_ddl_suggestion` .
+Fetches the DDL suggestion for a given suggestion ID. If the state is not yet `SUCCEEDED` or `FAILED` , the suggestion is still in progress. Wait at least 5 seconds before rechecking the state, and don't call `generate_ddl_suggestion` again. The DDL is in `suggestion.suggestion_content` . For instructions on using it, see `generate_ddl_suggestion` .
 
 The following code sample shows how to use `curl` to call the `fetch_ddl_suggestion` MCP tool.
 
