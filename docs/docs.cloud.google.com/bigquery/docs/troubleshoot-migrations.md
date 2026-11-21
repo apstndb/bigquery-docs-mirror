@@ -91,6 +91,44 @@ Writer queue is full. Ignoring event
 
 If you find this message, consider increasing the `dwhassessment.hook.queue.capacity` parameter.
 
+### Databricks migration errors
+
+The following sections describe common issues that you might encounter when you extract metadata from Databricks for BigQuery migration assessment.
+
+#### Notebook widgets fail to render or workspace imports fail on Databricks on Google Cloud
+
+This issue might occur when running the Discovery Notebook on Databricks on Google Cloud, where HTML widgets or local helper module imports might fail on older cluster runtimes.
+
+Verify that your cluster uses Databricks Runtime 11.3 or later on an active managed cluster.
+
+#### Extraction takes too long, runs out of memory, or misses table storage metrics
+
+This issue can occur where large Databricks environments or wide historical query windows can cause long execution times or driver memory pressure, and unsupported cluster modes prevent table storage extraction.
+
+To troubleshoot this issue, verify the following settings:
+
+- **Cluster access mode:** Ensure that the notebook runs on a managed cluster configured with **Dedicated** access mode. Serverless compute and shared access mode clusters can't extract table storage size metrics.
+- **Lookback window:** Reduce the configured lookback window to 30-60 days so that system table queries scan a bounded volume of historical logs.
+- **Cluster machine type:** Use a machine type with more memory and CPUs to reduce execution time.
+
+#### Insufficient permissions prevent metadata extraction
+
+Metadata extraction might fail due to insufficient permissions. To resolve this error, do the following:
+
+- Check that all the required roles are granted to either the Service Principal or the user generating the PAT.
+
+- Check that access for the Service Principal is granted to the workspaces required for the extraction.
+
+- Check that UC catalogs are attached to the current workspace and access to them is granted to the user running the notebook.
+
+- Optionally: run the provided `add_permissions` notebook to automate the process of granting permissions.
+
+#### The notebook fails to start with a target directory write error
+
+The notebook probes the provided output path by writing an empty file to it. If it is not able to write the file it fails fast to avoid extraction when saving the results is not possible.
+
+To resolve this error, check that the provided output path is correct and that the service principal has write access to it.
+
 ## Interactive SQL translator
 
 The following sections describe commonly encountered errors when using the interactive SQL translator.

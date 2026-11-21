@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/migration-assessment
 uri: https://docs.cloud.google.com/bigquery/docs/migration-assessment
 title: Migration assessment
-description: Describes how to use the migration assessment feature to evaluate your Teradata, Amazon Redshift, Apache Hive,or Snowflake data warehouse for migration to BigQuery.
+description: Describes how to use the migration assessment feature to evaluate your Databricks, Teradata, Amazon Redshift, Apache Hive, or Snowflake data warehouse for migration to BigQuery.
 data_source: docs.cloud.google.com
 ---
 
@@ -26,7 +26,7 @@ To prepare and run a BigQuery migration assessment, follow these steps:
 
 5.  [Run the migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment#run-migration-assessment) .
 
-6.  [Review the Data Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
+6.  [Review the Data Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) , or reach out to Google account team to obtain a TCO estimate.
 
 7.  Optional: [Query the assessment results](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) to find detailed or specific assessment information.
 
@@ -38,55 +38,81 @@ To extract the metadata and query logs necessary to run the assessment, select y
 
 ### Databricks
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+### Requirements
 
-To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
+Before you can extract metadata from your Databricks environment, you must do the following:
 
-Metadata extraction for the Databricks Assessment starts with downloading and running the extraction tool in your Databricks environment.
+- You must have an active Databricks managed cluster configured with **Dedicated** access mode in a Unity Catalog-enabled workspace. Don't use serverless compute or shared access mode, because Dedicated access mode on a managed cluster is required to extract table storage metrics.
+- If your workspace runs on Databricks on Google Cloud, you must have Databricks Runtime 11.3 or later on the cluster.
+- Configure the authentication of the notebook with either a [Databricks service principal](https://docs.databricks.com/aws/en/admin/users-groups/service-principals) (recommended) or a [personal access token (PAT)](https://docs.databricks.com/aws/en/dev-tools/auth/pat) .
+- Grant account administrator and metastore administrator privileges for the authenticated identity, or the following granular permissions:
+  - `CAN RUN` and `CAN VIEW` on the imported extraction notebook.
+  - `CAN ATTACH TO` on the Databricks cluster.
+  - `CAN VIEW` on all objects in all workspaces required for the extraction.
+  - `USE CATALOG` on the `system` catalog, plus `USE SCHEMA` and `SELECT` on all system tables.
+  - `USE CATALOG` , `USE SCHEMA` , and `SELECT` on all catalogs attached to the workspace.
+  - `WRITE VOLUME` on the Unity Catalog volume configured as the export target ( `EXPORT_VOLUME_PATH` ).
+- You must have a Google Cloud account with a Cloud Storage bucket to store the extracted archive and an empty BigQuery dataset in a compatible location to store the assessment results.
 
-The extraction tool is a notebook that produces a ZIP archive with files that contain a representation of a number of Databricks views. The views contain the data necessary for the assessment.
+Consider the following scope limitations when planning your extraction:
 
-## Download the extraction tool
+- **Single-region scope:** The notebook extracts metadata for a single region. For multi-region Databricks deployments, run the notebook separately in each region.
+- **Workspace catalog visibility:** The notebook discovers only catalogs attached to the current workspace that are visible to the authenticated identity. To bind isolated catalogs to the current workspace before running extraction, you can run the optional `add_permissions.ipynb` setup notebook included in `discovery.zip` .
+- **Lookback window:** Configure a lookback window of 30-60 days to capture representative usage patterns while keeping extraction runtime manageable.
 
-A download link for the notebook is provided in the Assessment section of the Google Cloud console. The files are available as a ZIP archive, containing the following:
+### Download the extraction tool
 
-- The extraction notebook
-- The utility Python scripts that the notebook runs during the extraction process.
+The extraction is done using the `discovery_notebook` , which is imported to the source Databricks environment. It extracts information from the Unity Catalog (UC) system tables as well as from the workspace API and MLflow API. The discovery is read-only and no data is automatically transmitted to Google. All extraction results are stored locally for user review.
 
-## Import and configure the extraction tool
+Metadata extraction for Databricks uses the Discovery Notebook archive ( `discovery.zip` ), which contains the read-only extraction notebook ( `discovery_notebook.ipynb` ), an optional pre-flight permissions notebook ( `add_permissions.ipynb` ), and supporting Python utility scripts.
 
-> **Note:** This step requires the entire downloaded archive, as the extraction notebook depends on the additional files to complete the necessary extraction tasks.
+You can download `discovery.zip` in either of the following ways:
 
-1.  [Import](https://docs.databricks.com/aws/en/notebooks/notebook-export-import) the ZIP file from the previous step using the Databricks user interface.
-2.  After import, open the extraction notebook and complete all steps labeled "Configuration".
+- **Direct download:** Download the [Databricks Discovery Notebook archive](https://storage.googleapis.com/assessment_databricks/discovery.zip) ( `discovery.zip` ) directly without authentication.
 
-Authentication for the notebook is a part of the configuration steps. The notebook supports two Databricks authentication methods:
+- **From the Google Cloud console:**
 
-- [Service principal](https://docs.databricks.com/aws/en/admin/users-groups/service-principals)
-- [Personal Access Token (PAT)](https://docs.databricks.com/aws/en/dev-tools/auth/pat)
+  1.  In the Google Cloud console, go to the **Assessment** page.
 
-you will need to use one of these methods to proceed to the next section. We recommend using a service principal over the PAT if available, since the PAT option is considered legacy by Databricks.
+  2.  Click **Start assessment** .
 
-## Obtain the data for assessment
+  3.  In the information pane on the **Start assessment** page, click **Discovery Notebook** to download `discovery.zip` .
 
-After you complete all of the configuration steps, your notebook is ready to run. When the extraction notebook is active, use the "Run all" option to run the notebook.
+### Import and configure the extraction tool
 
-Running the notebook could take up to a day for very large systems. For a typical system with about 50,000 tables, the extraction takes less than an hour.
+Once you have downloaded the Discovery Notebook archive ( `discovery.zip` ), import it into your Databricks workspace and configure the tool with the following steps:
 
-## Optional: Monitor the extraction notebook progress
+1.  [Import](https://docs.databricks.com/aws/en/notebooks/notebook-export-import) the `discovery.zip` archive into your Databricks workspace using the Databricks UI. The archive is automatically unzipped during import. Make sure to import the entire archive, because the extraction notebook depends on the bundled Python helper modules.
 
-The extraction notebook provides logs that contain progress and error information for monitoring purposes. The latest log messages for a given notebook run contain information on what is being extracted.
+2.  Optional: If you haven't already provisioned cross-workspace visibility and catalog permissions through Terraform or the Databricks administrator console, open `add_permissions.ipynb` to configure access before extraction. Set only the boolean flags that you need in its **Configuration** cell (all flags default to `False` ), and then run `add_permissions.ipynb` :
+    - `GRANT_WORKSPACE_ADMIN` : assigns the workspace administrator role to your service principal across all workspaces in the same region, so that the extraction notebook can read jobs, clusters, notebooks, and endpoints. Requires a service principal with account administrator privileges.
+    - `ATTACH_CATALOGS` : discovers catalogs across workspaces and binds isolated catalogs to the current workspace so that table sizing can scan them. Requires a service principal with account administrator and metastore administrator privileges, or a PAT with metastore administrator and workspace administrator privileges.
+    - `GRANT_CATALOG_ACCESS` : grants read access on all attached catalogs to the user running the notebook. Requires metastore administrator privileges.
 
-Because notebook execution doesn't stop at the first error, review errors in two steps:
+3.  Open the extraction notebook ( `discovery_notebook.ipynb` , which is strictly read-only) and complete all cells labeled **Configuration** , including the target Unity Catalog volume path ( `EXPORT_VOLUME_PATH` ), lookback window, and authentication credentials.
 
-1.  Check the summary after an extraction for an error count or other error indicators after the extraction completes; for example, less data was found than was expected. If the results look acceptable, you can skip the next step.
-2.  Copy the log output and save it to a text file.
+    We recommend authenticating with a service principal rather than a PAT when available. By default, `data_volume` in `DATA_TO_EXTRACT` is set to `"on"` , which extracts table sizes for a sample of tables ranked by popularity for TCO analysis. To extract storage sizes for all tables without a row limit, it is possible to set `data_volume` to `"planning"` .
 
-## Complete the extraction process
+### Run the extraction notebook
 
-After the notebook finishes the extraction process, you can download the results by clicking the download button in the last section of the notebook.
+Attach the configured extraction notebook to your managed cluster and click **Run all** .
+
+For a typical environment with approximately 50,000 tables, extraction finishes in under an hour. Very large environments can take up to 24 hours.
+
+### Optional: Monitor the extraction progress
+
+The extraction notebook logs progress and error details as each extractor runs. Check the output messages to see which metadata category is being extracted.
+
+Because notebook execution doesn't stop on nonfatal errors, verify the run in two steps after execution finishes:
+
+1.  Inspect the summary output at the end of the notebook for error counts or missing data warnings (for example, fewer tables or workspaces discovered than expected). If the summary shows expected coverage, you can skip the next step.
+2.  Copy the log file which is stored in the Unity Catalog volume specified by `EXPORT_VOLUME_PATH` and save it for troubleshooting.
+
+### Download the extracted data
+
+When extraction completes, the notebook packages the extracted metadata into a ZIP archive in the Unity Catalog volume specified by `EXPORT_VOLUME_PATH` . Additionally, it writes data extracted from system tables as raw Parquet files in the same volume.
+
+Download the generated files from your Unity Catalog target volume to your local machine. You can inspect the extracted data and upload it to Cloud Storage.
 
 ### Snowflake
 
@@ -880,13 +906,13 @@ Once you have extracted the metadata and query logs from your data warehouse, yo
 
 ### Databricks
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+Upload the metadata ZIP archive and parquet files generated by the Discovery Notebook to a folder in your Cloud Storage bucket. When uploading the file to Cloud Storage, the following requirements must be met:
 
-To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
+- Upload the packaged ZIP archive exactly as generated by the Discovery Notebook. Don't extract the zip files. If data was modified, such as for anonymization or obfuscation, make sure that it was not truncated and there were no changes to the data format.
+- Ensure that the total uncompressed size of all files inside the metadata ZIP archive is less than 50 GB.
+- Verify that your Cloud Storage bucket and target BigQuery dataset are in compatible [locations](https://docs.cloud.google.com/storage/docs/locations) .
 
-Upload the ZIP file to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
+For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Snowflake
 
@@ -1200,11 +1226,14 @@ The BigQuery migration assessment writes the assessment results to tables in Big
 
     ![Assessment progress in the tooltip.](https://docs.cloud.google.com/static/bigquery/images/assessment-progress-tooltip.png)
 
-6.  While the assessment is running, you can click the **View report** link in the assessment jobs list to view the assessment report with partial data in Data Studio. The **View report** link might take some time to appear while the assessment is running. The report opens in a new tab.
+6.  For data sources other than Databricks, while the assessment is running, you can click the **Create report** link in the assessment jobs list to view the assessment report with partial data in Data Studio. The **Create report** link might take some time to appear while the assessment is running. The report opens in a new tab.
 
-    The report is updated with new data as they are processed. Refresh the tab with the report or click **View report** again to see the updated report.
+    The report is updated with new data as they are processed. Refresh the tab with the report or click **Create report** again to see the updated report.
 
-7.  After the assessment is complete, click **View report** to view the complete assessment report in Data Studio. The report opens in a new tab.
+7.  After the assessment is complete:
+
+    - For data sources other than Databricks, click **Create report** to view the complete assessment report in Data Studio. The report opens in a new tab.
+    - For Databricks assessments, the Data Studio report can be reviewed immediately. In order to obtain the TCO projection, get in contact with the Google account team working with your organization.
 
 ### API
 
@@ -1255,6 +1284,31 @@ The report looks similar to the following screenshot:
 ![Assessment report.](https://docs.cloud.google.com/static/bigquery/images/assessment-report.png)
 
 To see which views are contained in the report, select your data warehouse:
+
+### Databricks
+
+The report gives a high-level overview of the Databricks environment, focusing mainly on workloads of different types and compute usage.
+
+Environment Summary  
+Overview of the Databricks environment, including the number of workspaces, clusters, catalogs, users and DBU usage.
+
+Workload Summary  
+Overview of the Databricks workloads, split into several categories.
+
+Workload Details  
+Detailed breakdown of each workload category, including general migration recommendations.
+
+Feature Usage and Complexity  
+Detected complexity indicators which could impact the migration effort.
+
+### Calculate TCO for Databricks assessments
+
+Data Studio reports aren't used for Databricks TCO, but still contain migration scope & volumetrics. To obtain the TCO spreadsheet and calculate TCO for a Databricks assessment, share the assessment information with your Google Cloud account team by doing the following:
+
+1.  Wait for the Databricks migration assessment job to finish so that all ingested metadata and usage tables are populated in your output BigQuery dataset.
+2.  Share the dataset with your Google Cloud account team.
+3.  Alternatively, share the output files from the discovery step with your Google Cloud account team.
+4.  Contact your Google Cloud account team to obtain the TCO estimation.
 
 ### Snowflake
 
@@ -1936,6 +1990,44 @@ Writer queue is full. Ignoring event
 ```
 
 If you find this message, consider increasing the `dwhassessment.hook.queue.capacity` parameter.
+
+### Databricks migration errors
+
+The following sections describe common issues that you might encounter when you extract metadata from Databricks for BigQuery migration assessment.
+
+#### Notebook widgets fail to render or workspace imports fail on Databricks on Google Cloud
+
+This issue might occur when running the Discovery Notebook on Databricks on Google Cloud, where HTML widgets or local helper module imports might fail on older cluster runtimes.
+
+Verify that your cluster uses Databricks Runtime 11.3 or later on an active managed cluster.
+
+#### Extraction takes too long, runs out of memory, or misses table storage metrics
+
+This issue can occur where large Databricks environments or wide historical query windows can cause long execution times or driver memory pressure, and unsupported cluster modes prevent table storage extraction.
+
+To troubleshoot this issue, verify the following settings:
+
+- **Cluster access mode:** Ensure that the notebook runs on a managed cluster configured with **Dedicated** access mode. Serverless compute and shared access mode clusters can't extract table storage size metrics.
+- **Lookback window:** Reduce the configured lookback window to 30-60 days so that system table queries scan a bounded volume of historical logs.
+- **Cluster machine type:** Use a machine type with more memory and CPUs to reduce execution time.
+
+#### Insufficient permissions prevent metadata extraction
+
+Metadata extraction might fail due to insufficient permissions. To resolve this error, do the following:
+
+- Check that all the required roles are granted to either the Service Principal or the user generating the PAT.
+
+- Check that access for the Service Principal is granted to the workspaces required for the extraction.
+
+- Check that UC catalogs are attached to the current workspace and access to them is granted to the user running the notebook.
+
+- Optionally: run the provided `add_permissions` notebook to automate the process of granting permissions.
+
+#### The notebook fails to start with a target directory write error
+
+The notebook probes the provided output path by writing an empty file to it. If it is not able to write the file it fails fast to avoid extraction when saving the results is not possible.
+
+To resolve this error, check that the provided output path is correct and that the service principal has write access to it.
 
 ## What's next
 

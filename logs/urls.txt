@@ -150,8 +150,8 @@ https://docs.cloud.google.com/bigquery/docs/create-data-agents	2026-11-19T16:39:
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model	2026-11-18T18:58:16Z
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console	2026-11-18T18:56:12Z
 https://docs.cloud.google.com/bigquery/docs/create-manage-folders	2026-11-11T04:23:03Z
-https://docs.cloud.google.com/bigquery/docs/create-notebooks	2026-11-11T04:23:03Z
-https://docs.cloud.google.com/bigquery/docs/create-pipelines	2026-11-11T04:23:03Z
+https://docs.cloud.google.com/bigquery/docs/create-notebooks	2026-11-20T14:36:05Z
+https://docs.cloud.google.com/bigquery/docs/create-pipelines	2026-11-20T14:36:05Z
 https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables	2026-11-11T04:23:03Z
 https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables	2026-11-11T04:23:03Z
 https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections	2026-11-02T22:41:46Z
@@ -162,7 +162,7 @@ https://docs.cloud.google.com/bigquery/docs/custom-constraints	2026-11-11T04:20:
 https://docs.cloud.google.com/bigquery/docs/custom-quotas	2026-11-11T04:20:06Z
 https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption	2026-11-13T09:51:08Z
 https://docs.cloud.google.com/bigquery/docs/data-analysis-tools-intro	2026-11-12T21:29:18Z
-https://docs.cloud.google.com/bigquery/docs/data-canvas	2026-11-18T14:40:45Z
+https://docs.cloud.google.com/bigquery/docs/data-canvas	2026-11-20T14:36:05Z
 https://docs.cloud.google.com/bigquery/docs/data-clean-rooms	2026-11-11T04:20:06Z
 https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines	2026-11-18T19:00:58Z
 https://docs.cloud.google.com/bigquery/docs/data-governance	2026-11-05T21:27:58Z
@@ -277,7 +277,7 @@ https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights	2
 https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio	2026-11-11T04:20:11Z
 https://docs.cloud.google.com/bigquery/docs/getting-model-metadata	2026-11-17T14:46:17Z
 https://docs.cloud.google.com/bigquery/docs/getting-support	2026-10-02T03:43:39Z
-https://docs.cloud.google.com/bigquery/docs/git-repositories	2026-11-18T14:40:45Z
+https://docs.cloud.google.com/bigquery/docs/git-repositories	2026-11-20T14:36:05Z
 https://docs.cloud.google.com/bigquery/docs/global-queries	2026-10-23T18:38:10Z
 https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets	2026-11-11T04:20:11Z
 https://docs.cloud.google.com/bigquery/docs/google-ads-transfer	2026-11-13T23:04:30Z
@@ -433,7 +433,7 @@ https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-ten
 https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch-models-in-onnx-format	2026-11-11T04:20:21Z
 https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format	2026-11-11T04:20:21Z
 https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables	2026-11-11T04:20:21Z
-https://docs.cloud.google.com/bigquery/docs/manage-data-preparations	2026-11-18T14:40:45Z
+https://docs.cloud.google.com/bigquery/docs/manage-data-preparations	2026-11-20T14:36:05Z
 https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/manage-notebooks	2026-11-18T14:40:45Z
 https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations	2026-10-02T03:43:46Z
@@ -472,7 +472,7 @@ https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer	2026-10-13T
 https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers	2026-11-11T04:20:24Z
 https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables	2026-10-27T16:42:15Z
 https://docs.cloud.google.com/bigquery/docs/metadata-indexing-managed-tables	2026-11-11T04:20:24Z
-https://docs.cloud.google.com/bigquery/docs/migration-assessment	2026-11-11T04:20:24Z
+https://docs.cloud.google.com/bigquery/docs/migration-assessment	2026-11-20T13:27:59Z
 https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies	2026-11-11T04:20:24Z
 https://docs.cloud.google.com/bigquery/docs/migration-intro	2026-11-19T14:46:21Z
 https://docs.cloud.google.com/bigquery/docs/migration/external-metastore-lakehouse-migration	2026-11-16T14:02:29Z
@@ -1104,7 +1104,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool	2026-11-19T19:02:17Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double	2026-11-19T19:02:17Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding	2026-11-05T18:09:18Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int	2026-11-19T19:02:17Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int	2026-11-20T17:53:24Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text	2026-10-02T03:43:09Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if	2026-11-19T19:02:17Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers	2026-10-02T03:43:09Z
@@ -1292,7 +1292,7 @@ https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-10-28T22:36:0
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-11-11T21:29:14Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions-translation-tutorial	2026-11-11T04:20:14Z
 https://docs.cloud.google.com/bigquery/docs/replay-testing	2026-10-02T03:43:15Z
-https://docs.cloud.google.com/bigquery/docs/repositories	2026-11-18T14:40:58Z
+https://docs.cloud.google.com/bigquery/docs/repositories	2026-11-20T14:36:05Z
 https://docs.cloud.google.com/bigquery/docs/reservations-assignments	2026-11-12T22:27:51Z
 https://docs.cloud.google.com/bigquery/docs/reservations-commitments	2026-11-11T04:20:14Z
 https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy	2026-11-11T04:20:14Z
@@ -1394,7 +1394,7 @@ https://docs.cloud.google.com/bigquery/docs/translate-text	2026-11-17T14:45:50Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control	2026-11-20T01:17:30Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers	2026-10-15T05:16:41Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-intro	2026-11-12T06:56:58Z
-https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations	2026-10-14T16:08:03Z
+https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations	2026-11-20T13:27:59Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-11-20T01:17:30Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-11-20T01:17:30Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas	2026-10-22T03:26:18Z
@@ -1434,7 +1434,7 @@ https://docs.cloud.google.com/bigquery/docs/vpc-sc	2026-10-26T14:28:17Z
 https://docs.cloud.google.com/bigquery/docs/weights-overview	2026-11-18T15:01:17Z
 https://docs.cloud.google.com/bigquery/docs/window-aggregations	2026-11-04T13:19:44Z
 https://docs.cloud.google.com/bigquery/docs/work-with-objectref	2026-11-06T21:32:42Z
-https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries	2026-11-11T04:24:59Z
+https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries	2026-11-20T14:36:05Z
 https://docs.cloud.google.com/bigquery/docs/working-with-connections	2026-11-11T04:24:59Z
 https://docs.cloud.google.com/bigquery/docs/working-with-time-series	2026-10-30T16:21:51Z
 https://docs.cloud.google.com/bigquery/docs/working-with-transfers	2026-10-19T18:11:24Z
