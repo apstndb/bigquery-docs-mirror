@@ -8,19 +8,20 @@ data_source: docs.cloud.google.com
 
 # The ML.SEASONALITY function
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqml-feedback@google.com> .
-
 This document describes the `ML.SEASONALITY` function, which lets you obtain seasonality insights from time series data. The *seasonality component* of a time series represents repeating patterns over fixed time periods in your data, such as years, weeks, or days. For example, your business might see a small spike in sales every weekend and a larger spike in sales every year around particular holidays.
 
 ![Time series data and its seasonality component](https://docs.cloud.google.com/static/bigquery/images/seasonality-decomposition.png)
 
-The `ML.SEASONALITY` function is built using the algorithm that is used for the `ARIMA_PLUS` model. For more information, see [ARIMA_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in Google BigQuery](https://arxiv.org/abs/2510.24452) .
+The `ML.SEASONALITY` function is built using the algorithm that is used for the `ARIMA_PLUS` model. For more information, see [ARIMA_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in BigQuery](https://arxiv.org/abs/2510.24452) .
 
-Use the `ML.SEASONALITY` function to quickly decompose a time series and view seasonal effects. For a more detailed explanation of the trend component, see [Seasonal and trend decomposition](https://otexts.com/fpp2/stl.html) .
+Use the `ML.SEASONALITY` function to quickly decompose a time series and view seasonal effects. For a more detailed explanation of the seasonality component, see [Seasonal and trend decomposition](https://otexts.com/fpp2/stl.html) .
+
+## Permissions
+
+To use the `ML.SEASONALITY` function, you need the following permissions:
+
+- `bigquery.jobs.create` on the project
+- `bigquery.tables.getData` on the input tables
 
 ## Syntax
 
@@ -45,7 +46,7 @@ ML.SEASONALITY(
 - `TIMESTAMP_COL` : a `STRING` value that specifies the name of the column that contains the timestamp data. The timestamp column must use one of the following data types: `TIMESTAMP` , `DATE` , or `DATETIME` .
 - `ID_COLS` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to analyze. Specify one or more values for this argument to analyze multiple time series using a single query. The columns that you specify must use one of the following data types: `STRING` , `INT64` , `ARRAY<STRING>` , or `ARRAY<INT64>` .
 - `SEASONALITIES` : an `ARRAY<STRING>` value that specifies the seasonality types to extract. Valid values include `YEARLY` , `QUARTERLY` , `MONTHLY` , `WEEKLY` , and `DAILY` . If omitted, the function automatically detects all seasonalities.
-- `HORIZON` : an `INT64` value that specifies the number of future time points to forecast for seasonality. The default value is `0` , which returns results for the historical data only. The valid input range is `[1, 10000]` .
+- `HORIZON` : an `INT64` value that specifies the number of future time points to forecast for seasonality. The valid input range is `[1, 10000]` . If omitted, the argument returns results for historical data only.
 
 ## Output
 
@@ -88,7 +89,7 @@ The result is similar to the following:
 
 ```
 +------------+------------------+--------------+--------+-----------+---------+--------------------+-------+--------+
-| visit_date | time_series_type | total_visits | yearly | quarterly | monthly | weekly             | daily | status |
+| visit_timestamp | time_series_type | total_visits | yearly | quarterly | monthly | weekly             | daily | status |
 +------------+------------------+--------------+--------+-----------+---------+--------------------+-------+--------+
 | 2016-08-01 | history          | 1711.0       | null   | null      | null    | 169.61193783007687 | null  |        |
 | 2016-08-02 | history          | 2140.0       | null   | null      | null    | 287.0332731997334  | null  |        |
@@ -100,6 +101,16 @@ The result is similar to the following:
 The `NULL` values for the `yearly` , `quarterly` , `monthly` , and `daily` columns indicate that no seasonality was detected for those time periods.
 
 ![A visualization of the seasonality decomposition graphed next to time series data](https://docs.cloud.google.com/static/bigquery/images/ml-seasonality-example.png)
+
+## Pricing
+
+Queries using `ML.SEASONALITY` use standard [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing?e=0#bigquery-ml-pricing) .
+
+## Limitations
+
+- There must be at least three data points in the time series.
+- The supported frequency range is \[1 minute, 2 years\].
+- There can be at most 500,000 interpolated points.
 
 ## What's next
 

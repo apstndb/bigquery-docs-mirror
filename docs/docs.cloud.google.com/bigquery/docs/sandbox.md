@@ -78,11 +78,15 @@ The BigQuery sandbox is subject to the following limits:
 
 - All BigQuery [datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) have a [default table expiration time](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , and all [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , [views](https://docs.cloud.google.com/bigquery/docs/views-intro) , and [partitions](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) automatically expire after 60 days.
 
-- The BigQuery sandbox does not support several BigQuery features, including the following:
+- The BigQuery sandbox does not support several BigQuery features, including but not limited to the following:
 
   - [Streaming data](https://docs.cloud.google.com/bigquery/docs/write-api)
   - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language)
+  - [Continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction)
   - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
+  - [Edition-only features](https://docs.cloud.google.com/bigquery/docs/editions-intro)
+
+Running unsupported features without a linked Cloud Billing account returns a [`billingNotEnabled` error](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control#ts-billing-not-enabled) . To use these features, [upgrade from the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#upgrade) .
 
 ## View a public dataset
 

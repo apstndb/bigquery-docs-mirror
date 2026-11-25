@@ -14,6 +14,41 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 24, 2026
+
+Feature
+
+The following table-valued functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in the query editor and as part of [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) to help you analyze your data:
+
+- [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend) : identify the directional trajectory of your data.
+- [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality) : identify repeating patterns in your data.
+- [`ML.DETECT_CHANGE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points) : identify intervals where structural shifts occur in your data.
+- [`ML.CORRELATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-correlation) : identify the statistical correlation between a target column and one or more metric columns.
+
+Feature
+
+The built-in text embedding model `embeddinggemma-300m` in the [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) and [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) functions is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+BigQuery Migration Service supports translating Databricks SQL and Apache Spark SQL 3.x and 4.x into GoogleSQL and extracting schema metadata from Databricks in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Databricks and Apache Spark SQL translation reference](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql) and [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+
+## November 23, 2026
+
+Feature
+
+Version 1.1 of the [TabFM](https://docs.cloud.google.com/bigquery/docs/tabfm-model) model is now available as the default model for the [`AI.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict) and [`AI.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) functions.
+
+Version 1.1 expands input limits to 80,000 sampled training rows (up from 10,000) and 128 feature columns (up from 50). This model reduces latency by up to 50x—interactive queries return predictions in around 1 second, and you can score millions of rows in a single BigQuery job. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The `reservation_override_mode` and `disable_on_demand_billing` [reservation and billing controls](https://docs.cloud.google.com/bigquery/docs/default-configuration#reservation-controls) are [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use these regional options with the [`ALTER PROJECT SET OPTIONS` and `ALTER ORGANIZATION SET OPTIONS` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) to control whether queries can override assigned reservations to on-demand billing or require reservation slots.
+
+Feature
+
+You can now use the built-in [`embeddinggemma-2` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) in the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) . This model supports an 8,192-token context window and is designed for embedding long text and code at scale directly in BigQuery. The charges for this model are based on [BigQuery compute pricing](https://docs.cloud.google.com/bigquery/pricing#compute-pricing-models) and [model input tokens](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#billing_and_permissions) . This model is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## November 19, 2026
 
 Feature

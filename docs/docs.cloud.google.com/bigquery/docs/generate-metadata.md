@@ -25,6 +25,7 @@ You can use the `dwh-migration-dumper` tool to extract metadata from the followi
 - Apache Hive
 - Apache Impala
 - Apache Spark
+- Databricks Unity Catalog and Databricks legacy Apache Hive metastore
 - Azure Synapse
 - Greenplum
 - SQL Server
@@ -143,7 +144,7 @@ The following table describes the commonly used flags for extracting Teradata me
 <tr class="even">
 <td><code>--connector</code></td>
 <td></td>
-<td>The name of the connector to use, in this case <strong>teradata</strong> for metadata or <strong>teradata-logs</strong> for query logs.</td>
+<td>The name of the connector to use, in this case <code>teradata</code> for metadata or <code>teradata-logs</code> for query logs.</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
@@ -456,7 +457,7 @@ The following table describes the commonly used flags for extracting Amazon Reds
 <tr class="even">
 <td><code>--connector</code></td>
 <td></td>
-<td>The name of the connector to use, in this case <strong>redshift</strong> for metadata or <strong>redshift-raw-logs</strong> for query logs.</td>
+<td>The name of the connector to use, in this case <code>redshift</code> for metadata or <code>redshift-raw-logs</code> for query logs.</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
@@ -683,7 +684,7 @@ The following table describes the commonly used flags for extracting Apache Hive
 <tr class="even">
 <td><code>--connector</code></td>
 <td></td>
-<td>The name of the connector to use, in this case <strong>hiveql</strong> .</td>
+<td>The name of the connector to use, in this case <code>hiveql</code> .</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
@@ -759,6 +760,88 @@ JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
   --hive-kerberos-url principal/kerberos_host
 ```
 
+### Databricks
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+You can use the `dwh-migration-dumper` tool to extract schema metadata from the following Databricks catalog sources for SQL translation:
+
+- **Databricks Unity Catalog** : connects to the Databricks REST API through the Databricks Java SDK to extract catalog, schema, table, view, column, constraint, and partitioning metadata.
+
+- **Databricks legacy Hive metastore** : connects to a Databricks SQL warehouse through the Databricks Java SDK when you specify the `--warehouse` flag to extract schema, table, and view metadata from the workspace-local `hive_metastore` catalog. The `dwh-migration-dumper` tool doesn't extract UDF metadata from the `hive_metastore` catalog. To provide custom UDF signatures for translation, see [UDF specification](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#udf_specification) .
+
+- **Self-managed or external Apache Hive Metastore** : connects directly to a Hive Metastore Thrift endpoint on default port `9083` by using the `hiveql` connector.
+
+#### Required Databricks permissions
+
+The `dwh-migration-dumper` tool reads only catalog and table metadata and doesn't query table data. Before running the `dwh-migration-dumper` tool against Databricks Unity Catalog, grant the authenticating user or service principal either metastore administrator privileges or the following privileges on each catalog that you want to extract:
+
+- `USE CATALOG`
+- `USE SCHEMA`
+- `BROWSE`
+
+To authenticate the `dwh-migration-dumper` tool, pass a Databricks personal access token (PAT) or an OAuth token with the `--password` flag. If you omit the `--password` flag, the `dwh-migration-dumper` tool uses the Databricks SDK default authentication chain, which lets you authenticate with environment variables such as `DATABRICKS_TOKEN` .
+
+#### Flags
+
+The following table describes the flags for extracting Databricks metadata by using the `dwh-migration-dumper` tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
+
+| **Name**      | **Default value**                           | **Description**                                                                                                                                                                                                                                             | **Required** |
+|---------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| `--connector` |                                             | The name of the connector to use, in this case `databricks` . For a self-managed or external Hive Metastore, use `hiveql` instead.                                                                                                                          | Yes          |
+| `--database`  | All accessible user catalogs                | A comma-separated list of catalogs to extract metadata from.                                                                                                                                                                                                | No           |
+| `--password`  | Databricks SDK default authentication chain | A Databricks PAT or OAuth token for authenticating to your Databricks workspace. If you omit this flag, the `dwh-migration-dumper` tool falls back to the Databricks SDK default authentication chain, such as the `DATABRICKS_TOKEN` environment variable. | No           |
+| `--url`       |                                             | The URL of your Databricks workspace, such as `https:// `` WORKSPACE_HOST` .                                                                                                                                                                                | Yes          |
+| `--warehouse` |                                             | The ID of a Databricks SQL warehouse used to query metadata from the legacy `hive_metastore` catalog. If you omit this flag, the `dwh-migration-dumper` tool skips the `hive_metastore` catalog and extracts metadata only from Unity Catalog.              | No           |
+
+#### Examples
+
+To extract Unity Catalog metadata from a Databricks workspace into a `databricks-metadata.zip` file by passing a PAT or OAuth token, run the following command:
+
+```
+dwh-migration-dumper \
+  --connector databricks \
+  --url https://WORKSPACE_HOST \
+  --password DATABRICKS_TOKEN \
+  --output databricks-metadata.zip
+```
+
+To include the legacy `hive_metastore` catalog, filter the extraction to specific catalogs, and authenticate with the `DATABRICKS_TOKEN` environment variable, run the following command:
+
+```
+DATABRICKS_TOKEN=DATABRICKS_TOKEN \
+  dwh-migration-dumper \
+  --connector databricks \
+  --url https://WORKSPACE_HOST \
+  --warehouse WAREHOUSE_ID \
+  --database CATALOG_1,CATALOG_2 \
+  --output databricks-metadata.zip
+```
+
+If your Databricks environment uses a self-managed or external Hive Metastore, extract metadata by using the `hiveql` connector:
+
+```
+dwh-migration-dumper \
+  --connector hiveql \
+  --host METASTORE_HOST \
+  --port 9083 \
+  --output hive-metadata.zip
+```
+
+Replace the following:
+
+- `WORKSPACE_HOST` : the hostname of your Databricks workspace.
+- `DATABRICKS_TOKEN` : a Databricks PAT or OAuth token for the authenticating user or service principal.
+- `WAREHOUSE_ID` : the ID of the Databricks SQL warehouse used to extract metadata from the `hive_metastore` catalog.
+- `CATALOG_1` and `CATALOG_2` : the names of the catalogs that you want to extract.
+- `METASTORE_HOST` : the hostname or IP address of your self-managed Hive Metastore Thrift server.
+
+#### Upload the metadata archive
+
+After you generate the metadata ZIP archive, upload it to the Cloud Storage bucket that contains your SQL translation input files. For instructions, see [Upload input files to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) . For more information about how the translator uses extracted Databricks metadata, see [Extracted Databricks metadata archive](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql#schema-mapping-profile) .
+
 ### Azure Synapse or Microsoft SQL Server
 
 To allow the `dwh-migration-dumper` tool to connect to Azure Synapse or Microsoft SQL Server, download their JDBC driver from Microsoft's [download page](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15) .
@@ -767,7 +850,7 @@ The following table describes the commonly used flags for extracting Azure Synap
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required** |
 |---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| `--connector` |                   | The name of the connector to use, in this case **sqlserver** .                                                                                         | Yes          |
+| `--connector` |                   | The name of the connector to use, in this case `sqlserver` .                                                                                           | Yes          |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes          |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
 | `--host`      | localhost         | The hostname or IP address of the database server.                                                                                                     | No           |
@@ -797,7 +880,7 @@ The following table describes the commonly used flags for extracting Greenplum m
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required**                                                              |
 |---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| `--connector` |                   | The name of the connector to use, in this case **greenplum** .                                                                                         | Yes                                                                       |
+| `--connector` |                   | The name of the connector to use, in this case `greenplum` .                                                                                           | Yes                                                                       |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes                                                                       |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes                                                                       |
 | `--host`      | localhost         | The hostname or IP address of the database server.                                                                                                     | No                                                                        |
@@ -827,7 +910,7 @@ The following table describes the commonly used flags for extracting IBM Netezza
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required** |
 |---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| `--connector` |                   | The name of the connector to use, in this case **netezza** .                                                                                           | Yes          |
+| `--connector` |                   | The name of the connector to use, in this case `netezza` .                                                                                             | Yes          |
 | `--database`  |                   | A list of the databases to extract, separated by commas.                                                                                               | Yes          |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
 | `--host`      | localhost         | The hostname or IP address of the database server.                                                                                                     | No           |
@@ -857,7 +940,7 @@ The following table describes the commonly used flags for extracting PostgreSQL 
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required**                                                              |
 |---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| `--connector` |                   | The name of the connector to use, in this case **postgresql** .                                                                                        | Yes                                                                       |
+| `--connector` |                   | The name of the connector to use, in this case `postgresql` .                                                                                          | Yes                                                                       |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes                                                                       |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes                                                                       |
 | `--host`      | localhost         | The hostname or IP address of the database server.                                                                                                     | No                                                                        |
@@ -889,7 +972,7 @@ The following table describes the commonly used flags for extracting Oracle meta
 
 | **Name**           | **Default value** | **Description**                                                                                                                                                                                                                                                                    | **Required**                                                                          |
 |--------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `--connector`      |                   | The name of the connector to use, in this case **oracle** .                                                                                                                                                                                                                        | Yes                                                                                   |
+| `--connector`      |                   | The name of the connector to use, in this case `oracle` .                                                                                                                                                                                                                          | Yes                                                                                   |
 | `--driver`         |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.                                                                                                                             | Yes                                                                                   |
 | `--host`           | localhost         | The hostname or IP address of the database server.                                                                                                                                                                                                                                 | No                                                                                    |
 | `--oracle-service` |                   | The Oracle service name to use for the connection.                                                                                                                                                                                                                                 | Not explicitly, but you must specify either this flag or the `--oracle-sid` flag.     |
@@ -919,7 +1002,7 @@ The following table describes the commonly used flags for extracting Snowflake m
 | **Name**                 | **Default value** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                    | **Required**                                                                                                                                 |
 |--------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `--assessment`           |                   | Turns on assessment mode when generating database logs or extracting metadata. The `dwh-migration-dumper` tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction. When used for query logs, the tool extracts additional columns for BigQuery migration assessment.                                                                                                                       | Only for assessment.                                                                                                                         |
-| `--connector`            |                   | The name of the connector to use, in this case **snowflake** .                                                                                                                                                                                                                                                                                                                                                                                     | Yes                                                                                                                                          |
+| `--connector`            |                   | The name of the connector to use, in this case `snowflake` .                                                                                                                                                                                                                                                                                                                                                                                       | Yes                                                                                                                                          |
 | `--database`             |                   | A comma-separated list of database names to extract. This flag is not allowed in assessment mode.                                                                                                                                                                                                                                                                                                                                                  | Only for translation.                                                                                                                        |
 | `--host`                 | localhost         | The hostname or IP address of the database server.                                                                                                                                                                                                                                                                                                                                                                                                 | No                                                                                                                                           |
 | `--private-key-file`     |                   | The path to the RSA private key used for authentication. We recommend using a [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.                                                                                                                   | No, if not provided extraction tool uses a password based authentication.                                                                    |
@@ -1023,7 +1106,7 @@ The following table describes the commonly used flags for extracting Vertica met
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required** |
 |---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| `--connector` |                   | The name of the connector to use, in this case **vertica** .                                                                                           | Yes          |
+| `--connector` |                   | The name of the connector to use, in this case `vertica` .                                                                                             | Yes          |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes          |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
 | `--host`      | localhost         | The hostname or IP address of the database server.                                                                                                     | No           |
@@ -1050,7 +1133,7 @@ The following table describes the commonly used flags for extracting BigQuery me
 
 | **Name**      | **Default value** | **Description**                                                                    | **Required** |
 |---------------|-------------------|------------------------------------------------------------------------------------|--------------|
-| `--connector` |                   | The name of the connector to use, in this case **bigquery** .                      | Yes          |
+| `--connector` |                   | The name of the connector to use, in this case `bigquery` .                        | Yes          |
 | `--database`  |                   | The list of projects to extract metadata and query logs from, separated by commas. | Yes          |
 | `--schema`    |                   | The list of datasets to extract metadata and query logs from, separated by commas. | Yes          |
 
@@ -1247,7 +1330,19 @@ In addition to changing the connection protocol to `TCPS` , you might need to pr
 set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
 ```
 
-Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf) .
+Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [Oracle Database JDBC Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjdbc/client-side-security.html) .
+
+### `dwh-migration-dumper` tool returns fewer tables than expected from Databricks Unity Catalog
+
+When extracting metadata from Databricks Unity Catalog, the `dwh-migration-dumper` tool returns only the catalogs, schemas, and tables that the authenticating user or service principal has permission to browse.
+
+To resolve this issue, grant the authenticating principal metastore administrator privileges, or grant the `USE CATALOG` , `USE SCHEMA` , and `BROWSE` privileges on each catalog that you want to extract, and then rerun the `dwh-migration-dumper` tool. For more information about required permissions, see [Required Databricks permissions](https://docs.cloud.google.com/bigquery/docs/generate-metadata#databricks-permissions) .
+
+### `dwh-migration-dumper` tool fails with HTTP 429 rate-limit errors on Databricks
+
+When extracting metadata from a large Databricks Unity Catalog or legacy Hive metastore, the `dwh-migration-dumper` tool might encounter `HTTP 429 Too Many Requests` responses from the Databricks REST API.
+
+By default, the `dwh-migration-dumper` tool throttles requests and retries rate-limited calls with exponential backoff. If the extraction still fails with `HTTP 429` errors, rerun the `dwh-migration-dumper` tool during a period of lower API activity or use the `--database` flag to filter the extraction to specific catalogs.
 
 ## What's next
 

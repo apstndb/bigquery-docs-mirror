@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Troubleshoot migration issues
 
-This document helps you troubleshoot common issues when migrating your data warehouse (such as Teradata, Amazon Redshift, Oracle, or Apache Hive) to BigQuery, including issues with migration assessment, interactive and batch SQL translation, and metadata generation using the `dwh-migration-dumper` command-line extraction tool.
+You can diagnose and resolve common errors when migrating your data warehouse from sources such as Teradata, Amazon Redshift, Oracle, Databricks, Apache Spark, or Apache Hive to BigQuery. These troubleshooting steps cover migration assessment, interactive and batch SQL translation, and metadata generation using the `dwh-migration-dumper` command-line extraction tool.
 
 To inspect job execution details, error codes, and slot usage for migrated queries and jobs, you can also query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
@@ -205,6 +205,29 @@ To fix failed translation jobs with the `RelationNotFound` or `AttributeNotFound
     - To copy the generated schema file from the output directory to the input directory, click **Apply** .
     - To copy the generated schema file from the output directory to the input directory and open a rerun window, click **Apply and rerun** .
 
+### `SyntaxError` or `LexicalError` translation issues
+
+When translating SQL scripts, you might see multiple `SyntaxError` or `LexicalError` messages in the translation report.
+
+All input files must contain valid SQL in your source dialect. This issue occurs when input files contain any of the following elements:
+
+- Invalid SQL syntax
+- Unresolved template variables or templated SQL expressions
+- Non-SQL code, such as Python or Scala notebook cells
+- Notebook magic commands, such as `%sql` or `%run`
+- Databricks notebook widgets or parameters, such as `${param}` or `:param`
+
+To resolve this issue, include only valid SQL statements in your input files and resolve any template variables or parameters before uploading the files for translation. For more information about preparing input files, see [Collect source files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#collect_source_files) and [Prepare your Databricks SQL input files](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql#prepare-input-files) .
+
+### `NoSuchFunction` translation issues for user-defined functions
+
+When translating queries that call custom user-defined functions (UDFs), you might see `NoSuchFunction` messages in the translation report. Because custom UDFs aren't built into your source SQL dialect, the translation service doesn't recognize their input and output data types by default.
+
+To resolve this issue, provide the UDF definitions to the translator by using one of the following methods:
+
+- Include the `CREATE FUNCTION` DDL statements for your UDFs in your translation input files alongside the SQL queries that reference the UDFs.
+- Register the UDF signatures in a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#udf_specification) .
+
 ## Generate metadata for translation and assessment
 
 The following sections explain some common issues and troubleshooting techniques for the `dwh-migration-dumper` tool.
@@ -363,7 +386,19 @@ In addition to changing the connection protocol to `TCPS` , you might need to pr
 set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
 ```
 
-Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf) .
+Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [Oracle Database JDBC Developer's Guide](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjdbc/client-side-security.html) .
+
+### `dwh-migration-dumper` tool returns fewer tables than expected from Databricks Unity Catalog
+
+When extracting metadata from Databricks Unity Catalog, the `dwh-migration-dumper` tool returns only the catalogs, schemas, and tables that the authenticating user or service principal has permission to browse.
+
+To resolve this issue, grant the authenticating principal metastore administrator privileges, or grant the `USE CATALOG` , `USE SCHEMA` , and `BROWSE` privileges on each catalog that you want to extract, and then rerun the `dwh-migration-dumper` tool. For more information about required permissions, see [Required Databricks permissions](https://docs.cloud.google.com/bigquery/docs/generate-metadata#databricks-permissions) .
+
+### `dwh-migration-dumper` tool fails with HTTP 429 rate-limit errors on Databricks
+
+When extracting metadata from a large Databricks Unity Catalog or legacy Hive metastore, the `dwh-migration-dumper` tool might encounter `HTTP 429 Too Many Requests` responses from the Databricks REST API.
+
+By default, the `dwh-migration-dumper` tool throttles requests and retries rate-limited calls with exponential backoff. If the extraction still fails with `HTTP 429` errors, rerun the `dwh-migration-dumper` tool during a period of lower API activity or use the `--database` flag to filter the extraction to specific catalogs.
 
 ## What's next
 

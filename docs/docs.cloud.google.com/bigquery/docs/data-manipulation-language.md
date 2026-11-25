@@ -16,6 +16,7 @@ When you run DML statements, the following conditions apply:
 
 - You must use GoogleSQL. To enable GoogleSQL, see [Switching SQL dialects](https://docs.cloud.google.com/bigquery/sql-reference/enabling-standard-sql) .
 - You cannot specify a destination table for the query.
+- You must run the DML statement from a project with a linked Cloud Billing account. DML statements aren't supported in the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#limitations) . Running a DML statement without billing enabled returns a [`billingNotEnabled` error](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control#ts-billing-not-enabled) . To link a billing account, see [Enable billing for a project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project) or [Upgrade from the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#upgrade) .
 
 For more information about how to compute the number of bytes processed by a DML statement, see [On-demand query size calculation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#on-demand-query-size-calculation) .
 

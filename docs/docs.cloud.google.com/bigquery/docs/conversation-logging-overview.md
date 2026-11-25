@@ -120,6 +120,7 @@ You can manage retention, access, encryption, and perimeter security for your co
           - permission: bigquery.tables.create
           - permission: bigquery.tables.update
           - permission: bigquery.tables.updateData
+          - method: BigQueryWrite.AppendRows
         resources:
         - projects/PROJECT_NUMBER
     ```

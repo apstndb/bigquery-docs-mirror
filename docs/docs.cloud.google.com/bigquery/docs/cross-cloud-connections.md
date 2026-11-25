@@ -307,6 +307,93 @@ The following table lists Azure regions and the best corresponding BigQuery regi
 | Central India        | `asia-south1`               | `asia-south2` `me-central1` `asia-southeast1`              |
 | South India          | `asia-south1`               | `asia-south2` `asia-southeast1` `me-central1`              |
 
+## Troubleshoot cross-cloud connections
+
+This section shows you how to resolve common issues when you use cross-cloud connections.
+
+### AWS connection isn't authorized to assume the IAM role
+
+You might see an error like the following:
+
+```
+Connection CONNECTION_NAME isn't authorized to assume into your AWS IAM Role.
+```
+
+To resolve this issue, do the following:
+
+- Verify that the `iamRoleId` of the connection is the ARN of your AWS IAM role. To view the connection properties, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) .
+- Verify that the trust policy of the role includes the connection's `identity` value from the `bq show` output. For more information, see [Add a trust policy to the AWS role](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#add-trust-policy) .
+- If you just created the connection or changed the trust policy, wait a few minutes for the change to propagate in AWS, and then try again.
+
+### AWS IAM role session duration is too short
+
+You might see an error like the following:
+
+```
+Connection CONNECTION_NAME failed assuming into your AWS IAM role because the session
+duration of your IAM Role is smaller than the requested session duration.
+```
+
+To resolve this issue, set the **Maximum session duration** of your AWS IAM role to 12 hours ( `43200` seconds).
+
+### AWS account has a custom identity provider for Google
+
+You might see an error like the following:
+
+```
+Connection: CONNECTION_NAME cannot assume AWS IAM Role. This can result when your AWS
+account has a custom identity provider for Google.
+```
+
+To resolve this issue, add the connection's `identity` value to the audiences of your custom identity provider. For more information, see [Configure a custom AWS identity provider](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#configuring-custom-idp) .
+
+### Access denied when reading from Amazon S3
+
+You might see an error like the following:
+
+```
+BigQuery received AccessDenied from S3 for 'OPERATION' on bucket 'BUCKET' path 'PATH'
+in region 'REGION' using Connection 'CONNECTION'. This could be due to insufficient
+permission, or the path doesn't exist.
+```
+
+To resolve this issue, do the following:
+
+- Verify that the bucket and path in the table's `uris` option exist.
+- Verify that the IAM policy attached to your role grants the `s3:ListBucket` permission on the bucket and the `s3:GetObject` permission on the objects. For more information, see [Create an AWS IAM policy for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-policy) .
+- If the objects are encrypted with an AWS KMS key, verify that the role has the `kms:Decrypt` permission on the key.
+
+### Azure application rejects the connection
+
+You might see an error like the following:
+
+```
+BigQuery received an error from Azure when attempting to use connection CONNECTION_NAME
+to access your Azure application.
+```
+
+To resolve this issue, do the following:
+
+- Verify that the `customerTenantId` and `federatedApplicationClientId` of the connection match the Directory (tenant) ID and Application (client) ID of your Azure application. To view the connection properties, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) .
+- Verify that the federated credential of the application uses the connection's `identity` value from the `bq show` output. For more information, see [Add a federated credential](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#add-a-federated-credential) .
+- If you just created the connection or the federated credential, wait a few minutes for the change to propagate in Azure, and then try again.
+
+### Access denied when reading from Blob Storage
+
+You might see an error like the following:
+
+```
+BigQuery received AccessDenied from Azure Blob Storage for 'OPERATION' on storage account
+'STORAGE_ACCOUNT' container 'CONTAINER' path 'PATH' using Connection 'CONNECTION'.
+This could be due to insufficient permission granted to BigQuery.
+```
+
+To resolve this issue, verify that your Azure application has a role, such as Storage Blob Data Reader, on the storage account or container. For more information, see [Assign a role to the Azure application](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#assigning-a-role) .
+
+### Bucket, container, or path not found
+
+You might see an error that starts with `BigQuery received NotFound from S3` or `BigQuery received NotFound from Azure Blob Storage` . To resolve this issue, verify that the bucket, storage account, container, and path in the table's `uris` option exist and are spelled correctly.
+
 ## What's next
 
 - Learn about [BigQuery analytics](https://docs.cloud.google.com/bigquery/docs/query-overview) .

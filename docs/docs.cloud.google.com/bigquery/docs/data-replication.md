@@ -439,7 +439,7 @@ GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DAT
 
 ## Migrate datasets
 
-You can use cross-region dataset replication to migrate your datasets from one region to another. You can also use cross-region dataset replication to migrate from a multi-region location to a region, or from a region to a multi-region location. For more information, see [Migrate a dataset](https://docs.cloud.google.com/bigquery/docs/migrate-datasets) .
+You can use cross-region dataset replication to migrate your datasets from one region to another. You can also use cross-region dataset replication to migrate from a multi-region location to a region, or from a region to a multi-region location.
 
 ### Replicate the dataset
 

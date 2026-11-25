@@ -240,6 +240,8 @@ In addition to [external table limitations](https://docs.cloud.google.com/bigque
 
 - Queries that use VPC Service Controls are unsupported and result in an error such as `NO_MATCHING_ACCESS_LEVEL` .
 
+- [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) collects column-level [lineage](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage) for downstream BigQuery queries that read Iceberg external tables, but it only collects table-level lineage for the upstream connection to the external table files. Static metadata exports from remote catalogs (such as Databricks Unity Catalog) don't connect lineage back to the source catalog. If you need end-to-end lineage across catalogs, use the [Lakehouse runtime catalog with cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) .
+
 - Tables using merge-on-read have the following limitations:
 
   - A query can process up to 100,000 total deletion vector entries across the table. For Iceberg version 3 tables that use binary deletion vectors, each data file associated with a deletion vector counts as one deletion entry toward this limit.

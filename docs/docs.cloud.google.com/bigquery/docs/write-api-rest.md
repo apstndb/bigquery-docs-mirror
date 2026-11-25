@@ -539,6 +539,8 @@ Notes about the duplicate removal query:
 
 When you stream data to a time-partitioned table, each partition has a streaming buffer. The streaming buffer is retained when you perform a load, query, or copy job that overwrites a partition by setting the `writeDisposition` property to `WRITE_TRUNCATE` . If you want to remove the streaming buffer, verify that the streaming buffer is empty by calling [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) on the partition.
 
+> **Note:** Partitioned tables are subject to a system limit of [10,000 partitions per table](https://docs.cloud.google.com/bigquery/quotas#max_partitions_per_table) . To prevent streamed data from becoming stuck in the `__UNPARTITIONED__` partition, background repartitioning doesn't reject writes when a table reaches 10,000 partitions. However, a table with more than 10,000 partitions is in an unsupported state. Exceeding 10,000 partitions degrades background storage compaction and query performance. In addition, subsequent load jobs, query jobs, multi-table copy jobs, and DML statements that add partitions fail. To stay within this limit, set a [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) or use a coarser partitioning granularity with [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . For more information, see [Maximum number of partitions per partitioned table limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-max-partitions-per-table) .
+
 ### Ingestion-time partitioning
 
 When you stream to an ingestion-time partitioned table, BigQuery infers the destination partition from the current UTC time.

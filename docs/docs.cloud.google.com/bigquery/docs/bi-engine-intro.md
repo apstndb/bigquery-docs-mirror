@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to BI Engine
 
-BigQuery BI Engine is a fast, in-memory analysis service that accelerates many SQL queries in BigQuery by intelligently caching the data that you use most frequently. This caching lets you improve query performance without manual tuning or data tiering. You can [cluster tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) and [partition tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) to further optimize BI Engine performance for large tables.
+You can use BigQuery BI Engine to accelerate SQL queries and interactive business intelligence (BI) dashboards in BigQuery without manual tuning or data tiering. By caching your most frequently queried data, BI Engine helps you achieve low-latency query performance while continuing to use your existing BI tools and custom applications without modification.
+
+## About BI Engine
+
+BigQuery BI Engine is a fast, in-memory analysis service that accelerates many SQL queries in BigQuery by intelligently caching the data that you use most frequently. You can [cluster tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) and [partition tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) to further optimize BI Engine performance for large tables.
 
 For example, if your dashboard only displays data from the last quarter, you can partition your tables by time so that only the latest partitions are loaded into memory. You could then use [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) to join and flatten your data, and then mark the resulting view and base table as a preferred table to ensure that BI Engine acceleration is only applied to the data you need.
 

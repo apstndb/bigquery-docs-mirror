@@ -95,7 +95,7 @@ ENDPOINT = 'vertex_ai_llm_endpoint'
 
 **Description**
 
-The Agent Platform endpoint for the remote model to use. You can specify the name of the Agent Platform model, for example `gemini-3.5-flash-lite` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-3.5-flash-lite` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
+The Agent Platform endpoint for the remote model to use. For most models, Agent Platform only supports multi-regional endpoints. For a complete list of which models have support in which regions, see [Google model endpoint locations](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations#google-models) .
 
 **Arguments**
 
@@ -110,14 +110,12 @@ All of the [generally available](https://docs.cloud.google.com/vertex-ai/generat
 For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
 ```
-  https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-pro
+  https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-3.5-flash
 ```
 
 Using the global endpoint for your requests can improve overall availability while reducing resource exhausted (429) errors, which occur when you exceed your quota for a regional endpoint. If you want to use Gemini in a region where it isn't available, you can avoid migrating your data to a different region by using the global endpoint instead. You can only use the global endpoint with the `AI.GENERATE_TEXT` function.
 
 > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
-
-> **Note:** Using Gemini 2.5 models with any of these functions incurs charges for the [thinking process](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking) . With some functions, you can set a budget for the thinking process for Gemini 2.5 Flash and Gemini 2.5 Flash-Lite models. You can't set a budget for Gemini 2.5 Pro models. See the documentation for a given function for details.
 
 BigQuery supports the following models:
 
@@ -132,13 +130,13 @@ BigQuery supports the following models:
 - `gemini-3.5-flash`
 - `gemini-3.1-flash-lite`
 
-Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
+For most models, Agent Platform only supports multi-regional endpoints. For a complete list of which models have support in which regions, see [Google model endpoint locations](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations#google-models) . If you specify a short endpoint name that omits the region, such as `gemini-4-argon` , then BigQuery selects an endpoint according to the following rules:
 
 - If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
 - If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
 - For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
 
-To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
+To specify a specific multi-regional endpoint, use a fully qualified endpoint name in one of the following formats:
 
 - `https:// `**`aiplatform.us.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`us`**` /publishers/google/models/ `` MODEL_ID`
 - `https:// `**`aiplatform.eu.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`eu`**` /publishers/google/models/ `` MODEL_ID`

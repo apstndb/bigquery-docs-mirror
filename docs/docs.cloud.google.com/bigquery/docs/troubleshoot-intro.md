@@ -127,6 +127,7 @@ Diagnose issues when assessing, translating, or migrating external data warehous
 Diagnose connectivity, authentication, and execution errors when querying data outside BigQuery.
 
 - **[Troubleshoot Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .** Resolve connection timeouts, instance configuration issues, and credential failures.
+- **[Troubleshoot cross-cloud connections](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#troubleshoot) .** Resolve AWS IAM role and Azure application authorization errors, and access errors when reading data from Amazon S3 and Blob Storage.
 
 ### Billing and cost discrepancies
 

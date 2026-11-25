@@ -8,17 +8,18 @@ data_source: docs.cloud.google.com
 
 # The ML.CORRELATION function
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request feedback or support for this feature, send an email to <bqml-feedback@google.com> .
-
 This document describes the `ML.CORRELATION` function, which calculates statistical correlations between a target column and one or more metric columns. `ML.CORRELATION` offers the following features:
 
 - **Multi-column matrix** : correlates one target variable against multiple metrics simultaneously.
 - **Dimensional slicing** : automatically computes correlations for all combinations of specified dimensions, similar to a `GROUP BY CUBE` operation.
 - **Flexible methods** : supports [Pearson](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient) , [Spearman](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) , and [Kendall](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient) correlation methods.
+
+## Permissions
+
+To use the `ML.CORRELATION` function, you need the following permissions:
+
+- `bigquery.jobs.create` on the project
+- `bigquery.tables.getData` on the input tables
 
 ## Syntax
 
@@ -27,7 +28,7 @@ ML.CORRELATION(
   { TABLE TABLE_NAME | (QUERY_STATEMENT) },
   target_col => TARGET_COL,
   target_correlation_cols => TARGET_CORRELATION_COLS
-  [, dimension_cols => DIMENSION_COLS, ]
+  [, dimension_cols => DIMENSION_COLS ]
   [, method => METHOD ]
 );
 ```
@@ -48,7 +49,7 @@ The `ML.CORRELATION` function takes the following arguments:
 The `ML.CORRELATION` function returns a table where each row represents the correlation for a specific pair of columns within a specific data segment. The results are sorted by `segment_size` in descending order, and then by `corr_col` in ascending order. The output table contains the following columns:
 
 - `segment` : an `ARRAY<STRUCT<dimension_col STRING, dimension_value JSON>>` value that contains the key-value pair for each dimension. The `JSON` value for `dimension_value` is generated using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function.
-- `dimension_col` : a column from `dimension_cols` , if you specified any dimension columns. The output includes one column for each dimension specified. A `NULL` value in one of these columns indicates either a true `NULL` value in the column or a placeholder `NULL` value that means the column was part of a rollup. This is conceptually similar to the presence of `NULL` placeholder values generated when you use [grouping sets](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_grouping_sets) . To determine whether the `NULL` value is from the column itself, check for a `NULL` value in the `dimension_value` field for that column in the `segment` column of the output.
+- `dimension_col` : a column from `dimension_cols` , if you specified any dimension columns. The output includes one column for each dimension specified. A `NULL` value in one of these columns indicates either a true `NULL` value in the column or a placeholder `NULL` value that means the column was part of a rollup. This is conceptually similar to the presence of `NULL` placeholder values generated when you use [grouping sets](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_grouping_sets) . To determine whether the `NULL` value is from the column itself, check if `JSON_TYPE(dimension_value)` is `null` for that column in the `segment` column of the output.
 - `target_col` : a `STRING` value that contains the name of the input target column.
 - `corr_col` : a `STRING` value that contains the name of the metric column being correlated against the target column.
 - `correlation` : a `FLOAT64` value that contains the correlation coefficient in the range of `-1.0` to `1.0` .
@@ -118,7 +119,7 @@ FROM ML.CORRELATION(
  +---------+--------------------------------------------------------+-------------+--------------*/
 ```
 
-The first row of the result contains `NULL` for country because it corresponds to aggregation over all countries. The third row of the result corresponds to a genuine `NULL` in the input data for country because the `dimension_value` field is `NULL` .
+The first row of the result contains `NULL` for country because it corresponds to aggregation over all countries. The third row of the result corresponds to a genuine `NULL` in the input data for country because `JSON_TYPE(dimension_value)` is `null` .
 
 ### Calculate correlation for multiple columns
 
@@ -183,3 +184,7 @@ FROM ML.CORRELATION(
  | Seattle             | 1.0         | 2            |
  +---------------------+-------------+--------------*/
 ```
+
+## Pricing
+
+Queries using `ML.CORRELATION` use standard [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing?e=0#bigquery-ml-pricing) .

@@ -6,17 +6,13 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-This tutorial teaches you how to use a [k-means model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) in BigQuery ML to identify clusters in a set of data.
+You can use a [k-means model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) in BigQuery ML to cluster data into descriptive segments and inform business decisions. This tutorial shows you how to prepare data from the [London Bicycle Hires public dataset](https://console.cloud.google.com/marketplace/details/greater-london-authority/london-bicycles?filter=solution-type:dataset&id=95374cac-2834-4fa2-a71f-fc033ccb5ce4) , train a k-means model, and run predictions using the `ML.PREDICT` function.
 
 The [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithm that groups your data into clusters is a form of unsupervised machine learning. Unlike supervised machine learning, which is about predictive analytics, unsupervised machine learning is about descriptive analytics. Unsupervised machine learning can help you understand your data so that you can make data-driven decisions.
 
 The queries in this tutorial use [geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) available in geospatial analytics. For more information, see [Introduction to geospatial analytics](https://docs.cloud.google.com/bigquery/docs/gis-intro) .
 
-This tutorial uses the [London Bicycle Hires public dataset](https://console.cloud.google.com/marketplace/details/greater-london-authority/london-bicycles?filter=solution-type:dataset&id=95374cac-2834-4fa2-a71f-fc033ccb5ce4) . The data includes start and stop timestamps, station names, and ride duration.
-
 ## Objectives
-
-This tutorial guides you through completing the following tasks:
 
 - Examine the data used to train the model.
 - Create a k-means clustering model.
@@ -497,15 +493,19 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Delete your dataset
 
-Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
+Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset that you created in this tutorial. Deleting the dataset also deletes the model.
 
-1.  If necessary, open the BigQuery page in the Google Cloud console.
+To delete the dataset, follow these steps:
 
-2.  In the navigation, click the **bqml_tutorial** dataset you created.
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset and the model.
+2.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `bqml_tutorial` ) and then click **Delete** .
+3.  In the **Datasets** list, click the **`bqml_tutorial`** dataset.
+
+4.  In the details pane, click **Delete** .
+
+5.  In the **Delete dataset** dialog, click **Delete** .
 
 ### Delete your project
 

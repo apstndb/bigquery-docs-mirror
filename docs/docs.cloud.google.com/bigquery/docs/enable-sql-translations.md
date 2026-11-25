@@ -81,8 +81,8 @@ The BigQuery SQL translators supports the translations of the following SQL dial
 Additionally, translation of the following SQL dialects is supported in [preview](https://cloud.google.com/products/#product-launch-stages) :
 
 - Apache Impala SQL ( `Impala2BigQuery_Translation` )
-- Apache Spark SQL ( `SparkSQL2BigQuery_Translation` )
 - Azure Synapse T-SQL ( `AzureSynapse2BigQuery_Translation` )
+- [Databricks and Apache Spark SQL](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql) ( `SparkSQL2BigQuery_Translation` )
 - GoogleSQL, BigQuery ( `Bigquery2Bigquery_Translation` )
 - Greenplum SQL ( `Greenplum2BigQuery_Translation` )
 - IBM DB2 SQL ( `Db22BigQuery_Translation` )

@@ -36,6 +36,7 @@ The BigQuery Migration Service supports the migration of the following data ware
 
 - [Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift-overview)
 - [Hadoop, Hive, and Apache Spark](https://docs.cloud.google.com/bigquery/docs/migration/hive)
+- [Databricks and Apache Spark SQL](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql)
 - [IBM Netezza](https://docs.cloud.google.com/bigquery/docs/migration/netezza)
 - [Oracle and Oracle Exadata](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration)
 - [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro)

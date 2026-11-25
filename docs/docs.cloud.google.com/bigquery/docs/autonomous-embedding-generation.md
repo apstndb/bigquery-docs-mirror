@@ -101,7 +101,7 @@ Use a `CREATE TABLE` statement to create a table with an automatically generated
     - `EMBEDDING_COL_NAME` : the name of the automatically generated embedding column.
     - `CONNECTION_ID` : a `STRING` value that contains the name of a connection to use, such as `my_project.us.example_connection` . You must grant the [Agent Platform User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) role to the connection's service account in the project in which you create the table.
     - `ENDPOINT` : a `STRING` value that specifies a supported Agent Platform [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example, `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
-    - `MODEL` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters. When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
+    - `MODEL` : a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters. When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
 
 3.  Click **Run** .
 
@@ -173,7 +173,7 @@ Replace the following:
 
 - `ENDPOINT` : a `STRING` value that specifies a supported Agent Platform [text embedding model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 
-- `MODEL` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters.
+- `MODEL` : a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters.
 
   When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
 
@@ -214,7 +214,7 @@ Use an `ALTER TABLE ADD COLUMN` statement to add an automatically generated embe
     - `SOURCE_COL` : the name of the `STRING` or `ObjectRef` column that you want to automatically embed.
     - `CONNECTION_ID` : a `STRING` value that contains the name of a connection to use, such as `my_project.us.example_connection` .
     - `ENDPOINT` : a `STRING` value that specifies a supported Agent Platform [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model.
-    - `MODEL` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters. When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
+    - `MODEL` : a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters. When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
 
 3.  Click **Run** .
 

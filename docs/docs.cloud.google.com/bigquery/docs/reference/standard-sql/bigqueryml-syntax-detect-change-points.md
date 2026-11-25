@@ -8,17 +8,18 @@ data_source: docs.cloud.google.com
 
 # The ML.DETECT_CHANGE_POINTS function
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqml-feedback@google.com> .
-
 This document describes the `ML.DETECT_CHANGE_POINTS` function, which performs change point detection to identify intervals where the statistical behavior or properties of time series data have shifted. This function provides insight into significant structural breaks, rather than transient or isolated events, without the overhead of creating and managing a model. For example, you can use this function to detect a level change in daily product sales after a marketing campaign.
 
 While standard time series anomaly detection focuses on detecting sudden spikes or outliers, `ML.DETECT_CHANGE_POINTS` is optimized to uncover anomalies that appear gradually over time and sustained structural shifts. All identified change points are represented as time windows in which the change occurred, defined by a beginning and an ending timestamp.
 
 ![Time series data with change points highlighted](https://docs.cloud.google.com/static/bigquery/images/detect-change-points.png)
+
+## Permissions
+
+To use the `ML.DETECT_CHANGE_POINTS` function, you need the following permissions:
+
+- `bigquery.jobs.create` on the project
+- `bigquery.tables.getData` on the input tables
 
 ## Syntax
 
@@ -51,9 +52,9 @@ The `ML.DETECT_CHANGE_POINTS` function takes the following arguments:
 
 - The columns specified in the `ID_COLS` argument.
 
-- `begin_timestamp` : a `TIMESTAMP` value that corresponds to the start of the change point.
+- `begin_timestamp` : a `TIMESTAMP` value that corresponds to the start of the change point. This value is `NULL` if no change point is detected.
 
-- `end_timestamp` : a `TIMESTAMP` value that corresponds to the end of the change point.
+- `end_timestamp` : a `TIMESTAMP` value that corresponds to the end of the change point. This value is `NULL` if no change point is detected.
 
 - `metrics` : a `STRUCT` value that contains metrics that describe the statistical behavior of the change point:
 
@@ -63,7 +64,9 @@ The `ML.DETECT_CHANGE_POINTS` function takes the following arguments:
   - `stddev` : a `FLOAT64` value that contains the standard deviation within the change point.
   - `count` : an `INT64` value that contains the total count of data points in the change point.
 
-- `status` : a `STRING` value that contains error messages for invalid input. This column is empty for successful requests.
+  This value returns `NULL` if no change point is detected.
+
+- `status` : a `STRING` value that contains error messages for invalid input. This column is empty for successful requests. This value is `""` if no change point is detected.
 
 ## Example
 
@@ -105,6 +108,16 @@ The following graph shows taxi ridership by date. The beginning and end of each 
 - The second change point reflects a much larger overall reduction in ridership. The shift begins March 6, 2020 and stabilizes March 22, 2020.
 
 ![Change points labeled on a graph of taxi trips over time.](https://docs.cloud.google.com/static/bigquery/images/change-point.png)
+
+## Pricing
+
+Queries using `ML.DETECT_CHANGE_POINTS` use standard [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing?e=0#bigquery-ml-pricing) .
+
+## Limitations
+
+- There must be at least three data points in the time series.
+- The supported frequency range is \[1 minute, 2 years\].
+- There can be at most 500,000 interpolated points.
 
 ## What's next
 

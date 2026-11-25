@@ -195,7 +195,7 @@ Partitioned tables have the following limitations:
 
 ## Quotas and limits
 
-Partitioned tables have defined [limits](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) in BigQuery. For more information on all quotas and limits, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
+Partitioned tables have defined [limits](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) in BigQuery, including a system limit of [10,000 partitions per table](https://docs.cloud.google.com/bigquery/quotas#max_partitions_per_table) . For information about monitoring partition counts and resolving partition limit errors across batch and streaming ingestion, see [Maximum number of partitions per partitioned table limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-max-partitions-per-table) . For more information on all quotas and limits, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
 
 ### Quotas and limits for jobs against partitioned tables
 

@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/classification-overview
 uri: https://docs.cloud.google.com/bigquery/docs/classification-overview
 title: Classification overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about machine learning classification models in BigQuery. You can use these models to predict categories and classify new data.
 data_source: docs.cloud.google.com
 ---
 
 # Classification overview
 
-A common use case for machine learning is classifying new data by using a model trained on similar labeled data. For example, you might want to predict whether an email is spam, or whether a customer product review is positive, negative, or neutral.
+You can classify new data in BigQuery ML by using a machine learning (ML) model trained on similar labeled data. For example, you might want to predict whether an email is spam, or whether a customer product review is positive, negative, or neutral.
 
 You can use any of the following models in combination with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform classification:
 

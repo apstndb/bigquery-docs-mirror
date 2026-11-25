@@ -2,18 +2,18 @@
 name: documents/docs.cloud.google.com/bigquery/docs/primary-foreign-keys
 uri: https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys
 title: Use primary and foreign keys
-description: Use primary and foreign keys to improve query performance.
+description: Learn how to create and manage primary and foreign key constraints in BigQuery to optimize query performance.
 data_source: docs.cloud.google.com
 ---
 
 # Use primary and foreign keys
 
-Primary keys and foreign keys are table constraints that can help with query optimization. This document explains how to create, view, and manage constraints, and use them to optimize your queries.
+Declaring primary and foreign key constraints on your BigQuery tables helps the query optimizer eliminate unnecessary joins and reorder joins for faster execution. Creating and managing these table constraints lets you accelerate queries—especially over complex views—without manually rewriting your SQL.
 
 BigQuery supports the following key constraints:
 
-- **Primary key** : A primary key for a table is a combination of one or more columns that is unique for each row and not `NULL` .
-- **Foreign key** : A foreign key for a table is a combination of one or more columns that is present in the primary key column of a referenced table, or is `NULL` .
+- **Primary key** : A primary key for a table is a combination of one or more columns that's unique for each row and not `NULL` .
+- **Foreign key** : A foreign key for a table is a combination of one or more columns that's present in the primary key column of a referenced table, or is `NULL` .
 
 Primary and foreign keys are typically used to ensure data integrity and enable query optimization. BigQuery doesn't enforce primary and foreign key constraints. When you declare constraints on your tables, you must ensure that your data conforms to them. To ensure uniqueness of values within a column, consider using an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) . BigQuery can use table constraints to optimize your queries.
 

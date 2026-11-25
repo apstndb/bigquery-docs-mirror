@@ -68,21 +68,17 @@ The first step is to create a BigQuery dataset to store your BI Engine-managed t
 
     If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click your project.
+3.  In the **Explorer** pane, next to your project, click **View actions** , and then click **Create dataset** .
 
-4.  In the details pane, click **View actions** , and then click **Create dataset** .
-
-5.  On the **Create dataset** page, do the following:
+4.  On the **Create dataset** page, do the following:
 
     - For **Dataset ID** , enter `biengine_tutorial` .
 
     - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) where public datasets are stored.
 
-    - For this tutorial, you can select **Enable table expiration** , and then specify the number of days before the table expires.
+    - Optional: To set a default table expiration, expand the **Advanced options** section and select **Enable table expiration** . In the **Default maximum table age** field, enter the number of days before tables expire.
 
-      ![Create dataset page](https://docs.cloud.google.com/static/bigquery/images/create-dataset-biengine.png)
-
-6.  Leave all of the other default settings in place and click **Create dataset** .
+5.  Leave all of the other default settings in place and click **Create dataset** .
 
 ## Create a table by copying data from a public dataset
 
@@ -120,7 +116,12 @@ To create your table, follow these steps:
 
 8.  Click **Copy** .
 
-9.  Optional: After the copy job is complete, verify the table contents by expanding **`PROJECT_NAME` \> biengine_tutorial** and clicking **311_service_requests_copy \> Preview** . Replace **`PROJECT_NAME`** with name of your Google Cloud project for this tutorial.
+9.  Optional: After the copy job is complete, verify the table contents:
+
+    1.  In the **Explorer** pane, expand your project and click **Datasets** .
+    2.  Click **`biengine_tutorial`** .
+    3.  In the **Overview \> Tables** tab, click **`311_service_requests_copy`** .
+    4.  Click the **Preview** tab.
 
 ## Create your BI Engine reservation
 

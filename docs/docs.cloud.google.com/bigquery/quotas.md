@@ -641,13 +641,11 @@ The following limits apply to BigQuery [partitioned tables](https://docs.cloud.g
 
 > **Note:** These limits don't apply to [Hive-partitioned external tables](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries) .
 
-Partition limits apply to the combined total of all [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) , [copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) , and [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) that append to or overwrite a destination partition.
+Daily partition modification limits apply to the combined total of all [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) , [copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) , and [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) that append to or overwrite a destination partition.
 
-A single job can affect multiple partitions. For example, query jobs and load jobs can write to multiple partitions.
+A single job can affect multiple partitions. For example, query jobs and load jobs can write to multiple partitions. BigQuery uses the number of partitions that a job modifies to determine how much of the daily partition modification limit the job consumes. Streaming writes don't count toward daily partition modification limits, but streamed tables remain subject to the maximum limit of 10,000 partitions per partitioned table.
 
-BigQuery uses the number of partitions affected by a job when determining how much of the limit the job consumes. Streaming inserts don't affect this limit.
-
-For information about strategies to stay within the limits for partitioned tables, see [Troubleshooting quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-number-column-partition-quota) .
+For strategies to stay within the limits for partitioned tables, see [Maximum number of partitions per partitioned table limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-max-partitions-per-table) and [Number of partition modifications for column-partitioned tables quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-number-column-partition-quota) .
 
 <table>
 <colgroup>
@@ -666,7 +664,9 @@ For information about strategies to stay within the limits for partitioned table
 <tr class="odd">
 <td>Number of partitions per partitioned table</td>
 <td>10,000 partitions</td>
-<td>Each partitioned table can have up to 10,000 partitions. If you exceed this limit, consider using <a href="https://docs.cloud.google.com/bigquery/docs/clustered-tables">clustering</a> in addition to, or instead of, partitioning.</td>
+<td><p>Each partitioned table can have up to 10,000 partitions, excluding the <code>__NULL__</code> and <code>__UNPARTITIONED__</code> partitions. Because this limit applies per table rather than per project, it doesn't appear on the <strong>Quotas &amp; System Limits</strong> page in the Google Cloud console. To monitor the number of partitions per table, query the <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-partitions"><code>INFORMATION_SCHEMA.PARTITIONS</code> view</a> .</p>
+<p>Load jobs, query jobs, multi-table copy jobs, and DML statements enforce this limit synchronously and fail if they increase the table's partition count above 10,000. When you stream data by using the <a href="https://docs.cloud.google.com/bigquery/docs/write-api-grpc">Storage Write API (gRPC)</a> or the <a href="https://docs.cloud.google.com/bigquery/docs/write-api-rest">Storage Write API (REST)</a> , BigQuery buffers incoming rows in the <code>__UNPARTITIONED__</code> partition and extracts partitions asynchronously. To prevent data from becoming stuck in the streaming buffer, background partition extraction doesn't reject writes when a table reaches 10,000 partitions. However, a table with more than 10,000 partitions is in an unsupported state. Exceeding 10,000 partitions degrades background storage compaction and query performance. In addition, subsequent load jobs, query jobs, multi-table copy jobs, and DML statements that add partitions fail.</p>
+<p>To stay within this limit, use <a href="https://docs.cloud.google.com/bigquery/docs/clustered-tables">clustering</a> with a coarser partitioning granularity or set a <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration">partition expiration</a> . For troubleshooting steps, see <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-max-partitions-per-table">Maximum number of partitions per partitioned table limit errors</a> .</p></td>
 </tr>
 <tr class="even">
 <td>Number of partitions modified by a single job</td>

@@ -8,19 +8,20 @@ data_source: docs.cloud.google.com
 
 # The ML.TREND function
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqml-feedback@google.com> .
-
 This document describes the `ML.TREND` function, which provides insight into trends in your time series data. The *trend component* of a time series represents the directional trajectory of a metric over time, while ignoring short-term fluctuations or noise.
 
 ![Time series data and its trend component](https://docs.cloud.google.com/static/bigquery/images/trend-decomposition.png)
 
-The `ML.TREND` function is built using the algorithm that is used for `ARIMA_PLUS` model. For more information, see [ARIMA_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in Google BigQuery](https://arxiv.org/abs/2510.24452) .
+The `ML.TREND` function is built using the algorithm that is used for `ARIMA_PLUS` model. For more information, see [ARIMA_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in BigQuery](https://arxiv.org/abs/2510.24452) .
 
 Use the `ML.TREND` function to quickly explore the trend component of time series data. For a more detailed explanation of the trend component, see [STL decomposition](https://otexts.com/fpp2/stl.html) .
+
+## Permissions
+
+To use the `ML.TREND` function, you need the following permissions:
+
+- `bigquery.jobs.create` on the project
+- `bigquery.tables.getData` on the input tables
 
 ## Syntax
 
@@ -45,7 +46,7 @@ ML.TREND(
 - `DATA_COL` : a `STRING` value that specifies the name of the column that contains the time series data. The data column must use one of the following data types: `INT64` , `NUMERIC` , `BIGNUMERIC` , or `FLOAT64` .
 - `TIMESTAMP_COL` : a `STRING` value that specifies the name of the column that contains the timestamp data. The timestamp column must use one of the following data types: `TIMESTAMP` , `DATE` , or `DATETIME` .
 - `ID_COLS` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to analyze. Specify one or more values for this argument to analyze multiple time series using a single query. The columns that you specify must use one of the following data types: `STRING` , `INT64` , `ARRAY<STRING>` , or `ARRAY<INT64>` .
-- `HORIZON` : an `INT64` value that specifies the number of time points to forecast. The default value is `0` , which returns results for the historical data only. The valid input range is `[1, 10000]` .
+- `HORIZON` : an `INT64` value that specifies the number of time points to forecast. The valid input range is `[1, 10000]` . If omitted, the argument returns results for historical data only.
 - `SMOOTHING_WINDOW_SIZE` : an `INT64` value that specifies the smoothing window size. The default value is `5` . You must specify a positive value to smooth the trend. When you specify a value, a center moving average smoothing is applied to the historical trend. When the smoothing window is outside of the boundary at the beginning or end of the trend, the first or last element is padded to fill the smoothing window before the average is applied.
 - `ADJUST_STEP_CHANGES` : a `BOOL` value that determines whether to perform automatic step change detection and adjustment. The default value is `FALSE` .
 
@@ -89,17 +90,27 @@ ORDER BY
 The result is similar to the following:
 
 ```
-+-----------------+------------------+--------------+--------------------+
-| visit_timestamp | time_series_type | total_visits | trend              |
-+-----------------+------------------+--------------+--------------------+
-| 2016-08-01      | history          | 1711.0       | 663.58261817132723 |
-| 2016-08-02      | history          | 2140.0       | 1108.5377263889254 |
-| 2016-08-03      | history          | 2890.0       | 1615.04323567092   |
-| ...             | ...              | ...          |                    |
-+-----------------+------------------+--------------+--------------------+
++-----------------+------------------+--------------+--------------------+ ----------+
+| visit_timestamp | time_series_type | total_visits | trend              | status    |
++-----------------+------------------+--------------+--------------------+ ----------+
+| 2016-08-01      | history          | 1711.0       | 663.58261817132723 |           |
+| 2016-08-02      | history          | 2140.0       | 1108.5377263889254 |           |
+| 2016-08-03      | history          | 2890.0       | 1615.04323567092   |           |
+| ...             | ...              | ...          | ...                |           |
++-----------------+------------------+--------------+--------------------+ ----------+
 ```
 
 ![A visualization of the trend decomposition overlaid on time series data](https://docs.cloud.google.com/static/bigquery/images/ml-trend-example.png)
+
+## Pricing
+
+Queries using `ML.TREND` use standard [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing?e=0#bigquery-ml-pricing) .
+
+## Limitations
+
+- There must be at least three data points in the time series.
+- The supported frequency range is \[1 minute, 2 years\].
+- There can be at most 500,000 interpolated points.
 
 ## What's next
 

@@ -2,13 +2,20 @@
 name: documents/docs.cloud.google.com/bigquery/docs/anomaly-detection-overview
 uri: https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview
 title: Anomaly detection overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about anomaly detection in BigQuery ML. You can use anomaly detection to identify data deviations, uncover fraud, and detect critical incidents using machine learning.
 data_source: docs.cloud.google.com
 ---
 
 # Anomaly detection overview
 
-Anomaly detection is a data mining technique that you can use to identify data deviations in a given dataset. For example, if the return rate for a given product increases substantially from the baseline for that product, that might indicate a product defect or potential fraud. You can use anomaly detection to detect critical incidents, such as technical issues, or opportunities, such as changes in consumer behavior.
+You can use anomaly detection in BigQuery ML to detect critical incidents, such as technical issues, or opportunities, such as changes in consumer behavior. BigQuery ML offers two built-in anomaly detection functions:
+
+- [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
+- [`ML.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies)
+
+## About anomaly detection
+
+Anomaly detection is a data mining technique that you can use to identify data deviations in a given dataset. For example, if the return rate for a given product increases substantially from the baseline for that product, that might indicate a product defect or potential fraud.
 
 It can be challenging to determine what counts as anomalous data. If you aren't certain what counts as anomalous data, or you don't have labeled data to train a model on, you can use unsupervised machine learning to perform anomaly detection. Use the [`AI.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) or [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with one of the following models to detect anomalies in training data or new serving data:
 

@@ -2,15 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/best-practices-performance-nested
 uri: https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested
 title: Use nested and repeated fields
-description: Describes best practices to optimize a SELECT statement, such as querying only required columns, filtering partitioned queries, denormalizing data, and using wildcard tables appropriately.
+description: Learn how to use nested and repeated fields in BigQuery to denormalize data, reduce table joins and shuffling, and speed up queries.
 data_source: docs.cloud.google.com
 ---
 
 # Use nested and repeated fields
 
-BigQuery can be used with many different data modeling methods, and generally provides high performance across many data model methodologies. To further tune a data model for performance, one method you might consider is data denormalization, which means adding columns of data to a single table to reduce or remove table joins.
+You can use nested `STRUCT` and repeated `ARRAY` fields in BigQuery to denormalize relational data and improve query performance while preserving parent-child relationships. Storing hierarchical data inline in a single table lets you reduce or eliminate expensive table joins and network shuffling.
 
-**Best practice:** Use nested and repeated fields to denormalize data storage and increase query performance.
+## Data denormalization
 
 Denormalization is a common strategy for increasing read performance for relational datasets that were previously normalized. The recommended way to denormalize data in BigQuery is to use nested and repeated fields. It's best to use this strategy when the relationships are hierarchical and frequently queried together, such as in parent-child relationships.
 

@@ -129,7 +129,7 @@ gcloud alpha bq migration translate \
 
 Replace the following:
 
-- `SOURCE_DIALECT` : the SQL dialect that you want to translate, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `SOURCE_DIALECT` : the SQL dialect that you want to translate, such as `teradata` . The `SparkSQL` dialect value works for both Databricks SQL and Apache Spark SQL workloads. For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
 - `TARGET_DIALECT` : the dialect to translate the query into. For example, `bigquery` .
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, specify the `eu` region.
 - `INPUT_FILE` : the local file that contains the query that you want to translate.

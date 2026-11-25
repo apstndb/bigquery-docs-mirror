@@ -26,11 +26,11 @@ You can use some or all of the following components to configure name mapping fo
 
 You provide the values for the source and target object names in a name mapping rule by using a combination of the following name parts:
 
-- `Database` : A top-level object in the object hierarchy, for example **`database`** `.schema.relation.attribute` . Your source platform might use an alternative term for this, for example *project* .
-- `Schema` : A second-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *dataset* .
-- `Relation` : A third-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *table* or *view* .
-- `Function` : A third-level object in the object hierarchy representing a user-defined function or stored procedure, for example `create procedure db.test.function1(a int)` .
-- `Attribute` : A fourth-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *column* .
+- **Database** : a top-level object in the object hierarchy, for example `database.schema.relation.attribute` . Your source platform might use an alternative term for this—for example, *project* or, in Databricks Unity Catalog ( `catalog.schema.table` ), *catalog* .
+- **Schema** : a second-level object in the object hierarchy. Your source platform might use an alternative term for this—for example, *dataset* or *schema* .
+- **Relation** : a third-level object in the object hierarchy. Your source platform might use an alternative term for this—for example, *table* or *view* .
+- **Function** : a third-level object in the object hierarchy representing a user-defined function or stored procedure, for example `create procedure db.test.function1(a int)` .
+- **Attribute** : a fourth-level object in the object hierarchy. Your source platform might use an alternative term for this—for example, *column* .
 
 When configuring name mapping rules in a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) , you only need to include the target name parts that you want to change. Any omitted target name parts remain unchanged.
 

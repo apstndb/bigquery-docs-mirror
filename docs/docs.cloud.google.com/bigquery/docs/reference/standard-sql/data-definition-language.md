@@ -6587,7 +6587,7 @@ The following options are supported:
 <p>Example: <code>`region-us.enable_global_queries_data_access` = true</code> .</p></td>
 </tr>
 <tr class="even">
-<td><code>reservation_override_mode</code> (Preview)</td>
+<td><code>reservation_override_mode</code></td>
 <td><code>STRING</code></td>
 <td><p>Specifies how query reservations can be overridden in the region. This option can be one of the following:</p>
 <ul>
@@ -6604,7 +6604,7 @@ The following options are supported:
 <p>Example: <code>`region-us.reusable_column_aliases_mode` = "on"</code></p></td>
 </tr>
 <tr class="even">
-<td><code>disable_on_demand_billing</code> (Preview)</td>
+<td><code>disable_on_demand_billing</code></td>
 <td><code>BOOL</code></td>
 <td><p>Determines whether on-demand billing is disabled for the organization in the region. If <code>true</code> , all queries must use an assigned reservation or they fail.</p>
 <p>Example: <code>`region-us.disable_on_demand_billing` = true</code></p></td>
@@ -6778,7 +6778,7 @@ The following options are supported:
 <p>Example: <code>`region-us.enable_global_queries_data_access` = true</code> .</p></td>
 </tr>
 <tr class="odd">
-<td><code>reservation_override_mode</code> ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
+<td><code>reservation_override_mode</code></td>
 <td><code>STRING</code></td>
 <td><p>Specifies how query reservations can be overridden in the region. This option can be one of the following:</p>
 <ul>

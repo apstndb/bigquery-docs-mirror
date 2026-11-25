@@ -289,7 +289,7 @@ Use the following prompts to translate SQL files or metadata files that are stor
 
 In the prompts, replace the following:
 
-- ` ``DIALECT`` ` : the dialect of the SQL query, files, or metadata that you're translating.
+- ` ``DIALECT`` ` : the dialect of the SQL query, files, or metadata that you're translating. The `SparkSQL` dialect value works for both Databricks SQL and Apache Spark SQL queries.
 - ` ``QUERY`` ` : the query you're translating.
 - ` ``FILENAME`` ` : the file that contains the query you're translating.
 - ` ``SOURCE_URI`` ` : the Cloud Storage directory that contains the input files, such as `gs://my_bucket/input/` .

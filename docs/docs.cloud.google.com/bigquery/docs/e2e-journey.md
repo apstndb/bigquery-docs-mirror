@@ -8,25 +8,7 @@ data_source: docs.cloud.google.com
 
 # End-to-end user journeys for ML models
 
-This document describes the user journeys for machine learning (ML) models that are trained in BigQuery ML, including the statements and functions that you can use to work with ML models. BigQuery ML offers the following types of ML models:
-
-- [Supervised learning](https://developers.google.com/machine-learning/glossary/fundamentals#supervised-machine-learning) models:
-
-  - [Linear and logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-  - [Deep neural network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-  - [Wide & Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
-  - [Boosted trees](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-  - [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
-  - [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
-
-- [Unsupervised learning](https://developers.google.com/machine-learning/glossary/fundamentals#unsupervised-machine-learning) models:
-
-  - [K-means clustering](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
-  - [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
-  - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
-  - [Principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
-
-- [Transform-only](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-transform) models: Transform-only models aren't typical ML models but are instead artifacts that transform raw data into features.
+Exploring the end-to-end user journeys for BigQuery ML-trained models can help you identify the exact SQL statements and functions supported for each stage of the machine learning (ML) lifecycle. Reviewing these workflows across [supervised](https://developers.google.com/machine-learning/glossary/fundamentals#supervised-machine-learning) , [unsupervised](https://developers.google.com/machine-learning/glossary/fundamentals#unsupervised-machine-learning) , and [transform-only](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-transform) models lets you map out how to train, tune, evaluate, explain, monitor, and generate predictions from your models directly in BigQuery ML.
 
 ## Model creation user journeys
 

@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 BigQuery Graph lets you use the analytical power of BigQuery to perform graph analysis on a large scale. When you model your data as a graph with nodes and edges, you can use [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) to find complex, hidden relationships between data points that would be challenging to find using SQL.
 
-You can create node and edge tables directly from tables or views that store entities and relationships between entities. You don't need to modify your existing workflows or replicate your data to use it in graph queries.
+You can create node and edge tables directly from tables or views that store entities and relationships between entities. You don't need to modify your existing workflows or replicate your data to use it in graph queries. A graph is a logical layer on top of your existing data and it respects the [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , and [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) of the underlying tables.
 
 BigQuery Graph supports a graph query interface compatible with the [ISO GQL standard](https://www.iso.org/standard/76120.html) and the [ISO Property Graph Queries (SQL/PGQ) standard](https://www.iso.org/standard/79473.html) . This provides you with interoperability between relational and graph models by combining well-established SQL capabilities with the expressiveness of graph pattern matching.
 
@@ -37,6 +37,12 @@ When your graph data is represented as tables, you must perform self joins or re
 - **Performance and scalability** . Graph workloads are powered by BigQuery's scalable, cost-effective and distributed analytics engine.
 
 - **Integration with Spanner Graph** . BigQuery Graph and [Spanner Graph](https://docs.cloud.google.com/spanner/docs/graph/overview) share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
+
+- **Integration with the BigQuery MCP server** . You can connect Gemini Enterprise Agent Platform to BigQuery Graph using the [MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) or [publish](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) your data agent to Agent Platform directly.
+
+- **Integration with the Google Cloud Data Agent Kit extension** . Build and query your graphs using the [Google Cloud Data Agent Kit](https://docs.cloud.google.com/data-agent-kit/overview) .
+
+- **Trace agent decisions** . Use BigQuery agent analytics to build a [context graph](https://adk.dev/integrations/bigquery-agent-analytics/#context-graph) , which is a queryable graph of your agent's decisions including requests handled, options weighed, and outcomes chosen.
 
 - **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. To try chatting with an agent about a graph, use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
 

@@ -57,7 +57,7 @@ AI.EMBED(
 
 `AI.EMBED` takes the following arguments:
 
-- `content` : a `STRING` value that provides the text to embed.
+- `content` : a `STRING` value that provides the text or code to embed.
 
   The `content` value can be a string literal, the name of a table column, or the output of an expression that evaluates to a string.
 
@@ -79,11 +79,16 @@ AI.EMBED(
   - `https:// `**`aiplatform.eu.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`eu`**` /publishers/google/models/gemini-embedding-2`
   - `https:// `**`aiplatform.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`global`**` /publishers/google/models/gemini-embedding-2`
 
-- `model` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) .
+- `model` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in embedding model. Supported values include the following:
 
-  If you specify this parameter, you can't specify the `endpoint` , `title` , `model_params` , or `connection_id` parameters. Your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
+  - [`embeddinggemma-2`](https://ai.google.dev/gemma/docs/embeddinggemma/model_card_2)
+  - [`embeddinggemma-300m`](https://ai.google.dev/gemma/docs/embeddinggemma/model_card)
 
-  To request feedback or support for this feature, send email to <bqml-feedback@google.com> .
+  For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) . To request support or provide feedback for these models, send an email to <bqml-feedback@google.com> .
+
+  If you specify `model` , then you can't specify the `endpoint` , `title` , `model_params` , or `connection_id` arguments. If you specify `model => 'embeddinggemma-2'` , then you also can't specify `task_type` .
+
+  Embeddings are generated directly in BigQuery; no data is sent to Agent Platform and no charges are incurred in Agent Platform. For more information, see [Billing and permissions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#billing_and_permissions) .
 
 - `task_type` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. The `task_type` argument accepts the following values:
   - `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
@@ -95,7 +100,7 @@ AI.EMBED(
   - `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
   - `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
 
-  Not compatible with the `gemini-embedding-2` model endpoint.
+  Not compatible with the `gemini-embedding-2` model endpoint. Must be `NULL` or omitted when used with the `embeddinggemma-2` built-in model.
 
 - `title` : A `STRING` value that specifies the document title, which the model uses to improve embedding quality. You can only use this parameter if you specify `RETRIEVAL_DOCUMENT` for the `task_type` value. Not compatible with the `gemini-embedding-2` model endpoint.
 
@@ -185,8 +190,8 @@ AI.EMBED(
 
 `AI.EMBED` returns a `STRUCT` value for each row in the table. The struct contains the following fields:
 
-- `result` : an `ARRAY<FLOAT64>` value containing the generated embeddings.
-- `status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
+- `result` : an `ARRAY<FLOAT64>` value that contains the generated embeddings, or `NULL` if embedding generation fails.
+- `status` : a `STRING` value that contains the status for the corresponding row. This value is empty if the operation was successful, or contains an error message if embedding generation fails.
 
 ## Examples
 
@@ -221,7 +226,7 @@ Alternatively, you can perform the embedding by using a built-in embedding model
 SELECT
   AI.EMBED(
     'A piece of text to embed',
-    model => 'embeddinggemma-300m') AS embedding;
+    model => 'embeddinggemma-2') AS embedding;
 ```
 
 If you need to reuse embeddings of the same data across many queries, you should save the results to table. The following example generates 768-dimensional embeddings for publicly available BBC news articles and writes the results to a table:
@@ -295,21 +300,29 @@ SELECT
 
 Use the following table to help you choose an embedding model for your data:
 
-| Model specification                             | Output dimension | Max sequence length | Supported text languages                                                                                                                            | Description                                                                                                                                 | Embedding location      | Billing and permissions                                                                                          |
-|-------------------------------------------------|------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|------------------------------------------------------------------------------------------------------------------|
-| `model => 'embeddinggemma-300m'`                | 768              | 2048 tokens         | [Supported text languages](https://ai.google.dev/gemma/docs/embeddinggemma)                                                                         | Best for embedding short strings (\<= 128 tokens). Specialized for multilingual tasks.                                                      | BigQuery query engine   | Uses and scales with BigQuery slots. No Gemini Enterprise Agent Platform charges or setup.                       |
-| `endpoint => 'gemini-embedding-001'`            | up to 3072       | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best performance for multilingual and coding tasks.                                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
-| `endpoint => 'text-embedding-005'`              | up to 768        | 2048 tokens         | English                                                                                                                                             | Best for embedding long English strings. Specialized in English and coding tasks.                                                           | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
-| `endpoint => 'text-multilingual-embedding-002'` | up to 768        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best for embedding long strings. Specialized in multilingual tasks.                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
-| `endpoint => 'gemini-embedding-2'`              | up to 3072       | 8192 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#expandable-4)                                          | Best for embedding long strings, including multilingual and unstructured data. Supports a mix of text, images, audio, video, and PDF files. | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
+| Model specification                             | Output dimension | Max sequence length | Supported text languages                                                                                                                            | Description                                                                                                                                 | Embedding location      | Billing and permissions                                                                                                                             |
+|-------------------------------------------------|------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `model => 'embeddinggemma-2'`                   | 768              | 8,192 tokens        | [Supported text languages](https://ai.google.dev/gemma/docs/embeddinggemma)                                                                         | Best for embedding long text and code strings. Specialized for multilingual and coding tasks.                                               | BigQuery                | Incurs charges for model input tokens, plus standard BigQuery query compute charges (slots or bytes processed). No Agent Platform charges or setup. |
+| `model => 'embeddinggemma-300m'`                | 768              | 2048 tokens         | [Supported text languages](https://ai.google.dev/gemma/docs/embeddinggemma)                                                                         | Best for embedding short strings (\<= 128 tokens). Specialized for multilingual tasks.                                                      | BigQuery                | Uses and scales with BigQuery slots. No Agent Platform charges or setup.                                                                            |
+| `endpoint => 'gemini-embedding-001'`            | up to 3072       | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best performance for multilingual and coding tasks.                                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings.                                    |
+| `endpoint => 'text-embedding-005'`              | up to 768        | 2048 tokens         | English                                                                                                                                             | Best for embedding long English strings. Specialized in English and coding tasks.                                                           | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings.                                    |
+| `endpoint => 'text-multilingual-embedding-002'` | up to 768        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best for embedding long strings. Specialized in multilingual tasks.                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings.                                    |
+| `endpoint => 'gemini-embedding-2'`              | up to 3072       | 8192 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#expandable-4)                                          | Best for embedding long strings, including multilingual and unstructured data. Supports a mix of text, images, audio, video, and PDF files. | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings.                                    |
 
 ## Billing and permissions
 
-The project that is billed for Agent Platform usage and the permissions required for the connection depend on how you specify the `endpoint` value and the context in which the `AI.EMBED` function is called.
+Billing and required permissions depend on whether you specify a built-in model with the `model` argument or a remote model with the `endpoint` argument.
 
 ### Billing model
 
-The following table describes which project is billed for Agent Platform usage based on the `endpoint` value and the context:
+When you specify a `model` value, BigQuery uses a built-in model and doesn't incur charges in Agent Platform. For rates, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) .
+
+- `embeddinggemma-300m` : billed only for BigQuery compute, based on slots used or bytes processed.
+- `embeddinggemma-2` : billed to the project in which the query runs for two components:
+  - **Model input tokens** : input tokens processed by `embeddinggemma-2` . Output embeddings aren't billed. `NULL` values, empty strings ( `""` ), and input tokens truncated past 8,192 tokens aren't billed. To view billed input tokens, see [Cloud Billing reports](https://docs.cloud.google.com/billing/docs/how-to/reports) for BigQuery. For more information, read about EmbeddingGemma 2 on the [BigQuery pricing page](https://cloud.google.com/bigquery/pricing#embeddinggemma-2-on-bigquery) .
+  - **BigQuery compute** : slots used or bytes processed for the rest of the query under your on-demand or editions pricing model.
+
+When you specify an `endpoint` value, the following table describes which project is billed for Agent Platform usage based on the `endpoint` format and the context:
 
 | Endpoint format                                                                                                             | Context                             | Billed project                                 |
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------|------------------------------------------------|
@@ -318,9 +331,11 @@ The following table describes which project is billed for Agent Platform usage b
 | Model name only. For example, `text-embedding-005`                                                                          | Standard query or search query      | The project ID in which the query is run.      |
 | Model name only. For example, `text-embedding-005`                                                                          | Autonomous embedding background job | The project ID that contains the table.        |
 
-### Connection permissions
+### Permissions
 
-The connection used by the `AI.EMBED` function must have the Agent Platform User ( `roles/aiplatform.user` ) role in the project that is billed for Agent Platform usage.
+If you specify a built-in `model` value, you need the `bigquery.jobs.create` permission on the project that runs the query and the `bigquery.tables.getData` permission on the source tables. No Cloud resource connection or Agent Platform role is required.
+
+If you specify an `endpoint` value, the connection used by the `AI.EMBED` function must have the Agent Platform User ( `roles/aiplatform.user` ) role in the project that is billed for Agent Platform usage:
 
 - If you specify a full path for the endpoint, the connection must have permissions in the project specified in that path.
 - If you specify only a model name:
@@ -329,11 +344,24 @@ The connection used by the `AI.EMBED` function must have the Agent Platform User
 
 ## Locations
 
-You can run `AI.EMBED` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Agent Platform embedding models, and also in the `US` and `EU` multi-regions.
+If you specify an `endpoint` value, you can run `AI.EMBED` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Agent Platform embedding models, and also in the `us` and `eu` multi-regions.
+
+If you specify `model => 'embeddinggemma-2'` , then the following data residency rules apply:
+
+- If you run the query in the `us` multi-region or any single region in the US, then data is processed in the US.
+- If you run the query in the `eu` multi-region or any single region in the EU other than `europe-west2` or `europe-west6` , then data is processed in the EU.
+- For all other locations, including `europe-west2` and `europe-west6` , there is no data residency commitment and data might be processed outside your query region.
 
 ## Quotas
 
 See [generative AI functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
+
+## Limitations
+
+The `embeddinggemma-2` built-in model has the following limitations:
+
+- Embeddings generated by `embeddinggemma-2` can vary slightly across repeated runs, with a cosine distance of up to `1e-4` . Compare vectors using distance thresholds rather than exact floating-point equality.
+- The `embeddinggemma-2` model isn't available in Assured Workloads projects. Use `model => 'embeddinggemma-300m'` in these projects instead.
 
 ## What's next
 

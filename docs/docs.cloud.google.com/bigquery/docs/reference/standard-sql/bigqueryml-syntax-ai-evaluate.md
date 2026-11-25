@@ -116,6 +116,10 @@ FROM
 
 ### TabFM
 
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
 ```googlesql
 SELECT
   *
@@ -124,6 +128,7 @@ FROM
   { TABLE TRAINING_TABLE | (TRAINING_QUERY)  },
   { TABLE PREDICTION_TABLE | (PREDICTION_QUERY)  },
   label_col => 'LABEL_COL'
+  [, n_ensembles => NUM_ENSEMBLES]
   )
 ```
 
@@ -131,11 +136,13 @@ FROM
 
 `AI.EVALUATE` takes the following arguments:
 
-- `TRAINING_TABLE | TRAINING_QUERY` : the table or query that contains the training data. The table or query result must contain a column named `label` or the column that you specify in the `LABEL_COL` argument. Every other column is considered a feature column. The feature and label columns must be one of the following types: `STRING` , `BOOL` , `INT64` , `FLOAT64` , `NUMERIC` or `BIGNUMERIC` .
+- `TRAINING_TABLE | TRAINING_QUERY` : the table or query that contains the training data. All feature columns in `TRAINING_TABLE` (except `label_col` ) must be present in `PREDICTION_TABLE` with the exact same data type. The table or query result must contain a column named `label` or the column that you specify in the `LABEL_COL` argument. Every other column is considered a feature column. The feature and label columns must be one of the following types: `STRING` , `BOOL` , `INT64` , `FLOAT64` , `NUMERIC` or `BIGNUMERIC` .
 
 - `PREDICTION_TABLE | PREDICTION_QUERY` : the table or query that contains the data to evaluate. The table or query result must contain all of the feature columns in the training data and can optionally contain additional columns.
 
 - `LABEL_COL` : a `STRING` value that specifies the name of the label column in the training data. You must provide this argument for TabFM evaluation. If the column is of type `STRING` or `BOOL` , then classification is evaluated. If the column is of type `INT64` , `FLOAT64` , `NUMERIC` or `BIGNUMERIC` , then regression is evaluated.
+
+- `NUM_ENSEMBLES` : an `INT64` value between `1` and `32` that specifies the number of ensemble members to use for evaluation. The default value is `4` .
 
 ## Output
 
@@ -258,6 +265,36 @@ The result is similar to the following:
 +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
 ```
 
+The following query evaluates the performance of TabFM regression to predict a penguin's mass with the number of ensembles set to `4` :
+
+```
+WITH prepared_data AS (
+  SELECT *, RAND() <= 0.8 AS training
+  FROM `bigquery-public-data.ml_datasets.penguins`
+  WHERE body_mass_g > 0
+)
+SELECT
+ *
+FROM
+ AI.EVALUATE(
+  # Training data
+  (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
+  # Prediction data
+  (SELECT * EXCEPT(training) FROM prepared_data WHERE NOT training),
+  label_col => 'body_mass_g',
+  n_ensembles => 4);
+```
+
+The result is similar to the following:
+
+```
++---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+| mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error | r2_score            | explained_variance  |
++---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+| 186.40924242424236  | 54079.01102575756  | 0.0035122601481680986  | 186.75                | 0.9126692412103394  | 0.9127772522404515  |
++---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+```
+
 ### Evaluate classification prediction
 
 The following query evaluates the performance of TabFM classification to predict a penguin's sex:
@@ -294,9 +331,19 @@ The result is similar to the following:
 
 `AI.EVALUATE` and the TimesFM and TabFM models are available in all [supported BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
+### Data processing and residency
+
+Data processing and residency for `AI.EVALUATE` depend on your query location:
+
+- Queries run in the `US` multi-region or any US single region are processed in the US.
+- Queries run in the `EU` multi-region or any EU single region other than `europe-west2` (London) and `europe-west6` (Switzerland) are processed in the EU.
+- All other locations, including `europe-west2` (London) and `europe-west6` (Switzerland), have no data residency commitment, and data might be processed outside your query region.
+
 ## Pricing
 
 `AI.EVALUATE` usage is billed at the evaluation, inspection, and prediction rate documented in the **BigQuery ML on-demand pricing** section of the [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) page.
+
+### TimesFM pricing
 
 During Preview, usage of `TimesFM 3.0` in BigQuery is billed in the following ways:
 
@@ -304,6 +351,22 @@ During Preview, usage of `TimesFM 3.0` in BigQuery is billed in the following wa
 - If you use on-demand pricing, then your usage is billed based on the number of bytes processed.
 
 `TimesFM 3.0` will use a token based pricing from 12/01/2026 onwards. At that time, you will be charged for tokens consumed by the model in your query and BigQuery slots used or bytes processed for the rest of the query.
+
+### TabFM pricing
+
+BigQuery TabFM uses token-based pricing in addition to standard [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#compute-pricing-models) . You are charged for two components:
+
+- **TabFM tokens** : tokens consumed by the TabFM model in your query. For rates, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) .
+- **BigQuery compute** : slots used under Enterprise or Enterprise Plus edition, or bytes processed under on-demand pricing, for the rest of the query.
+
+## Limitations
+
+The following limitations apply when using `AI.EVALUATE` with the TabFM model:
+
+- Your training data can include up to 80,000 sampled training rows.
+- Your data can include up to 128 feature columns. If you need to use more than 128 feature columns, contact <bqml-feedback@google.com> .
+- You can classify data into at most 10 different categories.
+- `AI.EVALUATE` with the TabFM model can't be used in [Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/overview) projects.
 
 ## What's next
 

@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes how to migrate your data, security settings, and pipelines from Apache Hive to BigQuery.
 
-You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. Apache HiveQL is fully supported by both SQL translation services.
+You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. Apache HiveQL is fully supported by both SQL translation services. To translate Databricks SQL or Apache Spark SQL workloads, see [Databricks and Apache Spark SQL translation reference](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql) .
 
 ## Prepare for migration
 

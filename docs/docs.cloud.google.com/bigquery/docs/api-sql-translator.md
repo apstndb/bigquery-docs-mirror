@@ -59,7 +59,7 @@ To restrict specific translation workflow configurations in your organization, s
 
 ### Upload input files to Cloud Storage
 
-For batch translation jobs, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket containing the source files.
+For batch translation jobs, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket containing the source files—for example, to [configure a default database or map three-part object names](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) .
 
 For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
@@ -100,7 +100,7 @@ curl -d "{
 
 Replace the following:
 
-- `TYPE` : the [task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) of the translation, which determines the source and target dialect.
+- `TYPE` : the [task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) of the translation, which determines the source and target dialect. Databricks SQL is an extension of Apache Spark SQL, so the Spark SQL task types ( `SparkSQL2BigQuery_Translation` , or `Translation_SparkSQL2BQ` with `sparksqlDialect` ) work for both Databricks SQL and Spark SQL workloads. For more information, see [Translation interface identifiers](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql#interface-identifiers) .
 
 - `TARGET_BASE` : the base URI for all translation outputs.
 
@@ -221,15 +221,15 @@ curl -d "{
 
 Replace the following:
 
-- `TYPE` : the [task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) of the translation, which determines the source and target dialect.
+- `TYPE` : the [task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) of the translation, which determines the source and target dialect. Databricks SQL is an extension of Apache Spark SQL, so the Spark SQL task types ( `SparkSQL2BigQuery_Translation` , or `Translation_SparkSQL2BQ` with `sparksqlDialect` ) work for both Databricks SQL and Spark SQL workloads. For more information, see [Translation interface identifiers](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql#interface-identifiers) .
 - `PATH` : the identifier of the literal entry, similar to a filename or path.
 - `STRING` : string of literal input data (for example, SQL) to be translated.
-- `TARGETS` : the expected targets that the user wants to be directly returned in the response in the `literal` format. These should be in the target URI format (for example, ` GENERATED_DIR ` + `target_spec.relative_path` + `source_spec.literal.relative_path` ). Anything not in this list is not returned in the response. The generated directory, ` GENERATED_DIR ` for general SQL translations is `sql/` .
-- `TOKEN` : the token for authentication. To generate a token, use the `gcloud auth print-access-token` command or the [OAuth 2.0 playground](https://developers.google.com/oauthplayground/) (use the scope `https://www.googleapis.com/auth/cloud-platform` ).
+- `TARGETS` : the expected targets that the user wants to be directly returned in the response in the `literal` format. These should be in the target URI format—for example, `GENERATED_DIR` + `target_spec.relative_path` + `source_spec.literal.relative_path` . Anything not in this list isn't returned in the response. The generated directory ( `GENERATED_DIR` ) for general SQL translations is `sql/` .
+- `TOKEN` : the token for authentication. To generate a token, use the `gcloud auth print-access-token` command or the [OAuth 2.0 playground](https://developers.google.com/oauthplayground/) with the scope `https://www.googleapis.com/auth/cloud-platform` .
 - `PROJECT_ID` : the project to process the translation.
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) where the job is processed.
 
-The preceding command returns a response that includes a workflow ID written in the format `projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /workflows/ `` WORKFLOW_ID` .
+The preceding `curl` command returns a response that includes a workflow ID written in the format `projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /workflows/ `` WORKFLOW_ID` .
 
 After the workflow is created, view the results by [checking the job status](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#check_job_status) .
 

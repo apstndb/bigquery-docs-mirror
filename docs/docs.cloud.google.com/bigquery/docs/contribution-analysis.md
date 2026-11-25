@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Contribution analysis overview
 
-Use this document to understand the contribution analysis use case, and the options for performing contribution analysis in BigQuery ML.
+You can use contribution analysis in BigQuery ML to compare test and control datasets and identify which data segments drove changes in key metrics. Depending on your metric type and number of dimensions, you can analyze key drivers directly by using the [`AI.KEY_DRIVERS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers) or by creating a model and retrieving insights with the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) .
 
-## What is contribution analysis?
+## About contribution analysis
 
 Contribution analysis, also called key driver analysis, is a method used to generate insights about changes to key metrics in your multi-dimensional data. For example, you can use contribution analysis to see what data contributed to a change in revenue numbers across two quarters, or to compare two sets of training data to understand changes in an ML model's performance.
 

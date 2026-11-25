@@ -54,6 +54,8 @@ To restrict specific translation workflow configurations in your organization, s
 
 Source files must be text files that contain valid SQL for the source dialect. Source files can also include comments. Do your best to ensure the SQL is valid, using whatever methods are available to you.
 
+For Databricks workloads, export SQL cells from notebooks into SQL files, remove `%sql` and other notebook magic commands, and resolve notebook widgets before uploading your files. For more information about preparing Databricks SQL files, see [Prepare your Databricks SQL input files](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql#prepare-input-files) .
+
 ### Create metadata files
 
 To help the service generate more accurate translation results, we recommend that you provide metadata files. However, this isn't mandatory.
@@ -133,14 +135,14 @@ These steps assume that you uploaded source files to a Cloud Storage bucket.
 
 To use the Google Cloud console to submit a batch translation job, do the following steps:
 
-1.  In the Google Cloud console, go to the **SQL Translation** page.
+1.  In the Google Cloud console, go to the **SQL translation** page.
 
 2.  In the **SQL translation** panel, click **Start translation** .
 
 3.  For **Translation configuration** , enter the following:
 
     1.  For **Display name** , enter a name for the translation job. The name can contain letters, numbers or underscores.
-    2.  For **Processing location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `eu` region. The translation job performs best when you choose the same location as your source file bucket.
+    2.  For **Processing Location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `eu` region. The translation job performs best when you choose the same location as your source file bucket.
     3.  For **Source dialect** , select the SQL dialect that you want to translate.
     4.  For **Target dialect** , select **GoogleSQL** .
 
@@ -149,14 +151,14 @@ To use the Google Cloud console to submit a batch translation job, do the follow
 5.  For **File location details** , specify the Cloud Storage paths to use for translation input and output. You can enter the paths in the format `bucket_name/folder_name/` or use the **Browse** option to navigate to a folder.
 
     1.  For **Output directory location** , specify a path to the destination Cloud Storage folder for the translated files. This serves as a root directory for all translation output.
-    2.  Choose one or more **Input directory locations** containing the path to the SQL files to translate.
+    2.  Under **Input directory location** , specify an **Input directory** path containing the SQL files to translate. To add more input folders, click **Add an Input directory location** .
     3.  Each input directory can optionally be given an **Output subdirectory name** underneath the root output directory if necessary.
 
 6.  Click **Next** .
 
-7.  Select any optional settings that you need to customize metadata and any additional translation outputs.
+7.  Optional: Under **Optional settings** , select any **Additional outputs** that you need ( **Gemini AI suggestions** or **DDL** ).
 
-8.  Optional: To further customize translation behavior, create configuration YAML files and place these files in the input Cloud Storage bucket. These files can be used to rename objects, enable optimizations, enhance translations with Gemini and more. For more information about configuration YAML files, see [Create a configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) .
+8.  Optional: To further customize translation behavior, create configuration YAML files and place these files in the input Cloud Storage bucket. These files can be used to rename objects, enable optimizations, enhance translations with Gemini, and more. To configure a default database or map three-part object names, see [Map SQL object names for translation](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) . For more information about configuration YAML files, see [Create a configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) .
 
 9.  Click **Create** to start the translation job.
 
@@ -185,7 +187,7 @@ gcloud alpha bq migration translate-batch \
 
 Replace the following:
 
-- `SOURCE_DIALECT` : the dialect of the source SQL files, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `SOURCE_DIALECT` : the dialect of the source SQL files, such as `teradata` . The `SparkSQL` dialect value works for both Databricks SQL and Apache Spark SQL workloads. For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
 - `TARGET_DIALECT` : the dialect to translate the source files into. For example, `bigquery` .
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
 - `SOURCE_URI` : the Cloud Storage directory that contains the source files, such as `gs://my_data_bucket/input/` .
@@ -297,7 +299,7 @@ gcloud alpha bq migration translate-metadata \
 
 Replace the following:
 
-- `SOURCE_DIALECT` : the dialect of the source metadata, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `SOURCE_DIALECT` : the dialect of the source metadata, such as `teradata` . The `SparkSQL` dialect value works for both Databricks SQL and Apache Spark SQL workloads. For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
 - `TARGET_DIALECT` : the dialect of the target tables. For example, `bigquery` .
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
 - `SOURCE_URI` : the Cloud Storage directory that contains the metadata ZIP files, such as `gs://my_data_bucket/metadata/` .
@@ -630,6 +632,29 @@ To fix failed translation jobs with the `RelationNotFound` or `AttributeNotFound
 
     - To copy the generated schema file from the output directory to the input directory, click **Apply** .
     - To copy the generated schema file from the output directory to the input directory and open a rerun window, click **Apply and rerun** .
+
+### `SyntaxError` or `LexicalError` translation issues
+
+When translating SQL scripts, you might see multiple `SyntaxError` or `LexicalError` messages in the translation report.
+
+All input files must contain valid SQL in your source dialect. This issue occurs when input files contain any of the following elements:
+
+- Invalid SQL syntax
+- Unresolved template variables or templated SQL expressions
+- Non-SQL code, such as Python or Scala notebook cells
+- Notebook magic commands, such as `%sql` or `%run`
+- Databricks notebook widgets or parameters, such as `${param}` or `:param`
+
+To resolve this issue, include only valid SQL statements in your input files and resolve any template variables or parameters before uploading the files for translation. For more information about preparing input files, see [Collect source files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#collect_source_files) and [Prepare your Databricks SQL input files](https://docs.cloud.google.com/bigquery/docs/migration/databricks-sql#prepare-input-files) .
+
+### `NoSuchFunction` translation issues for user-defined functions
+
+When translating queries that call custom user-defined functions (UDFs), you might see `NoSuchFunction` messages in the translation report. Because custom UDFs aren't built into your source SQL dialect, the translation service doesn't recognize their input and output data types by default.
+
+To resolve this issue, provide the UDF definitions to the translator by using one of the following methods:
+
+- Include the `CREATE FUNCTION` DDL statements for your UDFs in your translation input files alongside the SQL queries that reference the UDFs.
+- Register the UDF signatures in a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#udf_specification) .
 
 ## Quota and limits
 

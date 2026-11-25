@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/regression-overview
 uri: https://docs.cloud.google.com/bigquery/docs/regression-overview
 title: Regression overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about machine learning regression models in BigQuery. You can use these models to predict numerical values.
 data_source: docs.cloud.google.com
 ---
 
 # Regression overview
 
-A common use case for machine learning is predicting the value of a numerical metric for new data by using a model trained on similar historical data. For example, you might want to predict a house's expected sale price. By using the house's location and characteristics as features, you can compare this house to similar houses that have already sold, and use their sales prices to estimate the house's sale price.
+You can predict the value of a numerical metric for new data in BigQuery ML by using a machine learning (ML) model trained on similar historical data. For example, you might want to predict a house's expected sale price. By using the house's location and characteristics as features, you can compare this house to similar houses that have already sold, and use their sales prices to estimate the house's sale price.
 
 You can use any of the following models in combination with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform regression:
 

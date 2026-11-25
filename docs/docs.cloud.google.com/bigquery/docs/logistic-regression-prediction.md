@@ -567,15 +567,17 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Delete your dataset
 
-Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
+Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset that you created in this tutorial:
 
-1.  If necessary, open the BigQuery page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation, click the **census** dataset you created.
+2.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset and the model.
+3.  In the **Datasets** pane, click **`census`** .
 
-4.  In the **Delete dataset** dialog, confirm the delete command by typing the name of your dataset ( `census` ) and then click **Delete** .
+4.  In the dataset details pane, click **Delete** .
+
+5.  In the **Delete dataset "census"?** dialog, click **Delete** . This action deletes the dataset and the model.
 
 ### Delete your project
 

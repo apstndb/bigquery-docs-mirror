@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/libraries
 uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/libraries
 title: BigQuery Data Transfer Service API Client Libraries
-description: Information about interacting with BigQuery Data Transfer in C#, Go, Java, Node.js, PHP, Python, Ruby.
+description: Information about interacting with BigQuery Data Transfer in C#, Go, Java, Node.js, PHP, Python, Ruby, Rust.
 data_source: docs.cloud.google.com
 ---
 
@@ -32,13 +32,13 @@ For more information, see [Setting Up a Go Development Environment](https://docs
 
 If you are using [Maven](https://maven.apache.org/) , add the following to your `pom.xml` file. For more information about BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/java/docs/bom) .
 
-```ruby
+```
 <dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>libraries-bom</artifactId>
-      <version>26.72.0</version>
+      <version>26.90.0</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -55,14 +55,16 @@ If you are using [Maven](https://maven.apache.org/) , add the following to your 
 
 If you are using [Gradle](https://gradle.org/) , add the following to your dependencies:
 
-```ruby
-implementation 'com.google.cloud:google-cloud-bigquerydatatransfer:2.80.0'
+```
+implementation platform('com.google.cloud:libraries-bom:26.90.0')
+
+implementation 'com.google.cloud:google-cloud-bigquerydatatransfer'
 ```
 
 If you are using [sbt](https://www.scala-sbt.org/) , add the following to your dependencies:
 
-```ruby
-libraryDependencies += "com.google.cloud" % "google-cloud-bigquerydatatransfer" % "2.80.0"
+```
+libraryDependencies += "com.google.cloud" % "google-cloud-bigquerydatatransfer" % "2.102.0"
 ```
 
 If you're using Visual Studio Code or IntelliJ, you can add client libraries to your project using the following IDE plugins:
@@ -107,6 +109,14 @@ gem install google-cloud-bigquery-data_transfer
 ```
 
 For more information, see [Setting Up a Ruby Development Environment](https://docs.cloud.google.com/ruby/docs/setup) .
+
+### Rust
+
+```
+cargo add google-cloud-bigquery-datatransfer-v1
+```
+
+For more information, see [Get started with Rust](https://docs.cloud.google.com/rust/docs/quickstart) .
 
 ## Set up authentication
 
@@ -264,46 +274,6 @@ public class QuickstartSample {
 }
 ```
 
-### Node.js
-
-```javascript
-const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
-const client = new bigqueryDataTransfer.v1.DataTransferServiceClient();
-
-async function quickstart() {
-  const projectId = await client.getProjectId();
-
-  // Iterate over all elements.
-  const formattedParent = client.projectPath(projectId, 'us-central1');
-  let nextRequest = {parent: formattedParent};
-  const options = {autoPaginate: false};
-  console.log('Data sources:');
-  do {
-    // Fetch the next page.
-    const responses = await client.listDataSources(nextRequest, options);
-    // The actual resources in a response.
-    const resources = responses[0];
-    // The next request if the response shows that there are more responses.
-    nextRequest = responses[1];
-    // The actual response object, if necessary.
-    // const rawResponse = responses[2];
-    resources.forEach(resource => {
-      console.log(`  ${resource.name}`);
-    });
-  } while (nextRequest);
-
-  console.log('\n\n');
-  console.log('Sources via stream:');
-
-  client
-    .listDataSourcesStream({parent: formattedParent})
-    .on('data', element => {
-      console.log(`  ${element.name}`);
-    });
-}
-quickstart();
-```
-
 ### PHP
 
 ```php
@@ -454,3 +424,13 @@ The following list contains links to more resources related to the client librar
 - [Issue tracker](https://github.com/googleapis/google-cloud-ruby/issues)
 - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
 - [Source code](https://github.com/googleapis/google-cloud-ruby)
+
+### Rust
+
+The following list contains links to more resources related to the client library for Rust:
+
+- [API reference](https://docs.rs/google-cloud-bigquery-datatransfer-v1/latest)
+- [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
+- [Issue tracker](https://github.com/googleapis/google-cloud-rust/issues)
+- [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Brust%5D)
+- [Source code](https://github.com/googleapis/google-cloud-rust/tree/main/src/generated/cloud/bigquery/datatransfer/v1)

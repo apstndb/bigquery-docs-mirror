@@ -771,6 +771,16 @@ For more information about granting roles, see [Manage access to projects, folde
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
+In addition, the Conversational Analytics API service agent ( `service- `` PROJECT_NUMBER `` @gcp-sa-geminidataanalytics.iam.gserviceaccount.com` ) must have the `cloudaicompanion.instances.queryEffectiveSetting` permission on your project. This permission is included in the Gemini Data Analytics Service Agent ( `roles/geminidataanalytics.serviceAgent` ) role, which is granted to the service agent when you enable observability in the Google Cloud console.
+
+If the service agent doesn't have this permission, for example because an administrator removes the role or a deny policy blocks the permission, traces and metrics can be missing or incomplete. No error is reported and agents continue to respond. Data that isn't collected can't be backfilled.
+
+To find out why the permission is blocked, use [Policy Troubleshooter](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access) with the following values:
+
+- **Principal** : the email address of the Conversational Analytics API service agent
+- **Resource** : `//cloudresourcemanager.googleapis.com/projects/ `` PROJECT_ID`
+- **Permission** : `cloudaicompanion.instances.queryEffectiveSetting`
+
 ### Enable observability
 
 Agent observability is disabled by default. An administrator can enable it for your project or organization. To enable observability for your agents, select one of the following options:

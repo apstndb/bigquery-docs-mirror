@@ -10,9 +10,9 @@ data_source: cloud.google.com
 
 # BigQuery
 
-## AI-native, serverless analytics engine
+## High-performance analytics engine at agent scale
 
-BigQuery is the autonomous data to AI platform, automating the entire data life cycle, from ingestion to AI-driven insights, so you can go from data to AI to action faster.
+BigQuery enables analytics and AI co-processing that scales effortlessly for agents—without scaling your costs.
 
 [**Gemini in BigQuery**](https://cloud.google.com/gemini/docs/bigquery/overview) features are now included in BigQuery pricing models.
 
@@ -34,9 +34,9 @@ Store 10 GiB of data and run up to 1 TiB of queries for free per month. **New cu
 
 Features
 
-### Built-in predictive analytics and AI inferencing
+### AI-native processing and advanced analytics
 
-Connect your data to AI with [BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction). Train, evaluate, and deploy [predictive analytics](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) models directly within BigQuery using SQL. Easily integrate your models with [Gemini platform](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction) for advanced MLOps. Use generative AI in your workflows with [AI functions](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions) for text summarization, sentiment analysis, and data enrichment. Beyond traditional tables, use [BigQuery Graph](https://cloud.google.com/bigquery/docs/graph-overview) to uncover complex relationships and patterns in your data. Build sophisticated context-retrieval and RAG applications with embeddings and [vector, text, or hybrid search](https://docs.cloud.google.com/bigquery/docs/vector-search) to find information based on meaning, not just keywords.
+Connect your data to AI with [BigQuery](https://docs.cloud.google.com/bigquery/docs/ai-introduction) [AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction). Train, evaluate, and deploy [pr](https://docs.cloud.google.com/bigquery/docs/bqml-introduction)[e](https://docs.cloud.google.com/bigquery/docs/bqml-introduction)[dictive](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) [analytics](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) models directly within BigQuery using SQL. Easily integrate your models with [G](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction)[e](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction)[mini](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction) for advanced MLOps. Use generative AI in your workflows with [AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[fun](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[c](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[t](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[i](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[o](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[n](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)[s](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions) for text summarization, sentiment analysis, and data enrichment. Beyond traditional tables, use [BigQuery](https://cloud.google.com/bigquery/docs/graph-overview)[G](https://cloud.google.com/bigquery/docs/graph-overview)[r](https://cloud.google.com/bigquery/docs/graph-overview)[a](https://cloud.google.com/bigquery/docs/graph-overview)[ph](https://cloud.google.com/bigquery/docs/graph-overview) to uncover complex relationships and patterns in your data. Build sophisticated context-retrieval and RAG applications with embeddings and [v](https://docs.cloud.google.com/bigquery/docs/vector-search)[e](https://docs.cloud.google.com/bigquery/docs/vector-search)[cto](https://docs.cloud.google.com/bigquery/docs/vector-search)[r](https://docs.cloud.google.com/bigquery/docs/vector-search)[, text, or h](https://docs.cloud.google.com/bigquery/docs/vector-search)[y](https://docs.cloud.google.com/bigquery/docs/vector-search)[brid](https://docs.cloud.google.com/bigquery/docs/vector-search)[sea](https://docs.cloud.google.com/bigquery/docs/vector-search)[r](https://docs.cloud.google.com/bigquery/docs/vector-search)[c](https://docs.cloud.google.com/bigquery/docs/vector-search)[h](https://docs.cloud.google.com/bigquery/docs/vector-search) to find information based on meaning, not just keywords.
 
 [![](https://img.youtube.com/vi/vr-PK1_4QKE/hqdefault.jpg) From raw data to inferencing in the fast lane 1:49](https://www.youtube.com/watch?v=vr-PK1_4QKE)
 
@@ -44,25 +44,25 @@ Connect your data to AI with [BigQuery AI](https://docs.cloud.google.com/bigquer
 
 Get [AI-powered assistance and automation](https://cloud.google.com/use-cases/data-cloud-agents) for all data users across all analytical workflows. Automate data preparation, error detection, transformations, and pipeline building with [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines). Generate a detailed plan and run all aspects of data science including data loading, feature engineering, model training and evaluation with a simple prompt in the [Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent). Democratize insights with the [Conversational Analytics Agent](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview), allowing anyone to ask complex questions in plain language and receive grounded, context-aware answers. 
 
-[![AI agents for data teams](https://www.gstatic.com/bricks/image/3be6a76d-891c-434f-a7c5-12c23318f996.jpg) AI agents for data teams 41:33](https://youtu.be/ATgIU47V1yI?t=629)
+[![Agents](https://www.gstatic.com/bricks/image/c11a6de1-113b-495c-987d-dc3bc02c9dfb.png) How to build your own data agents on Google Cloud](https://services.google.com/fh/files/misc/google_cloud_data_agents_guidebook.pdf)
 
 ### Agent development and analysis tools
 
 Embed natural-language query functionality in your workflows using [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview). Publish your agent in Gemini, enabling all users to gain instant insights by simply asking questions in natural language. Manage data assets, run queries, and deploy data pipelines directly from your preferred IDE using the OSS [Data Agent Kit](https://cloud.google.com/use-cases/data-cloud-agents#data-agent-kit). Stream detailed agent interactions to BigQuery for performance and cost optimization with a single line of code using [BigQuery agent ops plugins](https://google.github.io/adk-docs/integrations/bigquery-agent-analytics/) for frameworks like ADK, LangGraph, and UCP.
 
-[![Conversational Analytics API](https://www.gstatic.com/bricks/image/6f8cc249-d4a1-4ba9-8320-9adb4d436981.jpg) Ground your agents with enterprise data 3:30](https://youtu.be/c3WSg0Bpmt4)
+[![](https://img.youtube.com/vi/99AXOrbjL-g/hqdefault.jpg) Connect to over 15 Google Data Cloud services with Data Agent Kit 1:43](https://www.youtube.com/watch?v=99AXOrbjL-g&t=9s)
 
 ### BigQuery scale and performance for Apache Iceberg
 
 Bring the best of BigQuery performance to your Iceberg data by enabling read/write interoperability across BigQuery, [Google Cloud Managed Service for Apache Spark](https://cloud.google.com/products/managed-service-for-apache-spark) and other OSS engines with zero data movement. Get real-time insights via high-throughput streaming and simplify pipelines with multi-statement transactions and CDC. [Google Cloud's borderless Lakehouse](https://cloud.google.com/products/lakehouse) automates routine Iceberg maintenance—like compaction and clustering—to optimize price-performance and eliminate manual overhead.
 
-[Borderless Lakehouse integrates with Gemini Read the blog](https://cloud.google.com/blog/products/data-analytics/borderless-lakehouse-integrates-with-gemini)
+[Activate your data with borderless Lakehouse Building a cross-cloud open data lakehouse Start a codelab](https://codelabs.developers.google.com/next26/multicloud-lakehouse#0)
 
 ### Automate governance and give context to agents
 
 Get built-in context with key capabilities such as automatic metadata harvesting, data profiling, data quality and lineage powered by [Knowledge Catalog](https://cloud.google.com/dataplex). Enable your agents to retrieve holistic context from your enterprise data. Through semantic search, Context APIs, and MCP tools, agents can instantly discover data assets, extract pre-generated, and enrich metadata.
 
-[Introducing the Knowledge Catalog Read the blog](https://cloud.google.com/blog/products/data-analytics/introducing-the-google-cloud-knowledge-catalog)
+[Give your agents enterprise context Get started with Knowledge Catalog Explore documentation](https://docs.cloud.google.com/knowledge-catalog/docs/introduction)
 
 ### Built for enterprise scale and efficiency
 
@@ -82,13 +82,13 @@ Cross-region disaster recovery offers [managed failover, backups, and data recov
 
 How It Works
 
-### See how BigQuery can help you unify your data and connect it with groundbreaking AI. Learn how to access unstructured data like images, PDFs, texts, and others to populate an ecommerce website's metadata. Something that would take hours is made easy with BigQuery.
+### Learn how to use the latest product innovations in BigQuery to tackle real-world data science use cases, including AI-first Colab Enterprise notebooks in BigQuery and Gemini. You'll train, evaluate, and use machine learning models within BigQuery using SQL, perform feature engineering with SQL or Python, and use large language models for data enrichment.
 
 [Try BigQuery free](https://console.cloud.google.com/freetrial?redirectPath=/bigquery)
 
-[Demo: Learn how you can connect your multimodal data in BigQuery with Gemini, 16 minutes 06 seconds](https://youtu.be/T0XttEMF4IM)
+[Hands-on-lab: End-to-end data science workflows in BigQuery , 1 hours 20 minutes 00 seconds](https://www.youtube.com/watch?v=W1ZxVfmJc6o)
 
-Demo: Learn how you can connect your multimodal data in BigQuery with Gemini
+Hands-on-lab: End-to-end data science workflows in BigQuery
 
 Common Uses
 
@@ -164,7 +164,7 @@ Solve for today’s analytics demands and tomorrow's AI use cases by migrating y
 
 - [Get started with a free migration assessment](https://cloud.google.com/bigquery/docs/migration-assessment)
 - [Translate queries with an interactive SQL translator](https://cloud.google.com/bigquery/docs/interactive-sql-translator)
-- [See if you qualify for migration incentives](https://cloud.google.com/resources/bigquery-migraton-incentives-program)
+- [See if you qualify for migration incentives](https://cloud.google.com/resources/offers/ramp-data-cloud-offer)
 
 ![{msg desc="Alternative text for a build icon"}build{/msg}](https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/build/wght100fill1/20px.svg)
 
@@ -180,7 +180,7 @@ Solve for today’s analytics demands and tomorrow's AI use cases by migrating y
 
 - [Get started with a free migration assessment](https://cloud.google.com/bigquery/docs/migration-assessment)
 - [Translate queries with an interactive SQL translator](https://cloud.google.com/bigquery/docs/interactive-sql-translator)
-- [See if you qualify for migration incentives](https://cloud.google.com/resources/bigquery-migraton-incentives-program)
+- [See if you qualify for migration incentives](https://cloud.google.com/resources/offers/ramp-data-cloud-offer)
 
 ### Data integration and ELT
 

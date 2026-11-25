@@ -1401,7 +1401,21 @@ A SQL translation with this configuration YAML file might look like the followin
 </tbody>
 </table>
 
-You can use static name mapping to update the region used by names in the [public user-defined functions](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs) .
+Static name mapping works across all supported dialects to map tables from a source database and schema to a target BigQuery project ID and dataset in the `project_id.dataset.table` format. For dialects such as Databricks Unity Catalog that use a catalog as the top-level namespace, specify the catalog name in the `database` field. For example, the following configuration YAML file maps all tables in the `main` catalog and `sales` schema to the `my_bq_project.sales_dataset` dataset:
+
+```
+type: experimental_object_rewriter
+relation:
+-
+  match:
+    database: main
+    schema: sales
+  outputName:
+    database: my_bq_project
+    schema: sales_dataset
+```
+
+You can also use static name mapping to update the region used by names in the [public user-defined functions](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs) .
 
 The following example changes the names in the `bqutil.fn` UDF from using the default `us` multi-region to using the `europe_west2` region:
 

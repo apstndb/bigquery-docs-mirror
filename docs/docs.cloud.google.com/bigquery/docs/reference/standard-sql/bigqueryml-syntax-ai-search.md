@@ -8,9 +8,16 @@ data_source: docs.cloud.google.com
 
 # The AI.SEARCH function
 
-This document describes the `AI.SEARCH` function, which is a table-valued function for semantic search and hybrid search on tables that have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+This document describes the `AI.SEARCH` function, which is a table-valued function for semantic search and hybrid search on tables that have an [AI index](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) or [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
 
-For example, you could use a query like the following to search a table of product descriptions for anything described as a fun toy. In this example, the `product_description` column has autonomous embedding generation enabled.
+If the table has an AI index, you can search across all of the indexed columns by passing only the table and a search query:
+
+```
+SELECT *
+FROM AI.SEARCH(TABLE mydataset.products, 'shoes that keep your feet dry in the rain');
+```
+
+If the table has autonomous embedding generation enabled, you specify the column to search. For example, you could use a query like the following to search a table of product descriptions for anything described as a fun toy. In this example, the `product_description` column has autonomous embedding generation enabled.
 
 ```
 SELECT *
@@ -63,7 +70,7 @@ AI.SEARCH(
 
 `AI.SEARCH` takes the following arguments:
 
-- `base_table` : The table to search for nearest neighbor embeddings. The table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+- `base_table` : The table to search for nearest neighbor embeddings. The table must have an [AI index](https://docs.cloud.google.com/bigquery/docs/ai-index-overview) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) or [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
 
 - `base_table_query` : A query that you can use to pre-filter the base table. Only `SELECT` , `FROM` , and `WHERE` clauses are allowed in this query. Don't apply any filters to the embedding column. You can't use [logical views](https://docs.cloud.google.com/bigquery/docs/views-intro) in this query. Using a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) might interfere with index usage or cause your query to fail. If the base table is indexed and the `WHERE` clause contains columns that are not stored in the index, then `AI.SEARCH` uses post-filters on those columns instead. To learn more, see [Store columns and pre-filter](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) .
 
@@ -234,6 +241,7 @@ When `rerank` is set to `TRUE` :
 
 ## What's next
 
+- Learn more about [creating and using AI indexes](https://docs.cloud.google.com/bigquery/docs/ai-index) .
 - Learn more about [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
 - Learn more about [creating and managing vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) .
 - Learn more about [embeddings and search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
