@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # End-to-end user journeys for time series forecasting models
 
-This document describes the user journeys for BigQuery ML time series forecasting models, including the statements and functions that you can use to work with time series forecasting models. BigQuery ML offers the following types of time series forecasting models:
-
-- [`ARIMA_PLUS` univariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-- [`ARIMA_PLUS_XREG` multivariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
-- [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model)
+Exploring the end-to-end user journeys for BigQuery ML time series forecasting models can help you identify the exact SQL statements and functions that are supported for your forecasting workflow. Comparing [`ARIMA_PLUS` univariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) , [`ARIMA_PLUS_XREG` multivariate models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) , and the built-in [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) lets you plan how to create, evaluate, explain, and generate forecasts or detect anomalies directly in BigQuery ML.
 
 ## Model creation user journeys
 

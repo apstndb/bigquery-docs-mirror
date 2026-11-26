@@ -2,18 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/e2e-journey-import
 uri: https://docs.cloud.google.com/bigquery/docs/e2e-journey-import
 title: End-to-end user journeys for imported models
-description: Understand BigQuery ML's end-to-end user journeys for imported models like XGBoost, ONNX, and TensorFlow. The workflow covers model creation, training, evaluation, and inference.
+description: Understand BigQuery ML end-to-end user journeys for imported models like XGBoost, ONNX, and TensorFlow. The workflow covers model creation, training, evaluation, and inference.
 data_source: docs.cloud.google.com
 ---
 
 # End-to-end user journeys for imported models
 
-This document describes the user journeys for ML models that are imported to BigQuery ML from Cloud Storage, including the statements and functions that you can use to work with imported models. BigQuery ML offers the following types of imported models:
-
-- [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
-- [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
-- [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
-- [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
+You can import machine learning (ML) models from Cloud Storage into BigQuery ML to run SQL-based predictions directly on your BigQuery data using models trained in external frameworks. Understanding these end-to-end user journeys can help you find the exact `CREATE MODEL` statements, `ML.PREDICT` inference workflows, and tutorials supported for [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) , [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) , and [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) models.
 
 ## Imported model user journeys
 

@@ -14,6 +14,38 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 25, 2026
+
+Feature
+
+You can use [cross-cloud connections](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections) to query data in AWS, Azure, and Salesforce Data 360 from all BigQuery regions with more feature availability than standard connections that use BigQuery Omni. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Deprecated
+
+The BigQuery Storage API v1beta1 is deprecated and will be shut down on August 31, 2027.
+
+Key milestone dates:
+
+- **Nov 20, 2026:** Access to the BigQuery Storage API v1beta1 is restricted to projects that recorded active usage between March 1, 2026, and August 31, 2026.
+- **August 31, 2027:** The BigQuery Storage API v1beta1 will be fully shut down. After this date, calls to the v1beta1 endpoint will fail with a `NOT_FOUND` error.
+
+**What you need to do:**
+
+To prevent service disruption, migrate your workloads from `v1beta1` to the generally available [BigQuery Storage API v1](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1) . The `v1` API is backward-compatible with `v1beta1` .
+
+- **SDKs and connectors:** If you use connectors or client libraries, update them to the latest versions to ensure they default to the `v1` API:
+  - [Simba ODBC/JDBC for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
+  - [Google BigQuery ODBC](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) / [JDBC driver](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery)
+  - [Trino BigQuery plugin](https://trino.io/docs/current/connector/bigquery.html)
+  - [Apache Beam BigQuery connector](https://beam.apache.org/documentation/io/built-in/google-bigquery/)
+  - [Spark BigQuery connector](https://github.com/GoogleCloudDataproc/spark-bigquery-connector)
+  - [Scio BigQuery plugin](https://spotify.github.io/scio/io/BigQuery.html)
+- **Custom code:** If your applications call the `v1beta1` API directly (for example, using gRPC), update your code to target the `v1` API endpoint ( `google.cloud.bigquery.storage.v1` ).
+
+For more information, see the [BigQuery Storage API reference](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
+
+If you are using `v1beta1` and have concerns with this deprecation schedule, please contact us via a support case.
+
 ## November 24, 2026
 
 Feature

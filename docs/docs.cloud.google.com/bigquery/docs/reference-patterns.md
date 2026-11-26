@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference-patterns
 uri: https://docs.cloud.google.com/bigquery/docs/reference-patterns
 title: Reference patterns
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Explore BigQuery ML reference patterns, sample code, and notebooks to speed up development for churn prediction, forecasting, and fraud detection.
 data_source: docs.cloud.google.com
 ---
 
 # Reference patterns
 
-This page provides links to business use cases, sample code, and technical reference guides for BigQuery ML use cases. Use these resources to identify best practices and speed up your application development.
+BigQuery ML reference patterns provide proven best practices and resources such as sample code, notebooks, and technical guides that can increase the speed of your application development. These end-to-end patterns—covering propensity modeling, demand forecasting, and real-time anomaly detection—serve various business use cases.
 
 ## Logistic regression
 

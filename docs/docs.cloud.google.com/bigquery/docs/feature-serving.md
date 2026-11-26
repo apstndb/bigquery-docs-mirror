@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Feature serving
 
-You can make [features](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) available for BigQuery ML model training and inference by using several serving options. For all options, you must save the features in BigQuery tables as a prerequisite first step.
+Serving [features](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) from BigQuery tables lets you supply consistent inputs for BigQuery ML model training, batch inference, and real-time online predictions. Using point-in-time lookup functions directly in BigQuery ML helps you prevent data leakage during training and batch inference, while connecting to Gemini Enterprise Agent Platform lets you serve features with low latency for online predictions.
+
+Regardless of which serving option you choose, you must first save the features in BigQuery tables.
 
 ## Point-in-time correctness
 

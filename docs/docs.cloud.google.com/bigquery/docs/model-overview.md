@@ -1,16 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/model-overview
 uri: https://docs.cloud.google.com/bigquery/docs/model-overview
-title: Model creation
+title: Model creation workflow
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Model creation
+# Model creation workflow
 
-BigQuery ML lets you build and operationalize machine learning (ML) models over data in BigQuery by using SQL.
-
-A typical model development workflow in BigQuery ML looks similar to the following:
+You can build, refine, and operationalize machine learning (ML) models directly over your BigQuery data using SQL. The following end-to-end model creation workflow provides guidance for feature preprocessing, hyperparameter tuning, evaluation, inference, and explainability before you map your use case to the SQL statements that are supported for your model type:
 
 1.  Create the model using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) .
 2.  Perform feature preprocessing. Some preprocessing happens [automatically](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-auto-preprocessing) , plus you can use [manual preprocessing functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-preprocessing-functions) inside the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to do additional preprocessing.
@@ -18,7 +16,7 @@ A typical model development workflow in BigQuery ML looks similar to the followi
 4.  [Evaluate the model](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) to assess how it might perform on data outside of the training set, and also to compare it to other models if appropriate.
 5.  [Perform inference](https://docs.cloud.google.com/bigquery/docs/inference-overview) to analyze data by using the model.
 6.  Provide [explainability](https://docs.cloud.google.com/bigquery/docs/xai-overview) for the model, to clarify how particular features influenced a given prediction and also the model overall.
-7.  Learn more about the components that comprise the model by using [model weights](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
+7.  Learn more about the components that the model consists of by using [model weights](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
 
 Because you can use many different kinds of models in BigQuery ML, the functions available for each model vary. For more information about supported SQL statements and functions for each model type, see the following documents:
 

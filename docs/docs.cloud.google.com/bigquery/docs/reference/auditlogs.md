@@ -230,6 +230,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method** : `google.cloud.bigquery.v2.RoutineService.UpdateRoutine`  
 - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
 - **Permissions** :
+  - `bigquery.routines.update - ADMIN_WRITE`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.v2.RoutineService.UpdateRoutine"`  
 
