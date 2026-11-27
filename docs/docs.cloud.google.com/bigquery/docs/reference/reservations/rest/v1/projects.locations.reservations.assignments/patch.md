@@ -16,7 +16,7 @@ data_source: docs.cloud.google.com
 
 Updates an existing assignment.
 
-Only the `priority` field can be updated.
+You can update only the `schedulingPolicy` field on scheduling policy assignments.
 
 ### HTTP request
 

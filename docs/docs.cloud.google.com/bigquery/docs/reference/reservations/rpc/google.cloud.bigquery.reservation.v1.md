@@ -525,7 +525,7 @@ For more information, see the [Authentication Overview](https://docs.cloud.googl
 
 Updates an existing assignment.
 
-Only the `priority` field can be updated.
+You can update only the `scheduling_policy` field on scheduling policy assignments.
 
 Authorization scopes  
 Requires one of the following OAuth scopes:

@@ -986,7 +986,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/proje
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/getIamPolicy	2025-10-17T21:03:38Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/list	2025-10-17T21:05:24Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/move	2025-10-17T21:03:42Z
-https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/patch	2025-10-17T21:05:11Z
+https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/patch	2026-11-27T06:42:35Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/setIamPolicy	2025-10-17T21:03:01Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/testIamPermissions	2025-10-17T21:03:12Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations/create	2025-10-17T21:03:54Z
@@ -1004,7 +1004,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/proje
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation	2025-10-17T21:04:25Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/upgradeEdition	2026-10-29T17:34:00Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc	2026-10-29T17:34:00Z
-https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1	2026-11-10T17:32:55Z
+https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1	2026-11-27T06:42:35Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.iam.v1	2025-10-17T21:04:32Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.rpc	2025-10-17T21:03:18Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.type	2025-10-17T21:03:59Z
